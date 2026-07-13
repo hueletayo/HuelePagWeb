@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inscripción y Salud | 3er Round Fit</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;600;900&display=swap" rel="stylesheet">
+    
+    <!-- Custom Styles for Form -->
+    <style>
+        :root {
+            --bg-color: #000000;
+            --text-color: #ffffff;
+            --accent-color: #FF6600;
+            --font-display: 'Bebas Neue', sans-serif;
+            --font-body: 'Inter', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: var(--font-body);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        .form-container {
+            background-color: #111;
+            padding: 50px;
+            width: 100%;
+            max-width: 800px;
+            border-top: 5px solid var(--accent-color);
+        }
+
+        .huge-text {
+            font-family: var(--font-display);
+            font-size: clamp(3rem, 6vw, 5rem);
+            color: var(--accent-color);
+            margin-bottom: 10px;
+            line-height: 0.9;
+        }
+
+        p.desc {
+            color: #aaa;
+            margin-bottom: 40px;
+            line-height: 1.6;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 600;
+            color: #fff;
+            letter-spacing: 1px;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+        }
+
+        input[type="text"],
+        input[type="tel"],
+        input[type="number"],
+        textarea {
+            width: 100%;
+            padding: 15px;
+            background-color: #222;
+            border: 1px solid #333;
+            color: #fff;
+            font-family: var(--font-body);
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: var(--accent-color);
+        }
+
+        .form-row {
+            display: flex;
+            gap: 20px;
+        }
+        .form-row .form-group {
+            flex: 1;
+        }
+
+        .btn-brutal {
+            font-family: var(--font-display);
+            font-size: 2rem;
+            background-color: var(--accent-color);
+            color: #000;
+            padding: 15px 40px;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            text-transform: uppercase;
+            transition: transform 0.2s, background-color 0.2s;
+            margin-top: 20px;
+        }
+
+        .btn-brutal:hover {
+            transform: translateY(-5px);
+            background-color: #fff;
+        }
+
+        .warning-text {
+            color: #ff4444;
+            font-size: 0.85rem;
+            margin-top: 5px;
+            display: block;
+        }
+
+        @media (max-width: 600px) {
+            .form-row {
+                flex-direction: column;
+                gap: 0;
+            }
+            .form-container {
+                padding: 30px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="form-container">
+        <h1 class="huge-text">ÚNETE AL CLUB</h1>
+        <p class="desc">Por favor, completa este formulario de ingreso con tus datos personales y de salud. Esta información es estrictamente confidencial y nos permite cuidar de ti durante los entrenamientos.</p>
+
+        <form id="registroForm">
+            <!-- Datos Personales -->
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Nombre y Apellido</label>
+                    <input type="text" id="nombre" placeholder="Ej. Jesús Huele" required>
+                </div>
+                <div class="form-group">
+                    <label>Cédula de Identidad</label>
+                    <input type="number" id="cedula" placeholder="Ej. 20123456" required>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Teléfono (WhatsApp)</label>
+                    <input type="tel" id="telefono" placeholder="Ej. 04120000000" required>
+                </div>
+                <div class="form-group">
+                    <label>Usuario de Instagram</label>
+                    <input type="text" id="instagram" placeholder="Ej. @tu_usuario">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Dirección de Habitación</label>
+                <input type="text" id="direccion" placeholder="Zona, Ciudad..." required>
+            </div>
+
+            <div class="form-group">
+                <label>Contacto de Emergencia</label>
+                <input type="text" id="emergencia" placeholder="Nombre y Teléfono de tu contacto" required>
+            </div>
+
+            <!-- Cuestionario de Salud -->
+            <hr style="border-color: #333; margin: 40px 0;">
+            <h2 class="huge-text" style="font-size: 2.5rem; color: #fff;">FORMULARIO DE SALUD</h2>
+            <p class="desc">El boxeo es de alta exigencia. Sé sincero por tu seguridad.</p>
+
+            <div class="form-group">
+                <label>1. ¿Sufres de alguna condición médica? (Azúcar, tensión, asma, etc.)</label>
+                <textarea id="condicion" rows="3" placeholder="Si no sufres de nada, escribe 'Ninguna'"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label>2. ¿Tienes lesiones físicas recientes o hernias? (espalda, rodillas, etc.)</label>
+                <textarea id="lesiones" rows="3" placeholder="Detalla cualquier lesión o escribe 'Ninguna'"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label>3. ¿Has sido operado recientemente?</label>
+                <textarea id="operaciones" rows="3" placeholder="Detalla tipo de operación y fecha, o escribe 'Ninguna'"></textarea>
+                <span class="warning-text">*Nota: Nos reservamos el derecho de pedir clearance médico si la operación fue reciente.</span>
+            </div>
+
+            <button type="submit" class="btn-brutal">ENVIAR REGISTRO</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('registroForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            // Lógica para enviar a Google Sheets u otra API
+            // En producción, esto se conecta a un script de Google Apps
+            
+            alert('¡Registro exitoso! Tus datos han sido enviados al sistema de 3er Round Fit. Te contactaremos por WhatsApp.');
+            this.reset();
+        });
+    </script>
+</body>
+</html>

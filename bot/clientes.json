@@ -1,0 +1,14 @@
+[
+  {
+    "nombre": "Jesus Huele",
+    "telefono": "584120000000",
+    "fecha_pago": "2026-07-01",
+    "estado": "activo"
+  },
+  {
+    "nombre": "Daniel 3rdRound",
+    "telefono": "584140000000",
+    "fecha_pago": "2026-06-15",
+    "estado": "moroso"
+  }
+]
