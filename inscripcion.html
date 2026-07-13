@@ -205,10 +205,46 @@
     <script>
         document.getElementById('registroForm').addEventListener('submit', function(e) {
             e.preventDefault();
-            // Lógica para enviar a Google Sheets u otra API
-            // En producción, esto se conecta a un script de Google Apps
             
-            alert('¡Registro exitoso! Tus datos han sido enviados al sistema de 3er Round Fit. Te contactaremos por WhatsApp.');
+            // Recopilar datos
+            const nombre = document.getElementById('nombre').value;
+            const cedula = document.getElementById('cedula').value;
+            const telefono = document.getElementById('telefono').value;
+            const instagram = document.getElementById('instagram').value || 'No tiene';
+            const direccion = document.getElementById('direccion').value;
+            const emergencia = document.getElementById('emergencia').value;
+            
+            const condicion = document.getElementById('condicion').value || 'Ninguna';
+            const lesiones = document.getElementById('lesiones').value || 'Ninguna';
+            const operaciones = document.getElementById('operaciones').value || 'Ninguna';
+
+            // Armar mensaje para WhatsApp
+            const mensaje = `🚨 *NUEVO INGRESO: FORMULARIO DE SALUD* 🚨\n\n` +
+                            `*👤 Datos Personales*\n` +
+                            `- Nombre: ${nombre}\n` +
+                            `- Cédula: ${cedula}\n` +
+                            `- Teléfono: ${telefono}\n` +
+                            `- Instagram: ${instagram}\n` +
+                            `- Dirección: ${direccion}\n` +
+                            `- Emergencia: ${emergencia}\n\n` +
+                            `*🏥 Historial Médico*\n` +
+                            `- Condiciones: ${condicion}\n` +
+                            `- Lesiones: ${lesiones}\n` +
+                            `- Operaciones: ${operaciones}\n\n` +
+                            `_Enviado desde la página web de 3er Round Fit_`;
+
+            // Número del gimnasio (reemplazar con el número real de Daniel/Gimnasio cuando esté en producción)
+            // IMPORTANTE: Escribir sin el '+' y con el código de país. Ej: 584120000000
+            const numeroGym = "584120000000"; 
+            
+            // Codificar el texto para que funcione en la URL
+            const url = `https://wa.me/${numeroGym}?text=${encodeURIComponent(mensaje)}`;
+            
+            // Abrir WhatsApp
+            window.open(url, '_blank');
+            
+            // Mostrar éxito en la página
+            alert('¡Serás redirigido a WhatsApp para enviar tu registro al gimnasio!');
             this.reset();
         });
     </script>
