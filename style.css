@@ -550,20 +550,22 @@ body {
 
 .btn-brutal {
     font-family: var(--font-display);
-    font-size: 3rem;
+    font-size: 1.8rem;
     background-color: var(--accent-color);
     color: #000;
-    padding: 10px 40px;
+    padding: 15px 30px;
     text-decoration: none;
     text-transform: uppercase;
-    display: inline-block;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     transition: transform 0.2s, background-color 0.2s;
     cursor: pointer;
 }
 
 .btn-brutal:hover {
-    transform: translate(-10px, -10px);
-    box-shadow: 10px 10px 0 #fff;
+    transform: translate(-5px, -5px);
+    box-shadow: 5px 5px 0 #fff;
 }
 
 .footer-info {
@@ -616,5 +618,18 @@ body {
     }
     .item-wide { grid-column: span 1; }
     
+    .btn-brutal {
+        font-size: 1.4rem;
+        padding: 15px;
+    }
+    
+    .footer-cta div {
+        flex-direction: column;
+    }
+    
+    .huge-text {
+        font-size: 3.5rem !important;
+    }
+
     body { cursor: auto; }
 }
