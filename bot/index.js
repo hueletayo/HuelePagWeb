@@ -8,7 +8,7 @@ const { JWT } = require('google-auth-library');
 // CONFIGURACIÓN DE GOOGLE SHEETS
 // ==========================================
 // 1. Pon aquí el ID de tu Google Sheet (lo sacas del link de arriba)
-const GOOGLE_SHEET_ID = 'TU_ID_DE_GOOGLE_SHEETS_AQUI'; 
+const GOOGLE_SHEET_ID = '1LE3XVzx8n4eGwpEYf10arN5hCWKnz1iBJLMCembljjs'; 
 
 let doc;
 try {
@@ -32,6 +32,11 @@ const client = new Client({
     puppeteer: {
         headless: true,
         args: ['--no-sandbox', '--disable-setuid-sandbox']
+    },
+    // Solución al error de WhatsApp Web: Forzar una versión estable
+    webVersionCache: {
+        type: 'remote',
+        remotePath: 'https://raw.githubusercontent.com/wppconnect-team/wa-version/main/html/2.2412.54.html'
     }
 });
 
@@ -52,25 +57,35 @@ client.on('ready', () => {
 // AUTORESPONDEDOR (CHATBOT)
 // ==========================================
 client.on('message', async msg => {
-    const chat = await msg.getChat();
-    if (chat.isGroup) return; // No responder a grupos
-
-    const texto = msg.body.toLowerCase();
-
-    // Palabras clave de información
-    if (texto.includes('info') || texto.includes('horario') || texto.includes('precio') || texto.includes('inscrip')) {
-        const respuesta = `*¡Hola! Bienvenido a 3er Round Fit 🥊*\n\n` +
-                          `Somos un centro de entrenamiento de Boxeo Técnico y Funcional.\n\n` +
-                          `⏱️ *Nuestros Horarios:*\n` +
-                          `- Lunes a Viernes: Mañanas (7:30am - 12:30pm) y Tardes (4:00pm - 8:00pm)\n` +
-                          `- Sábados Especiales: 8:30am - 10:30am\n\n` +
-                          `💰 *Mensualidad:* 60 Euros\n\n` +
-                          `📝 Para inscribirte, por favor llena nuestro formulario de salud aquí: \n` +
-                          `🔗 https://hueletayo.github.io/HuelePagWeb/inscripcion.html\n\n` +
-                          `_Si tienes otra duda puntual, Daniel o Grey te responderán por aquí en breve._`;
+    try {
+        console.log(`📩 Mensaje recibido de ${msg.from}: "${msg.body}"`);
         
-        await msg.reply(respuesta);
-        console.log(`Mensaje automático enviado a: ${msg.from}`);
+        const chat = await msg.getChat();
+        if (chat.isGroup) {
+            console.log('Es un grupo, ignorando...');
+            return; 
+        }
+
+        const texto = msg.body ? msg.body.toLowerCase() : "";
+
+        // Palabras clave de información
+        if (texto.includes('info') || texto.includes('horario') || texto.includes('precio') || texto.includes('inscrip')) {
+            const respuesta = `*¡Hola! Bienvenido a 3er Round Fit 🥊*\n\n` +
+                              `Somos un centro de entrenamiento de Boxeo Técnico y Funcional.\n\n` +
+                              `⏱️ *Nuestros Horarios:*\n` +
+                              `- Lunes a Viernes: Mañanas (7:30am - 12:30pm) y Tardes (4:00pm - 8:00pm)\n` +
+                              `- Sábados Especiales: 8:30am - 10:30am\n\n` +
+                              `💰 *Mensualidad:* 60 Euros\n\n` +
+                              `📝 Para inscribirte, por favor llena nuestro formulario de salud aquí: \n` +
+                              `🔗 https://hueletayo.github.io/HuelePagWeb/inscripcion.html\n\n` +
+                              `_Si tienes otra duda puntual, Daniel o Grey te responderán por aquí en breve._`;
+            
+            console.log('⏳ Intentando enviar respuesta automática...');
+            await msg.reply(respuesta);
+            console.log(`✅ Mensaje automático enviado exitosamente a: ${msg.from}`);
+        }
+    } catch (error) {
+        console.log('❌ Error procesando el mensaje:', error);
     }
 });
 
@@ -83,7 +98,7 @@ async function verificarCobros() {
     const hoy = new Date();
     const diaDelMes = hoy.getDate();
 
-    if (diaDelMes >= 1 && diaDelMes <= 5) {
+    if ((diaDelMes >= 1 && diaDelMes <= 5) || diaDelMes === 15) {
         console.log(`Hoy es día ${diaDelMes}. Conectando a Google Sheets para leer clientes...`);
         
         try {
@@ -105,10 +120,19 @@ async function verificarCobros() {
                     if (!telefono) return;
 
                     const chatId = `${telefono}@c.us`;
-                    const mensajeCobro = `¡Buenos días, ${nombre}! 🥊\n\n` +
-                                         `Se les recuerda el pago puntual de la mensualidad correspondiente a su fecha de pago.\n\n` +
-                                         `Agradecemos a las personas que ya realizaron su pago.\n\n` +
-                                         `_¡Muchas gracias y feliz día de entrenamiento!_`;
+                    
+                    let mensajeCobro = "";
+                    if (diaDelMes === 15) {
+                        mensajeCobro = `⚠️ *AVISO DE VENCIMIENTO - 3er Round Fit*\n\n` +
+                                       `Hola ${nombre}, notamos en nuestro sistema que tu mensualidad aún se encuentra PENDIENTE de pago habiendo pasado 15 días del mes.\n\n` +
+                                       `Por favor regulariza tu pago a la brevedad para poder seguir disfrutando de tus entrenamientos con nosotros.\n\n` +
+                                       `_Si ya realizaste el pago en estos días, por favor envíanos tu comprobante por esta vía. ¡Muchas gracias!_ 🥊`;
+                    } else {
+                        mensajeCobro = `¡Buenos días, ${nombre}! 🥊\n\n` +
+                                       `Se les recuerda el pago puntual de la mensualidad correspondiente a su fecha de pago.\n\n` +
+                                       `Agradecemos a las personas que ya realizaron su pago.\n\n` +
+                                       `_¡Muchas gracias y feliz día de entrenamiento!_`;
+                    }
                     
                     try {
                         // CUIDADO EN PRODUCCIÓN: Quitar el comentario de abajo para enviar de verdad
@@ -126,7 +150,7 @@ async function verificarCobros() {
             console.log('Error conectando a Google Sheets. Verifica tus claves o el ID del Excel.', error);
         }
     } else {
-        console.log(`Hoy es el día ${diaDelMes} del mes. Los cobros automáticos solo se hacen del día 1 al 5.`);
+        console.log(`Hoy es el día ${diaDelMes}. Los cobros automáticos masivos se hacen del 1 al 5, y el recordatorio de atraso el día 15.`);
     }
 }
 
