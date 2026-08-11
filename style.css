@@ -84,15 +84,59 @@ body {
 
 .brand-logo {
     display: flex;
-    align-items: baseline;
+    flex-direction: column;
+    align-items: flex-start;
     font-family: var(--font-display);
     text-decoration: none;
+    transform: rotate(-10deg);
+    margin-top: 15px;
+    margin-left: 10px;
+    transition: transform 0.3s ease;
 }
 
-.logo-3 { color: var(--accent-color); font-size: 3rem; line-height: 0.8; }
-.logo-er { color: var(--accent-color); font-size: 1.2rem; margin-right: 5px; }
-.logo-text { color: #fff; font-size: 2rem; }
-.logo-fit { color: var(--accent-color); }
+.brand-logo:hover {
+    transform: rotate(-10deg) scale(1.05);
+}
+
+.logo-main-row {
+    display: flex;
+    align-items: flex-start;
+}
+
+.logo-3 { 
+    color: var(--accent-color); 
+    font-size: 3.5rem; 
+    line-height: 0.8; 
+    font-weight: 900;
+}
+.logo-er { 
+    color: var(--accent-color); 
+    font-size: 1.2rem; 
+    margin-right: 5px; 
+    margin-top: -2px;
+}
+.logo-text { 
+    color: #fff; 
+    font-size: 2.8rem; 
+    font-weight: 900;
+    font-style: italic;
+    line-height: 0.85;
+}
+.logo-fit { 
+    color: var(--accent-color); 
+    font-style: italic;
+}
+
+.logo-sub-row {
+    color: #fff;
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+    letter-spacing: 0.6em;
+    margin-left: 28px;
+    margin-top: 5px;
+    font-weight: 300;
+    text-transform: uppercase;
+}
 
 .menu-btn {
     width: 40px;
