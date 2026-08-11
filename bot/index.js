@@ -69,16 +69,28 @@ client.on('message', async msg => {
         const texto = msg.body ? msg.body.toLowerCase() : "";
 
         // Palabras clave de información
-        if (texto.includes('info') || texto.includes('horario') || texto.includes('precio') || texto.includes('inscrip')) {
-            const respuesta = `*¡Hola! Bienvenido a 3er Round Fit 🥊*\n\n` +
-                              `Somos un centro de entrenamiento de Boxeo Técnico y Funcional.\n\n` +
-                              `⏱️ *Nuestros Horarios:*\n` +
-                              `- Lunes a Viernes: Mañanas (7:30am - 12:30pm) y Tardes (4:00pm - 8:00pm)\n` +
-                              `- Sábados Especiales: 8:30am - 10:30am\n\n` +
-                              `💰 *Mensualidad:* 60 Euros\n\n` +
-                              `📝 Para inscribirte, por favor llena nuestro formulario de salud aquí: \n` +
-                              `🔗 https://hueletayo.github.io/HuelePagWeb/inscripcion.html\n\n` +
-                              `_Si tienes otra duda puntual, Daniel o Grey te responderán por aquí en breve._`;
+        if (texto.includes('info') || texto.includes('horario') || texto.includes('precio') || texto.includes('inscrip') || texto.includes('plan')) {
+            const respuesta = `*Bienvenidos a 3er Round Fit Boxing Club 🥊*\n\n` +
+                              `Nuestro sistema de entrenamiento se basa en la disciplina del boxeo combinado con ejercicios de fuerza, resistencia, velocidad, agilidad y flexibilidad.\n` +
+                              `_Somos los únicos certificados por la Asociación Internacional de Boxeo (IBA) y el Consejo Mundial de Boxeo (WBC)_\n\n` +
+                              `📍 *UBICACIÓN:*\n` +
+                              `Centro Empresarial Colon PB, al lado del centro comercial Atlántico, Lechería.\n\n` +
+                              `🥊 *MODALIDADES:*\n` +
+                              `- *Boxeo Competitivo:* sparring y boxeo dirigido (1 hr).\n` +
+                              `- *Boxeo Recreativo:* mejora de condición física sin sparring (1 hr).\n` +
+                              `- *Boxeo Niños (6-11 años):* desarrollo motor y juegos (1 hr).\n\n` +
+                              `⏱️ *HORARIOS (Lun-Vie):*\n` +
+                              `- AM: 7:30 / 8:30 / 9:30 / 10:30\n` +
+                              `- PM: 3:00 (niños) / 4:00 / 5:00 / 6:00 / 7:00\n` +
+                              `- Sábados: 8:30 AM\n\n` +
+                              `💰 *PLANES MENSUALES:*\n` +
+                              `- PLAN PRO: 60€\n` +
+                              `- PLAN AMATER (3 días/sem): 50€\n` +
+                              `- PLAN INFANTIL: 40€\n` +
+                              `- PLAN PERSONALIZADO: 100€\n\n` +
+                              `🎁 *¡Puedes asistir a una clase de prueba gratuita!*\n\n` +
+                              `📝 Para inscribirte, llena nuestro formulario de salud aquí: \n` +
+                              `🔗 https://hueletayo.github.io/HuelePagWeb/inscripcion.html`;
             
             console.log('⏳ Intentando enviar respuesta automática...');
             await msg.reply(respuesta);
@@ -109,19 +121,29 @@ async function verificarCobros() {
             let cobrosEnviados = 0;
 
             rows.forEach(async (row) => {
-                // El bot buscará la columna llamada "Estado" en tu Excel
-                // Y solo le escribirá a los que digan "Pendiente" o "Moroso"
-                const estado = row.get('Estado');
-                if (estado && (estado.toLowerCase().includes('pendiente') || estado.toLowerCase().includes('moroso'))) {
-                    
-                    const telefono = row.get('Telefono'); // Columna Telefono
-                    const nombre = row.get('Nombre'); // Columna Nombre
+                const estado = row.get('Estado') ? row.get('Estado').toLowerCase() : "";
+                const telefono = row.get('Telefono'); 
+                const nombre = row.get('Nombre'); 
 
-                    if (!telefono) return;
+                if (!telefono || !estado) return;
+                
+                // Si la persona se retiró del gimnasio, la ignoramos por completo
+                if (estado.includes('inactivo') || estado.includes('retirado')) return;
 
-                    const chatId = `${telefono}@c.us`;
-                    
-                    let mensajeCobro = "";
+                const chatId = `${telefono}@c.us`;
+                let mensajeCobro = "";
+                let enviarMensaje = false;
+
+                // LOGICA 1: Si es el día 1, saludar a los "Activos" del mes pasado para recordarles el nuevo mes
+                if (diaDelMes === 1 && estado.includes('activo')) {
+                    mensajeCobro = `🌟 *¡Feliz inicio de mes, ${nombre}!* 🥊\n\n` +
+                                   `Comenzamos un nuevo ciclo de entrenamiento en 3er Round Fit. Te recordamos que tienes desde hoy hasta el día 5 para cancelar tu mensualidad sin recargos.\n\n` +
+                                   `_Si ya realizaste tu pago o pagaste por adelantado, por favor ignora este mensaje. ¡Nos vemos en el ring!_`;
+                    enviarMensaje = true;
+                }
+                
+                // LOGICA 2: Si están "Pendientes" o "Morosos", cobrarles (Días 1 al 5, o el día 15)
+                else if (estado.includes('pendiente') || estado.includes('moroso')) {
                     if (diaDelMes === 15) {
                         mensajeCobro = `⚠️ *AVISO DE VENCIMIENTO - 3er Round Fit*\n\n` +
                                        `Hola ${nombre}, notamos en nuestro sistema que tu mensualidad aún se encuentra PENDIENTE de pago habiendo pasado 15 días del mes.\n\n` +
@@ -133,11 +155,15 @@ async function verificarCobros() {
                                        `Agradecemos a las personas que ya realizaron su pago.\n\n` +
                                        `_¡Muchas gracias y feliz día de entrenamiento!_`;
                     }
-                    
+                    enviarMensaje = true;
+                }
+                
+                // Ejecutar el envío si se cumplió alguna condición
+                if (enviarMensaje) {
                     try {
                         // CUIDADO EN PRODUCCIÓN: Quitar el comentario de abajo para enviar de verdad
                         // await client.sendMessage(chatId, mensajeCobro);
-                        console.log(`[SIMULACIÓN] Mensaje de cobro que se enviaría a ${nombre} al número ${telefono}`);
+                        console.log(`[SIMULACIÓN] Mensaje a ${nombre} (${estado}): ${mensajeCobro.substring(0, 40)}...`);
                         cobrosEnviados++;
                     } catch (error) {
                         console.log(`No se pudo enviar mensaje a ${nombre}`);
