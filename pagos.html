@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reportar Pago - 3er Round Fit</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;600;900&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/feather-icons"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body style="background-color: #000; color: #fff;">
+    
+    <nav class="navbar" style="position: static; background: #0a0a0a; border-bottom: 1px solid #222;">
+        <a href="dashboard.html" class="brand-logo" style="margin-top: 5px;">
+            <div class="logo-main-row">
+                <span class="logo-3">3</span><span class="logo-er" style="font-size: 0.8rem;">er.</span> 
+                <span class="logo-text" style="font-size: 1.8rem;">ROUND<span class="logo-fit">FIT</span></span>
+            </div>
+        </a>
+    </nav>
+
+    <div class="form-container" style="margin-top: 40px; margin-bottom: 40px;">
+        <h2 class="huge-text" style="font-size: 2.5rem; text-align: center;">REPORTE DE PAGO</h2>
+        <p class="desc" style="text-align: center;">Llena este formulario para notificar tu pago de mensualidad.</p>
+
+        <form id="pagoForm">
+            <div class="form-group">
+                <label>Tu Nombre Completo</label>
+                <input type="text" id="nombre" required placeholder="Ej. Jesús Huele">
+            </div>
+
+            <div class="form-group">
+                <label>Plan que estás pagando</label>
+                <select id="plan" required style="width: 100%; padding: 15px; background: #111; color: #fff; border: 1px solid #333; font-family: var(--font-body); font-size: 1rem; outline: none;">
+                    <option value="Plan PRO (60€)">Plan PRO (60€)</option>
+                    <option value="Plan Amateur (50€)">Plan Amateur (3 días/sem) (50€)</option>
+                    <option value="Plan Infantil (40€)">Plan Infantil (40€)</option>
+                    <option value="Plan Personalizado (100€)">Plan Personalizado (100€)</option>
+                </select>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Método de Pago</label>
+                    <select id="metodo" required style="width: 100%; padding: 15px; background: #111; color: #fff; border: 1px solid #333; font-family: var(--font-body); font-size: 1rem; outline: none;">
+                        <option value="Pago Móvil">Pago Móvil</option>
+                        <option value="Transferencia">Transferencia Nacional</option>
+                        <option value="Zelle">Zelle</option>
+                        <option value="Efectivo">Efectivo (Entregado en Box)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Monto Pagado</label>
+                    <input type="text" id="monto" required placeholder="Ej. 60 o 2500 Bs">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Número de Referencia (Obligatorio)</label>
+                <input type="number" id="referencia" required placeholder="Ej. 12345678" style="font-family: monospace; font-size: 1.2rem; letter-spacing: 2px;">
+                <p style="font-size: 0.8rem; color: #888; margin-top: 5px;">*Si pagaste en efectivo, escribe 0000</p>
+            </div>
+
+            <button type="submit" class="btn-brutal" style="width: 100%; margin-top: 20px;">ENVIAR REPORTE</button>
+            <div style="text-align: center; margin-top: 20px;">
+                <a href="dashboard.html" style="color: #888; text-decoration: none;">&larr; Cancelar</a>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('pagoForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const nombre = document.getElementById('nombre').value;
+            const plan = document.getElementById('plan').value;
+            const metodo = document.getElementById('metodo').value;
+            const monto = document.getElementById('monto').value;
+            const referencia = document.getElementById('referencia').value;
+            
+            const mensaje = `💸 *REPORTE DE PAGO DE MENSUALIDAD* 💸\n\n` +
+                            `👤 *Atleta:* ${nombre}\n` +
+                            `💪 *Plan:* ${plan}\n` +
+                            `💳 *Método:* ${metodo}\n` +
+                            `💰 *Monto:* ${monto}\n` +
+                            `🔢 *Referencia:* ${referencia}\n\n` +
+                            `_Por favor valida este pago en el banco y actualiza mi estado en el sistema._`;
+
+            const numeroGym = "584248576200"; 
+            const url = `https://wa.me/${numeroGym}?text=${encodeURIComponent(mensaje)}`;
+            
+            window.open(url, '_blank');
+            window.location.href = "dashboard.html";
+        });
+    </script>
+</body>
+</html>

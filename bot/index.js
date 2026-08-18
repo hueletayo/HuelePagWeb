@@ -107,76 +107,78 @@ client.on('message', async msg => {
 async function verificarCobros() {
     if (!doc) return;
 
+    console.log(`Conectando a Google Sheets para revisar fechas de pago...`);
     const hoy = new Date();
-    const diaDelMes = hoy.getDate();
+    
+    try {
+        await doc.loadInfo(); 
+        const sheet = doc.sheetsByIndex[0];
+        const rows = await sheet.getRows();
 
-    if ((diaDelMes >= 1 && diaDelMes <= 5) || diaDelMes === 15) {
-        console.log(`Hoy es día ${diaDelMes}. Conectando a Google Sheets para leer clientes...`);
-        
-        try {
-            await doc.loadInfo(); 
-            const sheet = doc.sheetsByIndex[0]; // Lee la primera hoja del Excel
-            const rows = await sheet.getRows();
+        let cobrosEnviados = 0;
 
-            let cobrosEnviados = 0;
+        rows.forEach(async (row) => {
+            const estado = row.get('Estado') ? row.get('Estado').toLowerCase() : "";
+            const telefono = row.get('Telefono'); 
+            const nombre = row.get('Nombre'); 
+            const fechaStr = row.get('Ultimo Pago'); // Formato esperado: DD/MM/YYYY
 
-            rows.forEach(async (row) => {
-                const estado = row.get('Estado') ? row.get('Estado').toLowerCase() : "";
-                const telefono = row.get('Telefono'); 
-                const nombre = row.get('Nombre'); 
+            if (!telefono || !estado || !fechaStr) return;
+            if (estado.includes('inactivo') || estado.includes('retirado')) return;
 
-                if (!telefono || !estado) return;
-                
-                // Si la persona se retiró del gimnasio, la ignoramos por completo
-                if (estado.includes('inactivo') || estado.includes('retirado')) return;
+            // Parsear la fecha DD/MM/YYYY
+            const parts = fechaStr.split('/');
+            if (parts.length !== 3) return;
+            const fechaUltimoPago = new Date(parts[2], parts[1] - 1, parts[0]);
+            
+            // Calcular días transcurridos
+            const diffTime = hoy.getTime() - fechaUltimoPago.getTime();
+            const diasTranscurridos = Math.floor(diffTime / (1000 * 60 * 60 * 24));
 
-                const chatId = `${telefono}@c.us`;
-                let mensajeCobro = "";
-                let enviarMensaje = false;
+            const chatId = `${telefono}@c.us`;
+            let mensajeCobro = "";
+            let enviarMensaje = false;
 
-                // LOGICA 1: Si es el día 1, saludar a los "Activos" del mes pasado para recordarles el nuevo mes
-                if (diaDelMes === 1 && estado.includes('activo')) {
-                    mensajeCobro = `🌟 *¡Feliz inicio de mes, ${nombre}!* 🥊\n\n` +
-                                   `Comenzamos un nuevo ciclo de entrenamiento en 3er Round Fit. Te recordamos que tienes desde hoy hasta el día 5 para cancelar tu mensualidad sin recargos.\n\n` +
-                                   `_Si ya realizaste tu pago o pagaste por adelantado, por favor ignora este mensaje. ¡Nos vemos en el ring!_`;
-                    enviarMensaje = true;
+            // Lógica de 30 días exactos (Día de cobro)
+            if (diasTranscurridos === 30) {
+                mensajeCobro = `🌟 *¡Hola ${nombre}!* 🥊\n\n` +
+                               `Hoy se cumplen 30 días desde tu último pago. Comenzamos un nuevo ciclo de entrenamiento en 3er Round Fit.\n\n` +
+                               `Te recordamos que tienes 5 días de gracia para cancelar tu mensualidad sin recargos.\n\n` +
+                               `_Si ya realizaste tu pago, por favor envía el comprobante por esta vía. ¡Nos vemos en el ring!_`;
+                enviarMensaje = true;
+            }
+            // Lógica de Días de Gracia (Día 31 al 35) - Solo si Grey los marcó como "Pendiente"
+            else if (diasTranscurridos > 30 && diasTranscurridos <= 35 && (estado.includes('pendiente') || estado.includes('moroso'))) {
+                mensajeCobro = `¡Buenos días, ${nombre}! 🥊\n\n` +
+                               `Se te recuerda el pago de tu mensualidad, la cual ya cumplió su ciclo.\n\n` +
+                               `Agradecemos a las personas que ya realizaron su pago.\n\n` +
+                               `_¡Muchas gracias y feliz día de entrenamiento!_`;
+                enviarMensaje = true;
+            }
+            // Lógica de Vencimiento Tardío (Día 45 - 15 días de atraso)
+            else if (diasTranscurridos === 45 && (estado.includes('pendiente') || estado.includes('moroso'))) {
+                mensajeCobro = `⚠️ *AVISO DE VENCIMIENTO - 3er Round Fit*\n\n` +
+                               `Hola ${nombre}, notamos en nuestro sistema que tu mensualidad aún se encuentra PENDIENTE de pago habiendo pasado 15 días desde tu fecha de corte.\n\n` +
+                               `Por favor regulariza tu pago a la brevedad para poder seguir disfrutando de tus entrenamientos con nosotros.\n\n` +
+                               `_Si ya realizaste el pago, por favor envíanos tu comprobante. ¡Muchas gracias!_ 🥊`;
+                enviarMensaje = true;
+            }
+
+            if (enviarMensaje) {
+                try {
+                    // CUIDADO EN PRODUCCIÓN: Quitar el comentario de abajo para enviar de verdad
+                    // await client.sendMessage(chatId, mensajeCobro);
+                    console.log(`[SIMULACIÓN] Mensaje a ${nombre} (Días: ${diasTranscurridos}): ${mensajeCobro.substring(0, 40)}...`);
+                    cobrosEnviados++;
+                } catch (error) {
+                    console.log(`No se pudo enviar mensaje a ${nombre}`);
                 }
-                
-                // LOGICA 2: Si están "Pendientes" o "Morosos", cobrarles (Días 1 al 5, o el día 15)
-                else if (estado.includes('pendiente') || estado.includes('moroso')) {
-                    if (diaDelMes === 15) {
-                        mensajeCobro = `⚠️ *AVISO DE VENCIMIENTO - 3er Round Fit*\n\n` +
-                                       `Hola ${nombre}, notamos en nuestro sistema que tu mensualidad aún se encuentra PENDIENTE de pago habiendo pasado 15 días del mes.\n\n` +
-                                       `Por favor regulariza tu pago a la brevedad para poder seguir disfrutando de tus entrenamientos con nosotros.\n\n` +
-                                       `_Si ya realizaste el pago en estos días, por favor envíanos tu comprobante por esta vía. ¡Muchas gracias!_ 🥊`;
-                    } else {
-                        mensajeCobro = `¡Buenos días, ${nombre}! 🥊\n\n` +
-                                       `Se les recuerda el pago puntual de la mensualidad correspondiente a su fecha de pago.\n\n` +
-                                       `Agradecemos a las personas que ya realizaron su pago.\n\n` +
-                                       `_¡Muchas gracias y feliz día de entrenamiento!_`;
-                    }
-                    enviarMensaje = true;
-                }
-                
-                // Ejecutar el envío si se cumplió alguna condición
-                if (enviarMensaje) {
-                    try {
-                        // CUIDADO EN PRODUCCIÓN: Quitar el comentario de abajo para enviar de verdad
-                        // await client.sendMessage(chatId, mensajeCobro);
-                        console.log(`[SIMULACIÓN] Mensaje a ${nombre} (${estado}): ${mensajeCobro.substring(0, 40)}...`);
-                        cobrosEnviados++;
-                    } catch (error) {
-                        console.log(`No se pudo enviar mensaje a ${nombre}`);
-                    }
-                }
-            });
+            }
+        });
 
-            console.log(`Búsqueda terminada. Se detectaron ${cobrosEnviados} pagos pendientes hoy.`);
-        } catch (error) {
-            console.log('Error conectando a Google Sheets. Verifica tus claves o el ID del Excel.', error);
-        }
-    } else {
-        console.log(`Hoy es el día ${diaDelMes}. Los cobros automáticos masivos se hacen del 1 al 5, y el recordatorio de atraso el día 15.`);
+        console.log(`Búsqueda terminada. Se enviaron ${cobrosEnviados} recordatorios hoy.`);
+    } catch (error) {
+        console.log('Error conectando a Google Sheets. Verifica tus claves o el ID del Excel.', error);
     }
 }
 

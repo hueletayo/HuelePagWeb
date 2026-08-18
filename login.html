@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iniciar Sesión - 3er Round Fit</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;600;900&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/feather-icons"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body style="display: flex; align-items: center; justify-content: center; min-height: 100vh; background-image: url('https://images.unsplash.com/photo-1591117207239-788bf8de6c3b?auto=format&fit=crop&q=80&w=1920'); background-size: cover; background-position: center;">
+    
+    <div style="position: absolute; inset: 0; background: rgba(0,0,0,0.8); z-index: 0;"></div>
+
+    <div class="form-container" style="position: relative; z-index: 1; max-width: 400px; padding: 40px;">
+        <div style="text-align: center; margin-bottom: 30px;">
+            <a href="index.html" class="brand-logo" style="transform: rotate(0deg); justify-content: center; margin: 0 auto;">
+                <div class="logo-main-row" style="justify-content: center;">
+                    <span class="logo-3">3</span><span class="logo-er">er.</span> 
+                    <span class="logo-text">ROUND<span class="logo-fit">FIT</span></span>
+                </div>
+            </a>
+            <h2 class="huge-text" style="font-size: 2rem; margin-top: 20px;">PORTAL DEL ATLETA</h2>
+            <p class="desc" style="font-size: 0.9rem;">Ingresa tu número de Cédula para ver tu estatus y reportar pagos.</p>
+        </div>
+
+        <form id="loginForm">
+            <div class="form-group">
+                <label>Cédula de Identidad</label>
+                <input type="number" id="cedula" placeholder="Ej. 20123456" required style="font-size: 1.2rem; text-align: center; letter-spacing: 2px;">
+            </div>
+
+            <button type="submit" class="btn-brutal" id="btn-login">INICIAR SESIÓN</button>
+            <div id="error-msg" style="color: #ff3333; margin-top: 15px; text-align: center; display: none;">Cédula no encontrada en el sistema.</div>
+        </form>
+
+        <div style="text-align: center; margin-top: 20px;">
+            <a href="index.html" style="color: #888; text-decoration: none; font-size: 0.8rem;">&larr; Volver al Inicio</a>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const cedula = document.getElementById('cedula').value;
+            const btn = document.getElementById('btn-login');
+            const errorMsg = document.getElementById('error-msg');
+            
+            btn.innerText = "VERIFICANDO...";
+            errorMsg.style.display = 'none';
+
+            try {
+                // Aquí llamaremos a la API de NestJS cuando esté lista en Railway
+                // fetch('https://api-3erround.up.railway.app/auth/login')
+
+                // Simulación temporal: Si la cédula es 123456, entra.
+                setTimeout(() => {
+                    if(cedula === "123456" || cedula.length > 5) {
+                        localStorage.setItem('atleta_cedula', cedula);
+                        window.location.href = "dashboard.html";
+                    } else {
+                        btn.innerText = "INICIAR SESIÓN";
+                        errorMsg.style.display = 'block';
+                    }
+                }, 1000);
+
+            } catch (err) {
+                btn.innerText = "INICIAR SESIÓN";
+                errorMsg.style.display = 'block';
+            }
+        });
+    </script>
+</body>
+</html>

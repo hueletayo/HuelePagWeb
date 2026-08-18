@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - 3er Round Fit</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;600;900&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/feather-icons"></script>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .dashboard-container {
+            max-width: 600px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+        .status-card {
+            background: #111;
+            border: 2px solid #333;
+            padding: 30px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .status-badge {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 1.5rem;
+            font-family: var(--font-display);
+            letter-spacing: 2px;
+            margin: 15px 0;
+            background: #333;
+        }
+        .status-activo { background: #00aa00; color: #fff; }
+        .status-pendiente { background: #ff3333; color: #fff; }
+        .data-row {
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 1px solid #333;
+            padding: 15px 0;
+        }
+        .data-label { color: #888; font-size: 0.9rem; }
+        .data-value { font-weight: bold; }
+    </style>
+</head>
+<body style="background-color: #000; color: #fff;">
+    
+    <nav class="navbar" style="position: static; background: #0a0a0a; border-bottom: 1px solid #222;">
+        <a href="index.html" class="brand-logo" style="margin-top: 5px;">
+            <div class="logo-main-row">
+                <span class="logo-3">3</span><span class="logo-er" style="font-size: 0.8rem;">er.</span> 
+                <span class="logo-text" style="font-size: 1.8rem;">ROUND<span class="logo-fit">FIT</span></span>
+            </div>
+        </a>
+        <div>
+            <button id="btn-logout" class="btn-brutal" style="padding: 10px 15px; font-size: 0.8rem; background: transparent; color: #fff; border: 1px solid #fff;">CERRAR SESIÓN</button>
+        </div>
+    </nav>
+
+    <div class="dashboard-container">
+        <h2 class="huge-text" style="font-size: 2.5rem; margin-bottom: 10px;">HOLA, <span id="user-name">ATLETA</span> 🥊</h2>
+        <p class="desc" style="margin-bottom: 30px;">Bienvenido a tu portal de entrenamiento.</p>
+
+        <div class="status-card">
+            <h3 style="font-family: var(--font-display); font-size: 1.5rem; color: #888;">ESTATUS ACTUAL</h3>
+            <div id="status-badge" class="status-badge status-activo">CARGANDO...</div>
+            <p id="status-msg" style="font-size: 0.9rem; color: #aaa;">Consultando tu estatus en nuestro sistema...</p>
+        </div>
+
+        <div class="status-card" style="text-align: left; padding: 20px;">
+            <div class="data-row">
+                <span class="data-label">FECHA DE ÚLTIMO PAGO</span>
+                <span class="data-value" id="user-date">--/--/----</span>
+            </div>
+            <div class="data-row">
+                <span class="data-label">PRÓXIMO CORTE (Aprox)</span>
+                <span class="data-value" id="user-next">--/--/----</span>
+            </div>
+            <div class="data-row" style="border-bottom: none;">
+                <span class="data-label">PLAN ACTUAL</span>
+                <span class="data-value" id="user-plan">PRO</span>
+            </div>
+        </div>
+
+        <div style="margin-top: 30px;">
+            <a href="pagos.html" class="btn-brutal" style="display: block; text-align: center; width: 100%; font-size: 1.2rem;">REPORTAR PAGO DE MENSUALIDAD</a>
+        </div>
+    </div>
+
+    <script>
+        // Verificar si hay sesión
+        const cedula = localStorage.getItem('atleta_cedula');
+        if(!cedula) {
+            window.location.href = "login.html";
+        }
+
+        // Simulación de carga desde NestJS (API)
+        setTimeout(() => {
+            document.getElementById('user-name').innerText = "JESÚS";
+            
+            const badge = document.getElementById('status-badge');
+            badge.innerText = "PENDIENTE";
+            badge.className = "status-badge status-pendiente";
+            
+            document.getElementById('status-msg').innerText = "Tu mensualidad se encuentra vencida. Por favor, reporta tu pago.";
+            
+            document.getElementById('user-date').innerText = "18/07/2026";
+            document.getElementById('user-next').innerText = "18/08/2026";
+        }, 1500);
+
+        // Logout
+        document.getElementById('btn-logout').addEventListener('click', () => {
+            localStorage.removeItem('atleta_cedula');
+            window.location.href = "login.html";
+        });
+    </script>
+</body>
+</html>
