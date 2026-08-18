@@ -99,7 +99,10 @@
 <body class="login-bg">
     <div class="login-overlay"></div>
 
-    <div class="glass-panel">
+    <div class="glass-panel" style="position: relative;">
+        <!-- Botón de Cerrar (X) para volver al inicio -->
+        <a href="index.html" style="position: absolute; top: 15px; right: 20px; color: #fff; text-decoration: none; font-size: 1.5rem; font-family: sans-serif; opacity: 0.6; transition: opacity 0.3s;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.6'">&times;</a>
+
         <div style="text-align: center; margin-bottom: 35px;">
             <a href="index.html" class="brand-logo" style="transform: rotate(0deg); justify-content: center; margin: 0 auto;">
                 <div class="logo-main-row" style="justify-content: center;">
@@ -137,7 +140,7 @@
         </form>
 
         <div style="text-align: center; margin-top: 25px;">
-            <a href="index.html" style="color: #666; text-decoration: none; font-size: 0.85rem; transition: color 0.3s;">&larr; Volver al inicio</a>
+            <a href="index.html" style="color: #ccc; text-decoration: none; font-size: 0.95rem; font-weight: 600; transition: color 0.3s;">&larr; VOLVER A LA PÁGINA PRINCIPAL</a>
         </div>
     </div>
 
