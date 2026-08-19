@@ -73,29 +73,23 @@ body {
     top: 0;
     left: 0;
     width: 100%;
-    padding: 30px 40px;
+    padding: 30px 5%; /* Aligned with hero padding */
     display: flex;
     justify-content: space-between;
     align-items: center;
     z-index: 1000;
-    /* Removed mix-blend-mode to avoid contrast issues */
     background: linear-gradient(to bottom, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 100%);
 }
 
 .brand-logo {
     display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    font-family: var(--font-display);
+    align-items: center;
     text-decoration: none;
-    transform: rotate(-10deg);
-    margin-top: 15px;
-    margin-left: 10px;
     transition: transform 0.3s ease;
 }
 
 .brand-logo:hover {
-    transform: rotate(-10deg) scale(1.05);
+    transform: scale(1.05);
 }
 
 .logo-main-row {
