@@ -7,22 +7,34 @@
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <style>
-        body { background-color: #0f0f0f; color: #fff; font-family: var(--font-body); padding: 40px; }
-        .table-container { background: rgba(20, 20, 20, 0.9); padding: 20px; border-radius: 12px; margin-top: 20px; border: 1px solid rgba(255,255,255,0.1); }
-        table { width: 100%; border-collapse: collapse; }
-        th, td { padding: 12px 15px; text-align: left; border-bottom: 1px solid rgba(255,255,255,0.1); }
-        th { color: var(--accent-color); font-family: var(--font-display); font-size: 1.2rem; }
-        .btn-update { background: var(--accent-color); color: #000; border: none; padding: 6px 12px; border-radius: 6px; cursor: pointer; font-weight: bold; }
+        body { background-color: #0f0f0f; color: #fff; font-family: var(--font-body); padding: 30px; }
+        .table-container { background: rgba(20,20,20,0.9); padding: 20px; border-radius: 12px; margin-top: 20px; border: 1px solid rgba(255,255,255,0.1); overflow-x: auto; }
+        table { width: 100%; border-collapse: collapse; min-width: 700px; }
+        th, td { padding: 12px 15px; text-align: left; border-bottom: 1px solid rgba(255,255,255,0.08); }
+        th { color: var(--accent-color); font-family: var(--font-display); font-size: 1.1rem; }
+        .btn-update { background: var(--accent-color); color: #000; border: none; padding: 6px 12px; border-radius: 6px; cursor: pointer; font-weight: bold; font-size: 0.85rem; }
         .btn-update:hover { background: #e55c00; }
-        .status-badge { padding: 4px 8px; border-radius: 4px; font-weight: bold; font-size: 0.85rem; }
-        .status-vigente { background: rgba(74, 222, 128, 0.2); color: #4ade80; }
-        .status-pendiente { background: rgba(255, 85, 85, 0.2); color: #ff5555; }
+        .btn-salud { background: transparent; color: #aaa; border: 1px solid #444; padding: 6px 12px; border-radius: 6px; cursor: pointer; font-size: 0.85rem; margin-left: 6px; }
+        .btn-salud:hover { border-color: #fff; color: #fff; }
+        .badge-vigente { background: rgba(74,222,128,0.15); color: #4ade80; padding: 3px 8px; border-radius: 4px; font-weight: bold; font-size: 0.8rem; }
+        .badge-pendiente { background: rgba(255,85,85,0.15); color: #ff5555; padding: 3px 8px; border-radius: 4px; font-weight: bold; font-size: 0.8rem; }
+        /* Modal */
+        .modal-bg { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.8); z-index: 100; align-items: center; justify-content: center; }
+        .modal-bg.active { display: flex; }
+        .modal { background: #1a1a1a; border: 1px solid #333; border-radius: 12px; padding: 30px; max-width: 480px; width: 90%; }
+        .modal h3 { color: var(--accent-color); font-family: var(--font-display); margin-bottom: 20px; font-size: 1.4rem; }
+        .modal-row { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #2a2a2a; font-size: 0.9rem; }
+        .modal-label { color: #888; }
+        .modal-val { color: #fff; max-width: 55%; text-align: right; }
+        .btn-close { background: transparent; border: 1px solid #444; color: #aaa; padding: 8px 20px; border-radius: 6px; cursor: pointer; margin-top: 20px; width: 100%; }
+        .btn-close:hover { border-color: #fff; color: #fff; }
+        .loader { text-align: center; padding: 40px; color: #666; }
     </style>
 </head>
 <body>
-    <div style="display: flex; justify-content: space-between; align-items: center;">
-        <h1 class="huge-text" style="font-size: 2.5rem; margin: 0;">PANEL DE CONTROL - ATLETAS</h1>
-        <a href="index.html" style="color: #aaa; text-decoration: none;">Salir</a>
+    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;">
+        <h1 class="huge-text" style="font-size:2rem;margin:0;">PANEL DE CONTROL</h1>
+        <button onclick="logout()" style="background:transparent;border:1px solid #444;color:#aaa;padding:8px 18px;border-radius:6px;cursor:pointer;">Cerrar Sesion</button>
     </div>
 
     <div class="table-container">
@@ -30,75 +42,109 @@
             <thead>
                 <tr>
                     <th>Nombre</th>
-                    <th>Cédula</th>
+                    <th>Cedula</th>
                     <th>Estado</th>
-                    <th>Último Pago</th>
-                    <th>Acción</th>
+                    <th>Ultimo Pago</th>
+                    <th>Acciones</th>
                 </tr>
             </thead>
-            <tbody id="athletes-table-body">
-                <tr><td colspan="5" style="text-align: center;">Cargando atletas...</td></tr>
+            <tbody id="tbody">
+                <tr><td colspan="5" class="loader">Cargando atletas...</td></tr>
             </tbody>
         </table>
     </div>
 
+    <!-- Modal de Salud -->
+    <div class="modal-bg" id="modal-salud">
+        <div class="modal">
+            <h3 id="modal-nombre">FICHA DE SALUD</h3>
+            <div id="modal-content"></div>
+            <button class="btn-close" onclick="cerrarModal()">CERRAR</button>
+        </div>
+    </div>
+
+    <script src="auth.js"></script>
     <script>
-        function loadAthletes() {
-            fetch('https://api-3erround.onrender.com/athletes')
-                .then(res => res.json())
-                .then(data => {
-                    const tbody = document.getElementById('athletes-table-body');
-                    tbody.innerHTML = '';
-                    
-                    if (data.data.length === 0) {
-                        tbody.innerHTML = '<tr><td colspan="5" style="text-align: center;">No hay atletas registrados.</td></tr>';
-                        return;
-                    }
+        const session = requireAdmin();
+        if (session) loadAthletes(session);
 
-                    data.data.forEach(atleta => {
-                        const tr = document.createElement('tr');
-                        const statusClass = atleta.estado === 'VIGENTE' ? 'status-vigente' : 'status-pendiente';
-                        
-                        tr.innerHTML = 
-                            <td></td>
-                            <td></td>
-                            <td><span class="status-badge "></span></td>
-                            <td></td>
-                            <td>
-                                <button class="btn-update" onclick="marcarPago()">Renovar Hoy</button>
-                            </td>
-                        ;
-                        tbody.appendChild(tr);
-                    });
-                })
-                .catch(err => {
-                    console.error(err);
-                    document.getElementById('athletes-table-body').innerHTML = '<tr><td colspan="5" style="text-align: center; color: red;">Error cargando datos.</td></tr>';
+        async function loadAthletes(session) {
+            try {
+                const res = await fetch(API + "/athletes", { headers: adminHeaders(session) });
+                if (!res.ok) { logout(); return; }
+                const data = await res.json();
+                renderTable(data.data, session);
+            } catch(e) {
+                document.getElementById("tbody").innerHTML = '<tr><td colspan="5" style="color:#ff5555;text-align:center;">Error al cargar datos.</td></tr>';
+            }
+        }
+
+        function renderTable(athletes, session) {
+            const tbody = document.getElementById("tbody");
+            if (!athletes.length) {
+                tbody.innerHTML = '<tr><td colspan="5" class="loader">No hay atletas registrados.</td></tr>';
+                return;
+            }
+            tbody.innerHTML = "";
+            athletes.forEach(function(a) {
+                const tr = document.createElement("tr");
+                const badgeClass = a.estado === "VIGENTE" ? "badge-vigente" : "badge-pendiente";
+                tr.innerHTML =
+                    "<td>" + a.nombre + "</td>" +
+                    "<td>" + a.cedula + "</td>" +
+                    "<td><span class='" + badgeClass + "'>" + (a.estado || "PENDIENTE") + "</span></td>" +
+                    "<td>" + (a.ultimoPago || "Sin registrar") + "</td>" +
+                    "<td>" +
+                        "<button class='btn-update' data-id='" + a.id + "'>Renovar</button>" +
+                        "<button class='btn-salud' data-atleta='" + encodeURIComponent(JSON.stringify(a)) + "'>Ver Salud</button>" +
+                    "</td>";
+                tbody.appendChild(tr);
+            });
+
+            // Delegacion de eventos - evita template literals en onclick
+            tbody.addEventListener("click", function(e) {
+                const btnRenovar = e.target.closest(".btn-update");
+                const btnSalud = e.target.closest(".btn-salud");
+                if (btnRenovar) renovarPago(btnRenovar.dataset.id, session);
+                if (btnSalud) verSalud(JSON.parse(decodeURIComponent(btnSalud.dataset.atleta)));
+            });
+        }
+
+        async function renovarPago(id, session) {
+            if (!confirm("Marcar el pago de este atleta como realizado HOY?")) return;
+            try {
+                const res = await fetch(API + "/athletes/" + id + "/pago", {
+                    method: "PUT",
+                    headers: adminHeaders(session),
+                    body: JSON.stringify({ estado: "VIGENTE" })
                 });
+                const data = await res.json();
+                if (data.success) { loadAthletes(session); }
+                else { alert("Error: " + (data.message || "No se pudo renovar.")); }
+            } catch(e) {
+                alert("Error de conexion.");
+            }
         }
 
-        function marcarPago(id) {
-            if(!confirm('¿Estás seguro de marcar el pago de este atleta como realizado HOY?')) return;
-            
-            const hoy = new Date();
-            const fechaFormateada = hoy.toLocaleDateString('es-ES', { day: '2-digit', month: '2-digit', year: 'numeric' });
-
-            fetch(https://api-3erround.onrender.com/athletes//pago, {
-                method: 'PUT',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ ultimoPago: fechaFormateada, estado: 'VIGENTE' })
-            })
-            .then(res => res.json())
-            .then(data => {
-                if (data.success) {
-                    alert('Pago registrado correctamente.');
-                    loadAthletes();
-                }
-            })
-            .catch(err => alert('Error al registrar pago.'));
+        function verSalud(a) {
+            document.getElementById("modal-nombre").innerText = a.nombre.toUpperCase();
+            document.getElementById("modal-content").innerHTML =
+                "<div class='modal-row'><span class='modal-label'>Condicion Medica</span><span class='modal-val'>" + (a.condicionMedica || "No registrado") + "</span></div>" +
+                "<div class='modal-row'><span class='modal-label'>Lesiones</span><span class='modal-val'>" + (a.lesiones || "No registrado") + "</span></div>" +
+                "<div class='modal-row'><span class='modal-label'>Operaciones</span><span class='modal-val'>" + (a.operaciones || "No registrado") + "</span></div>" +
+                "<div class='modal-row'><span class='modal-label'>Contacto Emergencia</span><span class='modal-val'>" + (a.contactoEmergencia || "No registrado") + "</span></div>" +
+                "<div class='modal-row'><span class='modal-label'>Telefono</span><span class='modal-val'>" + (a.telefono || "No registrado") + "</span></div>" +
+                "<div class='modal-row' style='border:none'><span class='modal-label'>Instagram</span><span class='modal-val'>" + (a.instagram || "No registrado") + "</span></div>";
+            document.getElementById("modal-salud").classList.add("active");
         }
 
-        document.addEventListener('DOMContentLoaded', loadAthletes);
+        function cerrarModal() {
+            document.getElementById("modal-salud").classList.remove("active");
+        }
+
+        document.getElementById("modal-salud").addEventListener("click", function(e) {
+            if (e.target === this) cerrarModal();
+        });
     </script>
 </body>
 </html>

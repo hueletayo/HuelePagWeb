@@ -1,64 +1,51 @@
-import { Controller, Post, Body, UnauthorizedException, BadRequestException } from '@nestjs/common';
-import { PrismaService } from './prisma.service';
-import * as bcrypt from 'bcryptjs';
+﻿import { Controller, Post, Body, UnauthorizedException, BadRequestException } from "@nestjs/common";
+import { PrismaService } from "./prisma.service";
+import * as bcrypt from "bcryptjs";
 
-@Controller('auth')
+function sanitize(athlete: any) {
+  const { password, ...safe } = athlete;
+  return safe;
+}
+
+@Controller("auth")
 export class AuthController {
   constructor(private readonly prisma: PrismaService) {}
 
-  @Post('register')
+  @Post("register")
   async register(@Body() body: any) {
     const { cedula, nombre, email, password } = body;
     if (!cedula || !nombre || !email || !password) {
-      throw new BadRequestException('Todos los campos son requeridos');
+      throw new BadRequestException("Todos los campos son requeridos");
     }
 
-    const existingUser = await this.prisma.athlete.findFirst({
-      where: { OR: [{ email }, { cedula }] }
+    const existing = await this.prisma.athlete.findFirst({
+      where: { OR: [{ email }, { cedula }] },
     });
-
-    if (existingUser) {
-      throw new BadRequestException('El usuario o la cédula ya están registrados');
+    if (existing) {
+      throw new BadRequestException("El email o la cedula ya estan registrados");
     }
 
-    const hashedPassword = await bcrypt.hash(password, 10);
+    const hashed = await bcrypt.hash(password, 10);
     const atleta = await this.prisma.athlete.create({
-      data: {
-        cedula,
-        nombre,
-        email,
-        password: hashedPassword
-      }
+      data: { cedula, nombre, email, password: hashed },
     });
 
-    const { password: _, ...result } = atleta;
-    return { success: true, data: result };
+    return { success: true, data: sanitize(atleta) };
   }
 
-  @Post('login')
+  @Post("login")
   async login(@Body() body: any) {
     const { email, password } = body;
     if (!email || !password) {
-      throw new UnauthorizedException('Email y contraseña son requeridos');
+      throw new UnauthorizedException("Email y contrasena son requeridos");
     }
 
-    const atleta = await this.prisma.athlete.findUnique({
-      where: { email }
-    });
-    
-    if (!atleta) {
-      throw new UnauthorizedException('Credenciales inválidas');
-    }
+    const atleta = await this.prisma.athlete.findUnique({ where: { email } });
+    if (!atleta) throw new UnauthorizedException("Credenciales invalidas");
 
-    const isMatch = await bcrypt.compare(password, atleta.password);
-    if (!isMatch) {
-      throw new UnauthorizedException('Credenciales inválidas');
-    }
+    const match = await bcrypt.compare(password, atleta.password);
+    if (!match) throw new UnauthorizedException("Credenciales invalidas");
 
-    const { password: _, ...result } = atleta;
-    return {
-      success: true,
-      data: result
-    };
+    return { success: true, data: sanitize(atleta) };
   }
 }
