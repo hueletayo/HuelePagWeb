@@ -1,0 +1,88 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro - 3er Round Fit</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .login-bg { background-image: url('https://images.unsplash.com/photo-1549719386-74dfcbf7dbed?auto=format&fit=crop&q=80&w=1920'); background-size: cover; background-position: center; display: flex; align-items: center; justify-content: center; min-height: 100vh; position: relative; }
+        .login-overlay { position: absolute; inset: 0; background: linear-gradient(135deg, rgba(0,0,0,0.9) 0%, rgba(20,20,20,0.7) 100%); backdrop-filter: blur(5px); z-index: 0; }
+        .glass-panel { position: relative; z-index: 1; background: rgba(15, 15, 15, 0.6); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 16px; padding: 40px; width: 100%; max-width: 420px; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5); backdrop-filter: blur(10px); }
+        .input-dark { background: rgba(0, 0, 0, 0.5); border: 1px solid rgba(255, 255, 255, 0.1); color: #fff; padding: 12px 20px; border-radius: 8px; width: 100%; font-family: var(--font-body); font-size: 1rem; margin-bottom: 15px; outline: none; }
+        .input-dark:focus { border-color: var(--accent-color); background: rgba(0, 0, 0, 0.8); }
+        .form-group label { color: #aaa; font-size: 0.85rem; margin-bottom: 5px; display: block; }
+    </style>
+</head>
+<body class="login-bg">
+    <div class="login-overlay"></div>
+    <div class="glass-panel">
+        <a href="index.html" style="position: absolute; top: 15px; right: 20px; color: #fff; text-decoration: none; font-size: 1.5rem; opacity: 0.6;">&times;</a>
+        <div style="text-align: center; margin-bottom: 25px;">
+            <img src="assets/logo.png" alt="3er Round Fit Logo" style="height: 60px;">
+            <h2 class="huge-text" style="font-size: 1.5rem; margin-top: 10px;">CREA TU CUENTA</h2>
+        </div>
+        <form id="registroForm">
+            <div class="form-group">
+                <label>Nombre y Apellido</label>
+                <input type="text" id="nombre" class="input-dark" placeholder="Ej: Daniel Rodriguez" required>
+            </div>
+            <div class="form-group">
+                <label>Cédula de Identidad</label>
+                <input type="text" id="cedula" class="input-dark" placeholder="V-12345678" required>
+            </div>
+            <div class="form-group">
+                <label>Correo Electrónico</label>
+                <input type="email" id="email" class="input-dark" placeholder="tu@correo.com" required>
+            </div>
+            <div class="form-group" style="margin-bottom: 25px;">
+                <label>Contraseña</label>
+                <input type="password" id="password" class="input-dark" placeholder="••••••••" required>
+            </div>
+            <button type="submit" class="btn-brutal" id="btn-submit" style="width: 100%; border-radius: 8px; font-size: 1.1rem; padding: 15px;">REGISTRARME</button>
+            <div id="error-msg" style="color: #ff5555; margin-top: 15px; text-align: center; display: none; font-size: 0.9rem;">Error</div>
+        </form>
+        <div style="text-align: center; margin-top: 20px;">
+            <p style="color: #aaa; font-size: 0.95rem;">¿Ya tienes cuenta? <a href="login.html" style="color: var(--accent-color); font-weight: bold; text-decoration: none;">Inicia Sesión</a></p>
+        </div>
+    </div>
+    <script>
+        document.getElementById('registroForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const btn = document.getElementById('btn-submit');
+            const errorMsg = document.getElementById('error-msg');
+            
+            const nombre = document.getElementById('nombre').value;
+            const cedula = document.getElementById('cedula').value;
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            
+            btn.innerText = "REGISTRANDO...";
+            errorMsg.style.display = 'none';
+
+            fetch('https://api-3erround.onrender.com/auth/register', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ nombre, cedula, email, password })
+            })
+            .then(res => res.json())
+            .then(data => {
+                if (data.success) {
+                    localStorage.setItem('atleta_data', JSON.stringify(data.data));
+                    window.location.href = "dashboard.html";
+                } else {
+                    btn.innerText = "REGISTRARME";
+                    errorMsg.innerText = data.message || 'Error al registrarse.';
+                    errorMsg.style.display = 'block';
+                }
+            })
+            .catch(err => {
+                btn.innerText = "REGISTRARME";
+                errorMsg.innerText = 'Error de conexión.';
+                errorMsg.style.display = 'block';
+            });
+        });
+    </script>
+</body>
+</html>

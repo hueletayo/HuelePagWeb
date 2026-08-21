@@ -1,0 +1,22 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Athlete {
+  id          Int       @id @default(autoincrement())
+  cedula      String    @unique
+  nombre      String
+  email       String    @unique
+  password    String
+  telefono    String?
+  ultimoPago  String?
+  proximoPago String?
+  estado      String    @default("PENDIENTE")
+  role        String    @default("USER")
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}

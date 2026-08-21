@@ -1,0 +1,104 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Control - 3er Round Fit</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body { background-color: #0f0f0f; color: #fff; font-family: var(--font-body); padding: 40px; }
+        .table-container { background: rgba(20, 20, 20, 0.9); padding: 20px; border-radius: 12px; margin-top: 20px; border: 1px solid rgba(255,255,255,0.1); }
+        table { width: 100%; border-collapse: collapse; }
+        th, td { padding: 12px 15px; text-align: left; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        th { color: var(--accent-color); font-family: var(--font-display); font-size: 1.2rem; }
+        .btn-update { background: var(--accent-color); color: #000; border: none; padding: 6px 12px; border-radius: 6px; cursor: pointer; font-weight: bold; }
+        .btn-update:hover { background: #e55c00; }
+        .status-badge { padding: 4px 8px; border-radius: 4px; font-weight: bold; font-size: 0.85rem; }
+        .status-vigente { background: rgba(74, 222, 128, 0.2); color: #4ade80; }
+        .status-pendiente { background: rgba(255, 85, 85, 0.2); color: #ff5555; }
+    </style>
+</head>
+<body>
+    <div style="display: flex; justify-content: space-between; align-items: center;">
+        <h1 class="huge-text" style="font-size: 2.5rem; margin: 0;">PANEL DE CONTROL - ATLETAS</h1>
+        <a href="index.html" style="color: #aaa; text-decoration: none;">Salir</a>
+    </div>
+
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Cédula</th>
+                    <th>Estado</th>
+                    <th>Último Pago</th>
+                    <th>Acción</th>
+                </tr>
+            </thead>
+            <tbody id="athletes-table-body">
+                <tr><td colspan="5" style="text-align: center;">Cargando atletas...</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        function loadAthletes() {
+            fetch('https://api-3erround.onrender.com/athletes')
+                .then(res => res.json())
+                .then(data => {
+                    const tbody = document.getElementById('athletes-table-body');
+                    tbody.innerHTML = '';
+                    
+                    if (data.data.length === 0) {
+                        tbody.innerHTML = '<tr><td colspan="5" style="text-align: center;">No hay atletas registrados.</td></tr>';
+                        return;
+                    }
+
+                    data.data.forEach(atleta => {
+                        const tr = document.createElement('tr');
+                        const statusClass = atleta.estado === 'VIGENTE' ? 'status-vigente' : 'status-pendiente';
+                        
+                        tr.innerHTML = 
+                            <td></td>
+                            <td></td>
+                            <td><span class="status-badge "></span></td>
+                            <td></td>
+                            <td>
+                                <button class="btn-update" onclick="marcarPago()">Renovar Hoy</button>
+                            </td>
+                        ;
+                        tbody.appendChild(tr);
+                    });
+                })
+                .catch(err => {
+                    console.error(err);
+                    document.getElementById('athletes-table-body').innerHTML = '<tr><td colspan="5" style="text-align: center; color: red;">Error cargando datos.</td></tr>';
+                });
+        }
+
+        function marcarPago(id) {
+            if(!confirm('¿Estás seguro de marcar el pago de este atleta como realizado HOY?')) return;
+            
+            const hoy = new Date();
+            const fechaFormateada = hoy.toLocaleDateString('es-ES', { day: '2-digit', month: '2-digit', year: 'numeric' });
+
+            fetch(https://api-3erround.onrender.com/athletes//pago, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ ultimoPago: fechaFormateada, estado: 'VIGENTE' })
+            })
+            .then(res => res.json())
+            .then(data => {
+                if (data.success) {
+                    alert('Pago registrado correctamente.');
+                    loadAthletes();
+                }
+            })
+            .catch(err => alert('Error al registrar pago.'));
+        }
+
+        document.addEventListener('DOMContentLoaded', loadAthletes);
+    </script>
+</body>
+</html>

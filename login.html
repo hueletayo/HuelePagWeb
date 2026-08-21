@@ -122,8 +122,8 @@
 
         <form id="loginForm">
             <div class="form-group" style="margin-bottom: 15px;">
-                <label style="color: #aaa; font-size: 0.85rem; margin-bottom: 8px; display: block;">Usuario o Cédula</label>
-                <input type="text" id="usuario" class="input-dark" placeholder="Ingresa tu usuario" required>
+                <label style="color: #aaa; font-size: 0.85rem; margin-bottom: 8px; display: block;">Correo Electrónico</label>
+                <input type="email" id="email" class="input-dark" placeholder="tu@correo.com" required>
             </div>
 
             <div class="form-group" style="margin-bottom: 25px;">
@@ -137,7 +137,7 @@
         </form>
 
         <div style="text-align: center; margin-top: 25px;">
-            <a href="index.html" style="color: #ccc; text-decoration: none; font-size: 0.95rem; font-weight: 600; transition: color 0.3s;">&larr; VOLVER A LA PÁGINA PRINCIPAL</a>
+            <p style="color: #aaa; font-size: 0.95rem; font-family: var(--font-body);">¿No tienes cuenta? <a href="registro.html" style="color: var(--accent-color); font-weight: bold; text-decoration: none;">Regístrate aquí</a></p>
         </div>
     </div>
 
@@ -148,7 +148,8 @@
             e.preventDefault();
             const btn = document.getElementById('btn-login');
             const errorMsg = document.getElementById('error-msg');
-            const cedula = document.getElementById('usuario').value;
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
             
             btn.innerText = "VERIFICANDO...";
             errorMsg.style.display = 'none';
@@ -156,7 +157,7 @@
             fetch('https://api-3erround.onrender.com/auth/login', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ cedula: cedula })
+                body: JSON.stringify({ email, password })
             })
             .then(res => res.json())
             .then(data => {
