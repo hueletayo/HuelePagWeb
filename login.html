@@ -148,20 +148,33 @@
             e.preventDefault();
             const btn = document.getElementById('btn-login');
             const errorMsg = document.getElementById('error-msg');
+            const cedula = document.getElementById('usuario').value;
             
             btn.innerText = "VERIFICANDO...";
             errorMsg.style.display = 'none';
 
-            // Simulación visual
-            setTimeout(() => {
-                if(document.getElementById('usuario').value === "admin") {
-                    localStorage.setItem('atleta_cedula', '123456');
+            fetch('https://api-3erround.onrender.com/auth/login', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ cedula: cedula })
+            })
+            .then(res => res.json())
+            .then(data => {
+                if (data.success && data.data) {
+                    localStorage.setItem('atleta_data', JSON.stringify(data.data));
                     window.location.href = "dashboard.html";
                 } else {
                     btn.innerText = "INGRESAR AL RING";
+                    errorMsg.innerText = data.message || 'Cédula no encontrada.';
                     errorMsg.style.display = 'block';
                 }
-            }, 1000);
+            })
+            .catch(err => {
+                console.error(err);
+                btn.innerText = "INGRESAR AL RING";
+                errorMsg.innerText = 'Error de conexión. Intenta de nuevo.';
+                errorMsg.style.display = 'block';
+            });
         });
 
         document.getElementById('btn-google').addEventListener('click', () => {

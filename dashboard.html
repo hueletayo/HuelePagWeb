@@ -83,29 +83,37 @@
     </div>
 
     <script>
-        // Verificar si hay sesión
-        const cedula = localStorage.getItem('atleta_cedula');
-        if(!cedula) {
-            window.location.href = "login.html";
-        }
-
-        // Simulación de carga desde NestJS (API)
-        setTimeout(() => {
-            document.getElementById('user-name').innerText = "JESÚS";
+        // Carga de datos reales
+        document.addEventListener('DOMContentLoaded', () => {
+            const atletaDataRaw = localStorage.getItem('atleta_data');
+            if(!atletaDataRaw) {
+                window.location.href = "login.html";
+                return;
+            }
             
-            const badge = document.getElementById('status-badge');
-            badge.innerText = "PENDIENTE";
-            badge.className = "status-badge status-pendiente";
+            const data = JSON.parse(atletaDataRaw);
             
-            document.getElementById('status-msg').innerText = "Tu mensualidad se encuentra vencida. Por favor, reporta tu pago.";
+            // Asignar nombre
+            document.getElementById('user-name').innerText = (data.nombre || 'ATLETA').toUpperCase();
             
-            document.getElementById('user-date').innerText = "18/07/2026";
-            document.getElementById('user-next').innerText = "18/08/2026";
-        }, 1500);
+            // Asignar Estatus dinámico (Verde/Rojo)
+            const estadoEl = document.getElementById('status-badge');
+            estadoEl.innerText = (data.estado || 'DESCONOCIDO').toUpperCase();
+            
+            if (data.estado === 'VIGENTE') {
+                estadoEl.className = "status-badge status-activo";
+            } else {
+                estadoEl.className = "status-badge status-pendiente";
+            }
+            
+            // Asignar datos de fecha
+            document.getElementById('user-date').innerText = data.ultimoPago || '--/--/----';
+            document.getElementById('user-next').innerText = data.proximoPago || '--/--/----';
+        });
 
         // Logout
         document.getElementById('btn-logout').addEventListener('click', () => {
-            localStorage.removeItem('atleta_cedula');
+            localStorage.removeItem('atleta_data');
             window.location.href = "login.html";
         });
     </script>
