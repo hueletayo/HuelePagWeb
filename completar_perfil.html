@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Únete al Club - 3er Round Fit</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body { background-color: #0f0f0f; color: #fff; font-family: var(--font-body); padding: 40px; }
+        .form-container { background: rgba(20, 20, 20, 0.9); padding: 40px; border-radius: 12px; max-width: 600px; margin: 0 auto; border: 1px solid rgba(255,255,255,0.1); }
+        .input-dark { background: rgba(0, 0, 0, 0.5); border: 1px solid rgba(255, 255, 255, 0.1); color: #fff; padding: 12px 20px; border-radius: 8px; width: 100%; font-family: var(--font-body); font-size: 1rem; margin-bottom: 20px; outline: none; }
+        .input-dark:focus { border-color: var(--accent-color); background: rgba(0, 0, 0, 0.8); }
+        label { color: #aaa; font-size: 0.9rem; margin-bottom: 8px; display: block; font-weight: 500; }
+        .section-title { color: var(--accent-color); font-family: var(--font-display); font-size: 1.5rem; margin-top: 30px; margin-bottom: 15px; letter-spacing: 1px; }
+        .small-note { font-size: 0.8rem; color: #888; margin-bottom: 8px; display: block; }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <div style="text-align: center; margin-bottom: 30px;">
+            <img src="assets/logo.png" alt="Logo" style="height: 60px;">
+            <h1 class="huge-text" style="font-size: 2.2rem; margin-top: 15px;">ÚNETE AL CLUB</h1>
+            <p style="color: #ccc; font-size: 0.95rem; line-height: 1.5;">Por favor, completa este formulario de ingreso con tus datos personales y de salud. Esta información es estrictamente confidencial y nos permite cuidar de ti durante los entrenamientos.</p>
+        </div>
+
+        <form id="perfilForm">
+            <h2 class="section-title">DATOS PERSONALES</h2>
+            
+            <label>Teléfono (WhatsApp)</label>
+            <input type="text" id="telefono" class="input-dark" placeholder="Ej. 04120000000" required>
+            
+            <label>Usuario de Instagram</label>
+            <input type="text" id="instagram" class="input-dark" placeholder="Ej. @tu_usuario" required>
+            
+            <label>Dirección de Habitación</label>
+            <input type="text" id="direccion" class="input-dark" placeholder="Zona, Ciudad..." required>
+            
+            <label>Contacto de Emergencia</label>
+            <input type="text" id="contactoEmergencia" class="input-dark" placeholder="Nombre y Teléfono de tu contacto" required>
+            
+            <h2 class="section-title">FORMULARIO DE SALUD</h2>
+            <span class="small-note">El boxeo es de alta exigencia. Sé sincero por tu seguridad.</span>
+            
+            <label>1. ¿Sufres de alguna condición médica? (Azúcar, tensión, asma, etc.)</label>
+            <span class="small-note">Si no sufres de nada, escribe "Ninguna"</span>
+            <input type="text" id="condicionMedica" class="input-dark" required>
+            
+            <label>2. ¿Tienes lesiones físicas recientes o hernias? (espalda, rodillas, etc.)</label>
+            <span class="small-note">Detalla cualquier lesión o escribe "Ninguna"</span>
+            <input type="text" id="lesiones" class="input-dark" required>
+            
+            <label>3. ¿Has sido operado recientemente?</label>
+            <span class="small-note">Detalla tipo de operación y fecha, o escribe "Ninguna"</span>
+            <input type="text" id="operaciones" class="input-dark" required>
+            <span class="small-note" style="color: #ff5555; margin-top: -10px; margin-bottom: 25px;">*Nota: Nos reservamos el derecho de pedir clearance médico si la operación fue reciente.</span>
+            
+            <button type="submit" class="btn-brutal" id="btn-submit" style="width: 100%; border-radius: 8px; font-size: 1.2rem; padding: 15px; margin-top: 20px;">ENVIAR REGISTRO</button>
+            <div id="error-msg" style="color: #ff5555; margin-top: 15px; text-align: center; display: none;"></div>
+        </form>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const atletaDataRaw = localStorage.getItem("atleta_data");
+            if(!atletaDataRaw) {
+                window.location.href = "login.html";
+                return;
+            }
+        });
+
+        document.getElementById("perfilForm").addEventListener("submit", function(e) {
+            e.preventDefault();
+            const btn = document.getElementById("btn-submit");
+            const errorMsg = document.getElementById("error-msg");
+            
+            const atletaDataRaw = localStorage.getItem("atleta_data");
+            if(!atletaDataRaw) return;
+            const data = JSON.parse(atletaDataRaw);
+            const id = data.id;
+
+            const payload = {
+                telefono: document.getElementById("telefono").value,
+                instagram: document.getElementById("instagram").value,
+                direccion: document.getElementById("direccion").value,
+                contactoEmergencia: document.getElementById("contactoEmergencia").value,
+                condicionMedica: document.getElementById("condicionMedica").value,
+                lesiones: document.getElementById("lesiones").value,
+                operaciones: document.getElementById("operaciones").value
+            };
+            
+            btn.innerText = "ENVIANDO...";
+            errorMsg.style.display = "none";
+
+            fetch(https://api-3erround.onrender.com/athletes//perfil, {
+                method: "PUT",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(payload)
+            })
+            .then(res => res.json())
+            .then(resData => {
+                if (resData.success) {
+                    data.perfilCompletado = true;
+                    localStorage.setItem("atleta_data", JSON.stringify(data));
+                    window.location.href = "dashboard.html";
+                } else {
+                    btn.innerText = "ENVIAR REGISTRO";
+                    errorMsg.innerText = resData.message || "Error al guardar.";
+                    errorMsg.style.display = "block";
+                }
+            })
+            .catch(err => {
+                btn.innerText = "ENVIAR REGISTRO";
+                errorMsg.innerText = "Error de conexión.";
+                errorMsg.style.display = "block";
+            });
+        });
+    </script>
+</body>
+</html>

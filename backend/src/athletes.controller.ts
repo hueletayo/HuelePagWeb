@@ -7,7 +7,6 @@ export class AthletesController {
 
   @Get()
   async getAllAthletes() {
-    // Basic protection can be added here
     const athletes = await this.prisma.athlete.findMany({
       orderBy: { nombre: 'asc' }
     });
@@ -19,6 +18,26 @@ export class AthletesController {
     const athlete = await this.prisma.athlete.update({
       where: { id: parseInt(id) },
       data: { ultimoPago, estado }
+    });
+    return { success: true, data: athlete };
+  }
+
+  @Put(':id/perfil')
+  async completarPerfil(@Param('id') id: string, @Body() body: any) {
+    const { telefono, instagram, direccion, contactoEmergencia, condicionMedica, lesiones, operaciones } = body;
+    
+    const athlete = await this.prisma.athlete.update({
+      where: { id: parseInt(id) },
+      data: { 
+        telefono, 
+        instagram, 
+        direccion, 
+        contactoEmergencia, 
+        condicionMedica, 
+        lesiones, 
+        operaciones,
+        perfilCompletado: true
+      }
     });
     return { success: true, data: athlete };
   }

@@ -163,7 +163,11 @@
             .then(data => {
                 if (data.success && data.data) {
                     localStorage.setItem('atleta_data', JSON.stringify(data.data));
-                    window.location.href = "dashboard.html";
+                    if (!data.data.perfilCompletado) {
+                        window.location.href = "completar_perfil.html";
+                    } else {
+                        window.location.href = "dashboard.html";
+                    }
                 } else {
                     btn.innerText = "INGRESAR AL RING";
                     errorMsg.innerText = data.message || 'Cédula no encontrada.';
