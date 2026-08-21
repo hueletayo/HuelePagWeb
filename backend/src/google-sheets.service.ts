@@ -10,7 +10,7 @@ export class GoogleSheetsService implements OnModuleInit {
   private readonly sheetId = '1LE3XVzx8n4eGwpEYf10arN5hCWKnz1iBJLMCembljjs';
   
   // Sistema de Caché para evitar límites de API de Google
-  private cachedRows: any[] = null;
+  private cachedRows: any[] | null = null;
   private lastFetchTime: number = 0;
   private readonly CACHE_TTL = 5 * 60 * 1000; // 5 minutos en milisegundos
 
@@ -64,7 +64,7 @@ export class GoogleSheetsService implements OnModuleInit {
       await this.forceRefreshCache();
     }
     
-    const targetRow = this.cachedRows.find(row => {
+    const targetRow = this.cachedRows!.find(row => {
       const rowCedula = row.get('Cedula') || row.get('Cédula') || '';
       return rowCedula.toString().trim() === cedula.toString().trim();
     });
