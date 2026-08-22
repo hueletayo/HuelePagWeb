@@ -24,9 +24,10 @@ model Athlete {
   perfilCompletado   Boolean   @default(false)
   
   // Pagos
+  referenciaRegistro String?
   ultimoPago         String?
   proximoPago        String?
-  estado             String    @default("PENDIENTE")
+  estado             String    @default("EN_REVISION")
   
   role               String    @default("USER")
   createdAt          DateTime  @default(now())

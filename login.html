@@ -14,6 +14,7 @@
         .input-dark:focus { border-color: var(--accent-color); background: rgba(0,0,0,0.8); box-shadow: 0 0 0 2px rgba(255,102,0,0.2); }
         .input-dark::placeholder { color: #666; }
         label { color: #aaa; font-size: 0.85rem; margin-bottom: 8px; display: block; }
+        .alert-box { background: rgba(255,165,0,0.15); border: 1px solid rgba(255,165,0,0.4); color: #ffb732; padding: 15px; border-radius: 8px; font-size: 0.9rem; margin-top: 15px; text-align: center; display: none; line-height: 1.4; }
     </style>
 </head>
 <body class="login-bg">
@@ -37,6 +38,7 @@
             </div>
             <button type="submit" class="btn-brutal" id="btn-login" style="width:100%;border-radius:8px;font-size:1.1rem;padding:15px;">INGRESAR AL RING</button>
             <div id="error-msg" style="color:#ff5555;margin-top:15px;text-align:center;display:none;font-size:0.9rem;"></div>
+            <div id="review-msg" class="alert-box"></div>
         </form>
         <div style="text-align:center;margin-top:25px;">
             <p style="color:#aaa;font-size:0.95rem;font-family:var(--font-body);">No tienes cuenta? <a href="registro.html" style="color:var(--accent-color);font-weight:bold;text-decoration:none;">Registrate aqui</a></p>
@@ -44,7 +46,6 @@
     </div>
     <script src="auth.js"></script>
     <script>
-        // Si ya hay sesion activa, redirigir segun rol
         (function() {
             const s = getSession();
             if (s && s.id) {
@@ -58,12 +59,14 @@
             e.preventDefault();
             const btn = document.getElementById("btn-login");
             const errorMsg = document.getElementById("error-msg");
+            const reviewMsg = document.getElementById("review-msg");
             const email = document.getElementById("email").value.trim();
             const password = document.getElementById("password").value;
 
             btn.innerText = "VERIFICANDO...";
             btn.disabled = true;
             errorMsg.style.display = "none";
+            reviewMsg.style.display = "none";
 
             try {
                 const res = await fetch(API + "/auth/login", {
@@ -73,7 +76,7 @@
                 });
                 const data = await res.json();
 
-                if (data.success && data.data) {
+                if (res.ok && data.success && data.data) {
                     localStorage.setItem("atleta_data", JSON.stringify(data.data));
                     const d = data.data;
                     if (d.role === "ADMIN") {
@@ -86,8 +89,15 @@
                 } else {
                     btn.innerText = "INGRESAR AL RING";
                     btn.disabled = false;
-                    errorMsg.innerText = data.message || "Credenciales invalidas.";
-                    errorMsg.style.display = "block";
+                    
+                    // Manejar error 403 de cuenta en revision
+                    if (data.pendingReview) {
+                        reviewMsg.innerText = data.message || "Tu cuenta esta en revision. Espera la activacion.";
+                        reviewMsg.style.display = "block";
+                    } else {
+                        errorMsg.innerText = data.message || "Credenciales invalidas.";
+                        errorMsg.style.display = "block";
+                    }
                 }
             } catch(err) {
                 btn.innerText = "INGRESAR AL RING";

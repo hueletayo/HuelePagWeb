@@ -8,7 +8,9 @@
     <link rel="stylesheet" href="style.css">
     <style>
         body { background-color: #0f0f0f; color: #fff; font-family: var(--font-body); padding: 30px; }
-        .table-container { background: rgba(20,20,20,0.9); padding: 20px; border-radius: 12px; margin-top: 20px; border: 1px solid rgba(255,255,255,0.1); overflow-x: auto; }
+        .section-title { font-family: var(--font-display); font-size: 1.5rem; color: #fff; margin-top: 30px; margin-bottom: 10px; display: flex; align-items: center; gap: 10px; }
+        .table-container { background: rgba(20,20,20,0.9); padding: 20px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); overflow-x: auto; margin-bottom: 30px; }
+        .table-container.pending { background: rgba(255,102,0,0.05); border: 1px solid rgba(255,102,0,0.2); }
         table { width: 100%; border-collapse: collapse; min-width: 700px; }
         th, td { padding: 12px 15px; text-align: left; border-bottom: 1px solid rgba(255,255,255,0.08); }
         th { color: var(--accent-color); font-family: var(--font-display); font-size: 1.1rem; }
@@ -16,8 +18,16 @@
         .btn-update:hover { background: #e55c00; }
         .btn-salud { background: transparent; color: #aaa; border: 1px solid #444; padding: 6px 12px; border-radius: 6px; cursor: pointer; font-size: 0.85rem; margin-left: 6px; }
         .btn-salud:hover { border-color: #fff; color: #fff; }
+        
+        .btn-aprobar { background: #4ade80; color: #000; border: none; padding: 6px 12px; border-radius: 6px; cursor: pointer; font-weight: bold; font-size: 0.85rem; }
+        .btn-aprobar:hover { background: #22c55e; }
+        .btn-rechazar { background: #ff5555; color: #fff; border: none; padding: 6px 12px; border-radius: 6px; cursor: pointer; font-weight: bold; font-size: 0.85rem; margin-left: 6px; }
+        .btn-rechazar:hover { background: #ef4444; }
+
         .badge-vigente { background: rgba(74,222,128,0.15); color: #4ade80; padding: 3px 8px; border-radius: 4px; font-weight: bold; font-size: 0.8rem; }
         .badge-pendiente { background: rgba(255,85,85,0.15); color: #ff5555; padding: 3px 8px; border-radius: 4px; font-weight: bold; font-size: 0.8rem; }
+        .badge-revision { background: rgba(255,165,0,0.15); color: #ffb732; padding: 3px 8px; border-radius: 4px; font-weight: bold; font-size: 0.8rem; }
+        
         /* Modal */
         .modal-bg { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.8); z-index: 100; align-items: center; justify-content: center; }
         .modal-bg.active { display: flex; }
@@ -37,6 +47,24 @@
         <button onclick="logout()" style="background:transparent;border:1px solid #444;color:#aaa;padding:8px 18px;border-radius:6px;cursor:pointer;">Cerrar Sesion</button>
     </div>
 
+    <h2 class="section-title">⏳ PENDIENTES DE APROBACION</h2>
+    <div class="table-container pending">
+        <table>
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Cedula</th>
+                    <th>Referencia de Pago</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody id="tbody-pendientes">
+                <tr><td colspan="4" class="loader">Cargando...</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <h2 class="section-title">🏋️ ATLETAS ACTIVOS</h2>
     <div class="table-container">
         <table>
             <thead>
@@ -48,8 +76,8 @@
                     <th>Acciones</th>
                 </tr>
             </thead>
-            <tbody id="tbody">
-                <tr><td colspan="5" class="loader">Cargando atletas...</td></tr>
+            <tbody id="tbody-activos">
+                <tr><td colspan="5" class="loader">Cargando...</td></tr>
             </tbody>
         </table>
     </div>
@@ -73,16 +101,51 @@
                 const res = await fetch(API + "/athletes", { headers: adminHeaders(session) });
                 if (!res.ok) { logout(); return; }
                 const data = await res.json();
-                renderTable(data.data, session);
+                
+                const pendientes = data.data.filter(a => a.estado === "EN_REVISION" && a.role !== "ADMIN");
+                const activos = data.data.filter(a => a.estado !== "EN_REVISION" && a.role !== "ADMIN");
+                
+                renderPendientes(pendientes, session);
+                renderActivos(activos, session);
             } catch(e) {
-                document.getElementById("tbody").innerHTML = '<tr><td colspan="5" style="color:#ff5555;text-align:center;">Error al cargar datos.</td></tr>';
+                document.getElementById("tbody-pendientes").innerHTML = '<tr><td colspan="4" style="color:#ff5555;text-align:center;">Error al cargar datos.</td></tr>';
+                document.getElementById("tbody-activos").innerHTML = '<tr><td colspan="5" style="color:#ff5555;text-align:center;">Error al cargar datos.</td></tr>';
             }
         }
 
-        function renderTable(athletes, session) {
-            const tbody = document.getElementById("tbody");
+        function renderPendientes(athletes, session) {
+            const tbody = document.getElementById("tbody-pendientes");
             if (!athletes.length) {
-                tbody.innerHTML = '<tr><td colspan="5" class="loader">No hay atletas registrados.</td></tr>';
+                tbody.innerHTML = '<tr><td colspan="4" class="loader" style="padding:20px;">No hay cuentas pendientes por aprobar.</td></tr>';
+                return;
+            }
+            tbody.innerHTML = "";
+            athletes.forEach(function(a) {
+                const tr = document.createElement("tr");
+                tr.innerHTML =
+                    "<td>" + a.nombre + "</td>" +
+                    "<td>" + a.cedula + "</td>" +
+                    "<td style='font-family:monospace;font-size:1.1rem;color:var(--accent-color);'>" + (a.referenciaRegistro || "N/A") + "</td>" +
+                    "<td>" +
+                        "<button class='btn-aprobar' data-id='" + a.id + "'>Aprobar</button>" +
+                        "<button class='btn-rechazar' data-id='" + a.id + "'>Rechazar</button>" +
+                    "</td>";
+                tbody.appendChild(tr);
+            });
+
+            // Re-asignar eventos (limpiar anteriores si existian no es necesario si re-creamos, pero mejor asignarlo una vez o sobreescribir onclick)
+            tbody.onclick = function(e) {
+                const btnAprobar = e.target.closest(".btn-aprobar");
+                const btnRechazar = e.target.closest(".btn-rechazar");
+                if (btnAprobar) aprobarCuenta(btnAprobar.dataset.id, session);
+                if (btnRechazar) rechazarCuenta(btnRechazar.dataset.id, session);
+            };
+        }
+
+        function renderActivos(athletes, session) {
+            const tbody = document.getElementById("tbody-activos");
+            if (!athletes.length) {
+                tbody.innerHTML = '<tr><td colspan="5" class="loader">No hay atletas activos.</td></tr>';
                 return;
             }
             tbody.innerHTML = "";
@@ -101,13 +164,37 @@
                 tbody.appendChild(tr);
             });
 
-            // Delegacion de eventos - evita template literals en onclick
-            tbody.addEventListener("click", function(e) {
+            tbody.onclick = function(e) {
                 const btnRenovar = e.target.closest(".btn-update");
                 const btnSalud = e.target.closest(".btn-salud");
                 if (btnRenovar) renovarPago(btnRenovar.dataset.id, session);
                 if (btnSalud) verSalud(JSON.parse(decodeURIComponent(btnSalud.dataset.atleta)));
-            });
+            };
+        }
+
+        async function aprobarCuenta(id, session) {
+            if (!confirm("Aprobar esta cuenta? El atleta podra entrar al sistema.")) return;
+            try {
+                const res = await fetch(API + "/athletes/" + id + "/aprobar", {
+                    method: "PUT",
+                    headers: adminHeaders(session)
+                });
+                const data = await res.json();
+                if (data.success) { loadAthletes(session); }
+                else { alert("Error: " + (data.message || "No se pudo aprobar.")); }
+            } catch(e) { alert("Error de conexion."); }
+        }
+
+        async function rechazarCuenta(id, session) {
+            if (!confirm("Rechazar y eliminar esta cuenta?")) return;
+            try {
+                const res = await fetch(API + "/athletes/" + id, {
+                    method: "DELETE",
+                    headers: adminHeaders(session)
+                });
+                if (res.ok) { loadAthletes(session); }
+                else { alert("Error al rechazar."); }
+            } catch(e) { alert("Error de conexion."); }
         }
 
         async function renovarPago(id, session) {
@@ -121,9 +208,7 @@
                 const data = await res.json();
                 if (data.success) { loadAthletes(session); }
                 else { alert("Error: " + (data.message || "No se pudo renovar.")); }
-            } catch(e) {
-                alert("Error de conexion.");
-            }
+            } catch(e) { alert("Error de conexion."); }
         }
 
         function verSalud(a) {

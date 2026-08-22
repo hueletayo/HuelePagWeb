@@ -1,4 +1,4 @@
-﻿import { Controller, Get, Put, Body, Param, Headers, ForbiddenException, NotFoundException } from "@nestjs/common";
+﻿import { Controller, Get, Put, Delete, Body, Param, Headers, ForbiddenException, NotFoundException } from "@nestjs/common";
 import { PrismaService } from "./prisma.service";
 
 function sanitize(athlete: any) {
@@ -18,13 +18,11 @@ async function requireAdmin(prisma: PrismaService, athleteId: string) {
 export class AthletesController {
   constructor(private readonly prisma: PrismaService) {}
 
-  // Keep-alive para UptimeRobot / Render free tier
   @Get("ping")
   ping() {
     return { status: "ok" };
   }
 
-  // Datos frescos del atleta logueado para el dashboard
   @Get("athletes/:id")
   async getAthlete(@Param("id") id: string, @Headers("x-athlete-id") requesterId: string) {
     const numId = parseInt(id);
@@ -37,7 +35,6 @@ export class AthletesController {
     return { success: true, data: sanitize(atleta) };
   }
 
-  // Todos los atletas — solo ADMIN
   @Get("athletes")
   async getAllAthletes(@Headers("x-athlete-id") athleteId: string) {
     await requireAdmin(this.prisma, athleteId);
@@ -45,7 +42,6 @@ export class AthletesController {
     return { success: true, data: athletes.map(sanitize) };
   }
 
-  // Renovar pago — solo ADMIN
   @Put("athletes/:id/pago")
   async updatePago(
     @Param("id") id: string,
@@ -63,7 +59,6 @@ export class AthletesController {
     return { success: true, data: sanitize(athlete) };
   }
 
-  // Completar perfil — el propio atleta
   @Put("athletes/:id/perfil")
   async completarPerfil(
     @Param("id") id: string,
@@ -81,5 +76,30 @@ export class AthletesController {
       data: { telefono, instagram, direccion, contactoEmergencia, condicionMedica, lesiones, operaciones, perfilCompletado: true },
     });
     return { success: true, data: sanitize(athlete) };
+  }
+
+  @Put("athletes/:id/aprobar")
+  async aprobar(
+    @Param("id") id: string,
+    @Headers("x-athlete-id") athleteId: string,
+  ) {
+    await requireAdmin(this.prisma, athleteId);
+    const athlete = await this.prisma.athlete.update({
+      where: { id: parseInt(id) },
+      data: { estado: "PENDIENTE" },
+    });
+    return { success: true, data: sanitize(athlete) };
+  }
+
+  @Delete("athletes/:id")
+  async eliminar(
+    @Param("id") id: string,
+    @Headers("x-athlete-id") athleteId: string,
+  ) {
+    await requireAdmin(this.prisma, athleteId);
+    await this.prisma.athlete.delete({
+      where: { id: parseInt(id) },
+    });
+    return { success: true };
   }
 }

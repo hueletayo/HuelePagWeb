@@ -1,4 +1,4 @@
-﻿import { Controller, Post, Body, UnauthorizedException, BadRequestException } from "@nestjs/common";
+﻿import { Controller, Post, Body, UnauthorizedException, BadRequestException, HttpException } from "@nestjs/common";
 import { PrismaService } from "./prisma.service";
 import * as bcrypt from "bcryptjs";
 
@@ -13,9 +13,9 @@ export class AuthController {
 
   @Post("register")
   async register(@Body() body: any) {
-    const { cedula, nombre, email, password } = body;
-    if (!cedula || !nombre || !email || !password) {
-      throw new BadRequestException("Todos los campos son requeridos");
+    const { cedula, nombre, email, password, referenciaPago } = body;
+    if (!cedula || !nombre || !email || !password || !referenciaPago) {
+      throw new BadRequestException("Todos los campos son requeridos, incluyendo la referencia de pago");
     }
 
     const existing = await this.prisma.athlete.findFirst({
@@ -27,7 +27,14 @@ export class AuthController {
 
     const hashed = await bcrypt.hash(password, 10);
     const atleta = await this.prisma.athlete.create({
-      data: { cedula, nombre, email, password: hashed },
+      data: { 
+        cedula, 
+        nombre, 
+        email, 
+        password: hashed,
+        referenciaRegistro: referenciaPago,
+        estado: "EN_REVISION"
+      },
     });
 
     return { success: true, data: sanitize(atleta) };
@@ -45,6 +52,14 @@ export class AuthController {
 
     const match = await bcrypt.compare(password, atleta.password);
     if (!match) throw new UnauthorizedException("Credenciales invalidas");
+
+    if (atleta.estado === "EN_REVISION") {
+      throw new HttpException({
+        success: false,
+        pendingReview: true,
+        message: "Tu cuenta esta en revision. En cuanto Grey verifique tu pago, podras entrar."
+      }, 403);
+    }
 
     return { success: true, data: sanitize(atleta) };
   }

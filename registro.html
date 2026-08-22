@@ -9,39 +9,64 @@
     <style>
         .login-bg { background-image: url('https://images.unsplash.com/photo-1549719386-74dfcbf7dbed?auto=format&fit=crop&q=80&w=1920'); background-size: cover; background-position: center; display: flex; align-items: center; justify-content: center; min-height: 100vh; position: relative; }
         .login-overlay { position: absolute; inset: 0; background: linear-gradient(135deg, rgba(0,0,0,0.9) 0%, rgba(20,20,20,0.7) 100%); backdrop-filter: blur(5px); z-index: 0; }
-        .glass-panel { position: relative; z-index: 1; background: rgba(15,15,15,0.6); border: 1px solid rgba(255,255,255,0.1); border-radius: 16px; padding: 40px; width: 100%; max-width: 420px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5); backdrop-filter: blur(10px); }
-        .input-dark { background: rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.1); color: #fff; padding: 12px 20px; border-radius: 8px; width: 100%; font-family: var(--font-body); font-size: 1rem; margin-bottom: 15px; outline: none; }
+        .glass-panel { position: relative; z-index: 1; background: rgba(15,15,15,0.6); border: 1px solid rgba(255,255,255,0.1); border-radius: 16px; padding: 30px; width: 100%; max-width: 450px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5); backdrop-filter: blur(10px); max-height: 95vh; overflow-y: auto; }
+        .input-dark { background: rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.1); color: #fff; padding: 10px 15px; border-radius: 8px; width: 100%; font-family: var(--font-body); font-size: 0.95rem; margin-bottom: 15px; outline: none; }
         .input-dark:focus { border-color: var(--accent-color); background: rgba(0,0,0,0.8); }
-        label { color: #aaa; font-size: 0.85rem; margin-bottom: 5px; display: block; }
+        label { color: #aaa; font-size: 0.8rem; margin-bottom: 5px; display: block; }
+        .info-box { background: rgba(255,102,0,0.1); border: 1px solid rgba(255,102,0,0.3); padding: 15px; border-radius: 8px; margin-bottom: 20px; font-size: 0.85rem; color: #ddd; }
     </style>
 </head>
 <body class="login-bg">
     <div class="login-overlay"></div>
-    <div class="glass-panel">
+    <div class="glass-panel" id="panel-form">
         <a href="index.html" style="position:absolute;top:15px;right:20px;color:#fff;text-decoration:none;font-size:1.5rem;opacity:0.6;">&times;</a>
-        <div style="text-align:center;margin-bottom:25px;">
-            <img src="assets/logo.png" alt="3er Round Fit" style="height:60px;">
+        <div style="text-align:center;margin-bottom:20px;">
+            <img src="assets/logo.png" alt="3er Round Fit" style="height:50px;">
             <h2 class="huge-text" style="font-size:1.5rem;margin-top:10px;">CREA TU CUENTA</h2>
         </div>
+        
+        <div class="info-box">
+            <strong style="color:var(--accent-color);display:block;margin-bottom:5px;">PAGO REQUERIDO PARA ENTRAR</strong>
+            Transfiere o haz pago movil a la cuenta de Grey y coloca el numero de referencia abajo. <br><br>
+            <em style="color:#aaa;">(Pregunta a Grey por WhatsApp los datos de pago si no los tienes)</em>
+        </div>
+
         <form id="registroForm">
             <label>Nombre y Apellido</label>
             <input type="text" id="nombre" class="input-dark" placeholder="Ej: Daniel Rodriguez" required>
+            
             <label>Cedula de Identidad</label>
             <input type="text" id="cedula" class="input-dark" placeholder="V-12345678" required>
+            
             <label>Correo Electronico</label>
             <input type="email" id="email" class="input-dark" placeholder="tu@correo.com" required>
+            
             <label>Contrasena</label>
-            <input type="password" id="password" class="input-dark" placeholder="Min. 6 caracteres" required style="margin-bottom:25px;">
-            <button type="submit" class="btn-brutal" id="btn-submit" style="width:100%;border-radius:8px;font-size:1.1rem;padding:15px;">REGISTRARME</button>
+            <input type="password" id="password" class="input-dark" placeholder="Min. 6 caracteres" required>
+            
+            <label style="color:#fff;font-weight:bold;margin-top:10px;">Referencia de Pago</label>
+            <input type="text" id="referenciaPago" class="input-dark" placeholder="Ultimos 6 u 8 digitos" required style="border-color:var(--accent-color);">
+
+            <button type="submit" class="btn-brutal" id="btn-submit" style="width:100%;border-radius:8px;font-size:1.1rem;padding:15px;margin-top:10px;">REGISTRARME</button>
             <div id="error-msg" style="color:#ff5555;margin-top:15px;text-align:center;display:none;font-size:0.9rem;"></div>
         </form>
         <div style="text-align:center;margin-top:20px;">
-            <p style="color:#aaa;font-size:0.95rem;">Ya tienes cuenta? <a href="login.html" style="color:var(--accent-color);font-weight:bold;text-decoration:none;">Inicia Sesion</a></p>
+            <p style="color:#aaa;font-size:0.9rem;">Ya tienes cuenta? <a href="login.html" style="color:var(--accent-color);font-weight:bold;text-decoration:none;">Inicia Sesion</a></p>
         </div>
     </div>
+
+    <!-- Pantalla de exito -->
+    <div class="glass-panel" id="panel-success" style="display:none;text-align:center;padding:50px 30px;">
+        <h2 class="huge-text" style="color:var(--accent-color);font-size:2rem;margin-bottom:15px;">REGISTRO RECIBIDO</h2>
+        <p style="color:#ddd;font-size:1.1rem;line-height:1.6;margin-bottom:30px;">
+            Tu cuenta esta ahora <strong>EN REVISION</strong>.<br><br>
+            Grey verificara tu numero de referencia y activara tu cuenta pronto. Vuelve a iniciar sesion mas tarde.
+        </p>
+        <a href="login.html" class="btn-brutal" style="display:inline-block;padding:12px 30px;border-radius:8px;text-decoration:none;font-size:1.1rem;">IR AL LOGIN</a>
+    </div>
+
     <script src="auth.js"></script>
     <script>
-        // Si ya hay sesion activa, redirigir
         (function() {
             const s = getSession();
             if (s && s.id) {
@@ -67,13 +92,15 @@
                         nombre: document.getElementById("nombre").value.trim(),
                         cedula: document.getElementById("cedula").value.trim(),
                         email: document.getElementById("email").value.trim(),
-                        password: document.getElementById("password").value
+                        password: document.getElementById("password").value,
+                        referenciaPago: document.getElementById("referenciaPago").value.trim()
                     })
                 });
                 const data = await res.json();
                 if (data.success) {
-                    localStorage.setItem("atleta_data", JSON.stringify(data.data));
-                    window.location.href = "completar_perfil.html";
+                    // No guardamos sesion, lo mandamos a esperar
+                    document.getElementById("panel-form").style.display = "none";
+                    document.getElementById("panel-success").style.display = "block";
                 } else {
                     btn.innerText = "REGISTRARME";
                     btn.disabled = false;
