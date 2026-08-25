@@ -1,4 +1,4 @@
-﻿import { PrismaPg } from "@prisma/adapter-pg";
+import { PrismaPg } from "@prisma/adapter-pg";
 import { PrismaClient } from "@prisma/client";
 import { Pool } from "pg";
 import * as bcrypt from "bcryptjs";
@@ -19,7 +19,7 @@ async function main() {
   const hashed = await bcrypt.hash("mipfyJInIN\$MkUbY", 10);
   const admin = await prisma.athlete.create({
     data: {
-      nombre: "Grey Admin",
+      nombre: "Admin 3er Round Fit",
       cedula: "ADMIN001",
       email: "3erroundfit@gmail.com",
       password: hashed,

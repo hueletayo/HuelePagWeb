@@ -1,4 +1,4 @@
-﻿import { Controller, Post, Body, UnauthorizedException, BadRequestException, HttpException } from "@nestjs/common";
+import { Controller, Post, Body, UnauthorizedException, BadRequestException, HttpException } from "@nestjs/common";
 import { PrismaService } from "./prisma.service";
 import * as bcrypt from "bcryptjs";
 
@@ -57,7 +57,7 @@ export class AuthController {
       throw new HttpException({
         success: false,
         pendingReview: true,
-        message: "Tu cuenta esta en revision. En cuanto Grey verifique tu pago, podras entrar."
+        message: "Tu cuenta esta en revision. En cuanto Administracion verifique tu pago, podras entrar."
       }, 403);
     }
 
