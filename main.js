@@ -121,6 +121,36 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // --- Scroll spy de la barra horizontal --------------------------------
+    // Marca en la nav la sección que ocupa el centro de la pantalla.
+    const enlacesSpy = document.querySelectorAll('.nav-links a[data-spy]');
+    if (enlacesSpy.length && 'IntersectionObserver' in window) {
+        const porId = new Map();
+        const secciones = [];
+        enlacesSpy.forEach(a => {
+            const sec = document.getElementById(a.dataset.spy);
+            if (sec) { porId.set(sec, a); secciones.push(sec); }
+        });
+
+        const visibles = new Set();
+        const repintar = () => {
+            // Si hay varias visibles gana la primera en el orden del documento
+            const activa = secciones.find(s => visibles.has(s));
+            enlacesSpy.forEach(a => a.classList.remove('is-active'));
+            if (activa) porId.get(activa).classList.add('is-active');
+        };
+
+        const spy = new IntersectionObserver((entries) => {
+            entries.forEach(e => {
+                if (e.isIntersecting) visibles.add(e.target);
+                else visibles.delete(e.target);
+            });
+            repintar();
+        }, { rootMargin: '-45% 0px -45% 0px' });
+
+        secciones.forEach(s => spy.observe(s));
+    }
+
     // --- Próxima clase ----------------------------------------------------
     // Se calcula con la hora del visitante a partir del horario publicado.
     // Si algún día cambian las clases, hay que tocar HORARIO aquí y la

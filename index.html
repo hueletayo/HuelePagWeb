@@ -37,7 +37,7 @@
     <link rel="preload" as="image" href="assets/hero-poster.jpg" fetchpriority="high">
 
     <!-- CSS -->
-    <link rel="stylesheet" href="style.css?v=20260907i">
+    <link rel="stylesheet" href="style.css?v=20260907j">
 
     <!-- Feather Icons (versión fija) -->
     <script defer src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.29.2/feather.min.js"></script>
@@ -276,10 +276,27 @@
     <a href="#filosofia" class="skip-link">Saltar al contenido</a>
 
     <!-- Navigation -->
-    <nav class="navbar">
+    <nav class="navbar" aria-label="Navegación principal">
         <a href="#" class="brand-logo" aria-label="3er Round Fit — inicio">
             <img src="assets/logo.png" alt="3er Round Fit" width="1910" height="947" class="brand-img">
         </a>
+
+        <!-- Barra horizontal: visible en escritorio, oculta en móvil -->
+        <ul class="nav-links">
+            <li><a href="#filosofia" data-spy="filosofia">Filosofía</a></li>
+            <li><a href="#entrenamiento" data-spy="entrenamiento">Entrenamientos</a></li>
+            <li><a href="#entrenadores" data-spy="entrenadores">El equipo</a></li>
+            <li><a href="#horarios" data-spy="horarios">Horarios</a></li>
+            <li><a href="#precios" data-spy="precios">Precios</a></li>
+            <li><a href="#galeria" data-spy="galeria">Acción</a></li>
+        </ul>
+
+        <div class="nav-actions">
+            <a href="login.html" class="nav-atletas">Atletas</a>
+            <a href="registro.html" class="nav-cta">Únete</a>
+        </div>
+
+        <!-- Hamburguesa: solo por debajo del breakpoint -->
         <button type="button" class="menu-btn" id="menu-toggle" aria-expanded="false" aria-controls="fullscreen-menu" aria-label="Abrir menú">
             <span class="menu-btn-lines"></span>
         </button>
@@ -695,6 +712,6 @@
     </footer>
 
     <!-- Scripts -->
-    <script src="main.js?v=20260907i"></script>
+    <script src="main.js?v=20260907j"></script>
 </body>
 </html>

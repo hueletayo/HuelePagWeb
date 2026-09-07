@@ -20,7 +20,7 @@
     --gap-lg: 100px;
     --gap-xl: 150px;
 
-    --nav-h: 120px;
+    --nav-h: 96px;
 }
 
 * {
@@ -124,10 +124,11 @@ img, video {
     top: 0;
     left: 0;
     width: 100%;
-    padding: 30px 5%;
+    padding: 18px 4%;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 24px;
     z-index: 1000;
     background: linear-gradient(to bottom, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0) 100%);
     transition: background-color 0.3s ease, padding 0.3s ease;
@@ -135,7 +136,7 @@ img, video {
 
 .navbar.scrolled {
     background: rgba(10, 10, 10, 0.98);
-    padding: 15px 5%;
+    padding: 10px 4%;
     box-shadow: 0 5px 20px rgba(0,0,0,0.5);
 }
 
@@ -150,17 +151,93 @@ img, video {
 }
 
 .brand-img {
-    height: 60px;
+    height: 52px;
     width: auto;
     object-fit: contain;
     transition: height 0.3s ease;
 }
 .navbar.scrolled .brand-img {
-    height: 45px;
+    height: 42px;
+}
+
+/* ============================================================
+   Barra horizontal (patrón SPGA: links fuera del hamburguesa).
+   El hamburguesa y el menú fullscreen solo viven bajo --nav-bp.
+   ============================================================ */
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 26px;
+    list-style: none;
+    margin: 0 auto;
+}
+
+.nav-links a {
+    display: block;
+    font-family: var(--font-body);
+    font-size: 0.74rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #fff;
+    text-decoration: none;
+    padding-bottom: 6px;
+    border-bottom: 2px solid transparent;
+    transition: border-color 0.25s ease, color 0.25s ease;
+    white-space: nowrap;
+}
+
+.nav-links a:hover,
+.nav-links a:focus-visible { border-bottom-color: var(--accent-color); }
+
+/* Scroll spy: marca la sección que se está viendo */
+.nav-links a.is-active {
+    color: var(--accent-color);
+    border-bottom-color: var(--accent-color);
+}
+
+.nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex: none;
+}
+
+.nav-atletas {
+    font-family: var(--font-body);
+    font-size: 0.74rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.25s ease;
+    white-space: nowrap;
+}
+.nav-atletas:hover { color: #fff; }
+
+.nav-cta {
+    font-family: var(--font-body);
+    font-size: 0.74rem;
+    font-weight: 900;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #fff;
+    text-decoration: none;
+    border: 2px solid #fff;
+    padding: 9px 18px;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+}
+.nav-cta:hover {
+    background: var(--accent-color);
+    border-color: var(--accent-color);
+    color: var(--accent-ink);
 }
 
 /* Hamburguesa: <button> real, accesible por teclado */
 .menu-btn {
+    display: none;
     width: 40px;
     height: 30px;
     position: relative;
@@ -169,6 +246,14 @@ img, video {
     border: 0;
     padding: 0;
     color: inherit;
+    flex: none;
+}
+
+/* Por debajo de 1080px no caben seis links: vuelve el hamburguesa */
+@media (max-width: 1080px) {
+    .nav-links,
+    .nav-actions { display: none; }
+    .menu-btn { display: block; }
 }
 
 .menu-btn-lines,
