@@ -3,62 +3,245 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>3er Round Fit | Boxing Club</title>
-    
+
+    <title>3er Round Fit | Club de Boxeo en Lechería, Anzoátegui</title>
+    <meta name="description" content="Club de boxeo en Lechería, Anzoátegui. Boxeo competitivo, recreativo e infantil. Únicos certificados por la IBA y el WBC. Clases de lunes a sábado.">
+    <meta name="theme-color" content="#000000">
+    <link rel="canonical" href="https://www.3erroundfit.com/">
+
+    <!-- Open Graph / WhatsApp / Instagram -->
+    <!-- OJO: cambia el dominio en og:url y og:image si publicas en otra URL -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="3er Round Fit">
+    <meta property="og:locale" content="es_VE">
+    <meta property="og:title" content="3er Round Fit | Club de Boxeo en Lechería">
+    <meta property="og:description" content="Porque amamos el boxeo. Competitivo, recreativo e infantil. Únicos certificados por la IBA y el WBC en Lechería, Anzoátegui.">
+    <meta property="og:url" content="https://www.3erroundfit.com/">
+    <meta property="og:image" content="https://www.3erroundfit.com/assets/hero-poster.jpg">
+    <meta property="og:image:width" content="1600">
+    <meta property="og:image:height" content="900">
+    <meta property="og:image:alt" content="Entrenamiento de boxeo en el ring de 3er Round Fit">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <!-- Favicon -->
+    <link rel="icon" href="assets/favicon-32.png" sizes="32x32" type="image/png">
+    <link rel="icon" href="assets/favicon.png" sizes="512x512" type="image/png">
+    <link rel="apple-touch-icon" href="assets/favicon.png">
+
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;600;900&display=swap" rel="stylesheet">
-    
+
+    <!-- LCP: el póster se pinta antes de que cargue el video -->
+    <link rel="preload" as="image" href="assets/hero-poster.jpg" fetchpriority="high">
+
     <!-- CSS -->
-    <link rel="stylesheet" href="style.css">
-    
-    <!-- Feather Icons -->
-    <script src="https://unpkg.com/feather-icons"></script>
+    <link rel="stylesheet" href="style.css?v=20260907c">
+
+    <!-- Feather Icons (versión fija) -->
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.29.2/feather.min.js"></script>
+
+    <!--
+      Datos estructurados para Google / Google Maps.
+      Es lo que hace que aparezcas en búsquedas tipo "boxeo cerca de mí".
+      Los horarios de apertura salen de la tabla de clases:
+        mañana 07:30 (primera) a 11:30 (fin de la de 10:30)
+        tarde  15:00 (niños)   a 20:00 (fin de la de 19:00)
+        sábado 08:30 a 09:30
+      Si el local abre/cierra a otra hora, ajusta openingHoursSpecification.
+    -->
+    <script type="application/ld+json">
+    {
+          "@context": "https://schema.org",
+          "@type": "SportsClub",
+          "@id": "https://www.3erroundfit.com/#organizacion",
+          "name": "3er Round Fit",
+          "alternateName": "3er Round Fit Boxing Club",
+          "description": "Club de boxeo en Lechería, Anzoátegui. Sistema de entrenamiento basado en técnicas de boxeo combinadas con ejercicios de fuerza, resistencia, velocidad, agilidad y flexibilidad. Únicos certificados por la IBA y el WBC.",
+          "url": "https://www.3erroundfit.com/",
+          "logo": "https://www.3erroundfit.com/assets/logo.png",
+          "image": "https://www.3erroundfit.com/assets/hero-poster.jpg",
+          "telephone": "+58-424-857-6200",
+          "sport": "Boxing",
+          "priceRange": "60€",
+          "currenciesAccepted": "EUR, VES",
+          "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "Centro Empresarial Colón PB, Sector Vistamar (al lado del C. C. Atlántico)",
+                "addressLocality": "Lechería",
+                "addressRegion": "Anzoátegui",
+                "addressCountry": "VE"
+          },
+          "openingHoursSpecification": [
+                {
+                      "@type": "OpeningHoursSpecification",
+                      "dayOfWeek": [
+                            "Monday",
+                            "Tuesday",
+                            "Wednesday",
+                            "Thursday",
+                            "Friday"
+                      ],
+                      "opens": "07:30",
+                      "closes": "11:30"
+                },
+                {
+                      "@type": "OpeningHoursSpecification",
+                      "dayOfWeek": [
+                            "Monday",
+                            "Tuesday",
+                            "Wednesday",
+                            "Thursday",
+                            "Friday"
+                      ],
+                      "opens": "15:00",
+                      "closes": "20:00"
+                },
+                {
+                      "@type": "OpeningHoursSpecification",
+                      "dayOfWeek": "Saturday",
+                      "opens": "08:30",
+                      "closes": "09:30"
+                }
+          ],
+          "sameAs": [
+                "https://www.instagram.com/3erroundfit/"
+          ],
+          "hasCredential": [
+                {
+                      "@type": "EducationalOccupationalCredential",
+                      "credentialCategory": "Certificación",
+                      "recognizedBy": {
+                            "@type": "Organization",
+                            "name": "International Boxing Association (IBA)"
+                      }
+                },
+                {
+                      "@type": "EducationalOccupationalCredential",
+                      "credentialCategory": "Certificación",
+                      "recognizedBy": {
+                            "@type": "Organization",
+                            "name": "World Boxing Council (WBC)"
+                      }
+                }
+          ],
+          "hasOfferCatalog": {
+                "@type": "OfferCatalog",
+                "name": "Modalidades de entrenamiento",
+                "itemListElement": [
+                      {
+                            "@type": "Offer",
+                            "itemOffered": {
+                                  "@type": "Service",
+                                  "name": "Boxeo Competitivo",
+                                  "description": "Preparación de alto rendimiento que integra el sparring (guanteo) y boxeo dirigido en los entrenamientos."
+                            },
+                            "price": "60",
+                            "priceCurrency": "EUR",
+                            "availability": "https://schema.org/InStock",
+                            "priceSpecification": {
+                                  "@type": "UnitPriceSpecification",
+                                  "price": "60",
+                                  "priceCurrency": "EUR",
+                                  "unitText": "MES",
+                                  "billingDuration": 1,
+                                  "billingIncrement": 1
+                            }
+                      },
+                      {
+                            "@type": "Offer",
+                            "itemOffered": {
+                                  "@type": "Service",
+                                  "name": "Boxeo Recreativo",
+                                  "description": "Enfocado en mejorar la condición física, la coordinación y técnicas de la disciplina del Boxeo sin necesidad de sparring."
+                            },
+                            "price": "60",
+                            "priceCurrency": "EUR",
+                            "availability": "https://schema.org/InStock",
+                            "priceSpecification": {
+                                  "@type": "UnitPriceSpecification",
+                                  "price": "60",
+                                  "priceCurrency": "EUR",
+                                  "unitText": "MES",
+                                  "billingDuration": 1,
+                                  "billingIncrement": 1
+                            }
+                      },
+                      {
+                            "@type": "Offer",
+                            "itemOffered": {
+                                  "@type": "Service",
+                                  "name": "Boxeo Infantil (6-11 años)",
+                                  "description": "Desarrollo motor, disciplina y juego; técnicas básicas de boxeo y ejercicios funcionales."
+                            },
+                            "price": "60",
+                            "priceCurrency": "EUR",
+                            "availability": "https://schema.org/InStock",
+                            "priceSpecification": {
+                                  "@type": "UnitPriceSpecification",
+                                  "price": "60",
+                                  "priceCurrency": "EUR",
+                                  "unitText": "MES",
+                                  "billingDuration": 1,
+                                  "billingIncrement": 1
+                            }
+                      }
+                ]
+          }
+    }
+    </script>
 </head>
 <body>
 
+    <a href="#filosofia" class="skip-link">Saltar al contenido</a>
 
     <!-- Navigation -->
     <nav class="navbar">
-        <a href="#" class="brand-logo">
-            <img src="assets/logo.png" alt="3er Round Fit Logo" style="height: 60px; object-fit: contain;">
+        <a href="#" class="brand-logo" aria-label="3er Round Fit — inicio">
+            <img src="assets/logo.png" alt="3er Round Fit" width="1910" height="947" class="brand-img">
         </a>
-        <div class="menu-btn" id="menu-toggle">
-            <div class="menu-btn-lines"></div>
-        </div>
+        <button type="button" class="menu-btn" id="menu-toggle" aria-expanded="false" aria-controls="fullscreen-menu" aria-label="Abrir menú">
+            <span class="menu-btn-lines"></span>
+        </button>
     </nav>
 
     <!-- Fullscreen Menu -->
-    <div class="fullscreen-menu" id="fullscreen-menu">
-        <div class="menu-content">
+    <div class="fullscreen-menu" id="fullscreen-menu" inert>
+        <nav class="menu-content" aria-label="Menú principal">
             <a href="#filosofia" class="menu-link" data-text="FILOSOFÍA">FILOSOFÍA</a>
             <a href="#entrenamiento" class="menu-link" data-text="ENTRENAMIENTOS">ENTRENAMIENTOS</a>
             <a href="#horarios" class="menu-link" data-text="HORARIOS">HORARIOS</a>
+            <a href="#precios" class="menu-link" data-text="PRECIOS">PRECIOS</a>
             <a href="#galeria" class="menu-link" data-text="ACCIÓN">ACCIÓN</a>
             <a href="registro.html" class="menu-link" data-text="ÚNETE">ÚNETE</a>
-            <a href="login.html" class="menu-link" data-text="ATLETAS" style="color: #000;">ATLETAS</a>
-        </div>
+            <a href="login.html" class="menu-link menu-link-alt" data-text="ATLETAS">ATLETAS</a>
+        </nav>
     </div>
 
     <!-- Hero Section -->
     <header class="hero">
-        <div class="hero-bg"></div>
+        <div class="hero-media">
+            <video id="hero-video" class="hero-video" poster="assets/hero-poster.jpg"
+                   muted loop playsinline preload="none" tabindex="-1" aria-hidden="true"></video>
+        </div>
+        <div class="hero-scrim"></div>
         <div class="hero-content">
             <h1 class="hero-title">
                 <span class="line reveal-text">PORQUE AMAMOS</span>
                 <span class="line reveal-text">EL <span class="outline-text">BOXEO</span></span>
             </h1>
-            <a href="#filosofia" class="scroll-down">
-                <i data-feather="arrow-down"></i>
-                <span>DESCUBRE</span>
-            </a>
+            <p class="hero-badge">CERTIFICADOS <strong>IBA</strong> &amp; <strong>WBC</strong> <span class="accent">//</span> LECHERÍA, ANZOÁTEGUI</p>
         </div>
+        <a href="#filosofia" class="scroll-down">
+            <i data-feather="arrow-down" aria-hidden="true"></i>
+            <span>DESCUBRE</span>
+        </a>
     </header>
 
     <!-- Scrolling Marquee -->
     <div class="marquee-wrapper">
-        <div class="marquee">
+        <div class="marquee" aria-hidden="true">
             <span>PORQUE AMAMOS EL BOXEO • TRX • FUERZA • VELOCIDAD • 3ER ROUND FIT • </span>
             <span>PORQUE AMAMOS EL BOXEO • TRX • FUERZA • VELOCIDAD • 3ER ROUND FIT • </span>
         </div>
@@ -68,15 +251,17 @@
     <section id="filosofia" class="philosophy">
         <div class="philosophy-container">
             <div class="philosophy-text" data-scroll>
-                <h2 class="huge-text">SUDOR<br>& GLORIA</h2>
+                <h2 class="huge-text">SUDOR<br>&amp; GLORIA</h2>
                 <p class="body-text">
                     Sistema de entrenamiento basado en técnicas de boxeo combinados con ejercicios de fuerza, resistencia, velocidad, agilidad y flexibilidad.
-                    <br><br><span style="color: var(--accent-color); font-weight: bold;">Únicos certificados por la Asociación Internacional de Boxeo (IBA) y el Consejo Mundial de Boxeo (WBC)</span>
                 </p>
-                <a href="https://wa.me/584248576200?text=Hola!%20Quiero%20informaci%C3%B3n%20sobre%20las%20clases%20y%20precios." target="_blank" class="link-btn">EMPIEZA HOY <i data-feather="message-circle"></i></a>
+                <p class="body-text highlight-text">
+                    Únicos certificados por la Asociación Internacional de Boxeo (IBA) y el Consejo Mundial de Boxeo (WBC)
+                </p>
+                <a href="https://wa.me/584248576200?text=Hola!%20Quiero%20informaci%C3%B3n%20sobre%20las%20clases%20y%20precios." target="_blank" rel="noopener" class="link-btn">EMPIEZA HOY <i data-feather="message-circle" aria-hidden="true"></i></a>
             </div>
             <div class="philosophy-img" data-scroll>
-                <img src="https://images.unsplash.com/photo-1509255920064-fc2ba76da6d7?auto=format&fit=crop&q=80&w=1200" alt="Ring de boxeo">
+                <img src="assets/gym-sparring.jpg" alt="Entrenador con manoplas trabajando con un boxeador en el ring de 3er Round Fit" width="1200" height="1520" loading="lazy" decoding="async">
                 <div class="img-badge">100% ACTITUD</div>
             </div>
         </div>
@@ -85,21 +270,31 @@
     <!-- Interactive Training Section -->
     <section id="entrenamiento" class="training-section">
         <div class="training-bg" id="training-bg"></div>
+        <div class="training-scrim"></div>
         <div class="training-content">
             <h2 class="section-title" data-scroll>NUESTROS <span class="accent">ROUNDS</span></h2>
-            
+
             <ul class="training-list">
-                <li class="training-item" data-image="https://images.unsplash.com/photo-1591117207239-788bf8de6c3b?auto=format&fit=crop&q=80&w=1920">
-                    <div class="item-title">BOXEO COMPETITIVO</div>
-                    <div class="item-desc">Preparación de alto rendimiento que integra el sparring (guanteo) y boxeo dirigido en los entrenamientos.</div>
+                <li class="training-item" data-image="assets/train-competitivo.jpg">
+                    <div class="item-media"><img src="assets/train-competitivo.jpg" alt="" loading="lazy" decoding="async"></div>
+                    <div class="item-body">
+                        <div class="item-title">BOXEO COMPETITIVO</div>
+                        <div class="item-desc">Preparación de alto rendimiento que integra el sparring (guanteo) y boxeo dirigido en los entrenamientos.</div>
+                    </div>
                 </li>
-                <li class="training-item" data-image="https://images.unsplash.com/photo-1517838277536-f5f99be501cd?auto=format&fit=crop&q=80&w=1920">
-                    <div class="item-title">BOXEO RECREATIVO</div>
-                    <div class="item-desc">Enfocado en mejorar la condición física, la coordinación y técnicas de la disciplina del Boxeo sin necesidad de sparring.</div>
+                <li class="training-item" data-image="assets/train-recreativo.jpg">
+                    <div class="item-media"><img src="assets/train-recreativo.jpg" alt="" loading="lazy" decoding="async"></div>
+                    <div class="item-body">
+                        <div class="item-title">BOXEO RECREATIVO</div>
+                        <div class="item-desc">Enfocado en mejorar la condición física, la coordinación y técnicas de la disciplina del Boxeo sin necesidad de sparring.</div>
+                    </div>
                 </li>
-                <li class="training-item" data-image="https://images.unsplash.com/photo-1555597673-b21d5c935865?auto=format&fit=crop&q=80&w=1920">
-                    <div class="item-title">BOXEO INFANTIL (6-11 AÑOS)</div>
-                    <div class="item-desc">Se enfoca en el desarrollo motor, la disciplina y el juego; técnicas básicas de boxeo y ejercicios funcionales.</div>
+                <li class="training-item" data-image="assets/train-infantil.jpg">
+                    <div class="item-media"><img src="assets/train-infantil.jpg" alt="" loading="lazy" decoding="async"></div>
+                    <div class="item-body">
+                        <div class="item-title">BOXEO INFANTIL (6-11 AÑOS)</div>
+                        <div class="item-desc">Se enfoca en el desarrollo motor, la disciplina y el juego; técnicas básicas de boxeo y ejercicios funcionales.</div>
+                    </div>
                 </li>
             </ul>
         </div>
@@ -110,7 +305,7 @@
         <div class="schedule-container" data-scroll>
             <h2 class="huge-text outline-text">HORARIOS</h2>
             <div class="schedule-brutal">
-                
+
                 <div class="sch-row">
                     <div class="sch-day">LUN - VIE <span class="accent">//</span> MAÑANA</div>
                     <div class="sch-times">
@@ -124,7 +319,7 @@
                 <div class="sch-row">
                     <div class="sch-day">LUN - VIE <span class="accent">//</span> TARDE</div>
                     <div class="sch-times">
-                        <span class="accent-bg" style="color: #000;">03:00 PM (Niños)</span>
+                        <span class="accent-bg">03:00 PM (Niños)</span>
                         <span>04:00 PM</span>
                         <span>05:00 PM</span>
                         <span>06:00 PM</span>
@@ -135,7 +330,7 @@
                 <div class="sch-row special-row">
                     <div class="sch-day">SÁBADOS <span class="accent">//</span> ESPECIAL</div>
                     <div class="sch-times">
-                        <span class="accent-bg" style="color: #000;">08:30 AM</span>
+                        <span class="accent-bg">08:30 AM</span>
                     </div>
                 </div>
 
@@ -143,25 +338,101 @@
         </div>
     </section>
 
-    <!-- Immersive Gallery (Masonry style mockup) -->
+    <!-- ============================================================
+         PRECIOS — mensualidad única de 60€
+         ============================================================ -->
+    <section id="precios" class="pricing-section">
+        <div class="pricing-header" data-scroll>
+            <h2 class="huge-text outline-text">PRECIOS</h2>
+            <p>UNA MENSUALIDAD <span class="accent">//</span> TODAS LAS MODALIDADES</p>
+        </div>
+
+        <div class="pricing-card" data-scroll>
+            <div class="pricing-main">
+                <span class="pricing-label">MENSUALIDAD</span>
+                <div class="pricing-amount">60<span class="pricing-currency">€</span></div>
+                <span class="pricing-period">POR MES</span>
+            </div>
+
+            <div class="pricing-details">
+                <ul class="pricing-list">
+                    <li>Acceso a <strong>todos los horarios</strong>, mañana y tarde</li>
+                    <li>Boxeo competitivo, recreativo o infantil</li>
+                    <li>Entrenadores certificados por la <strong>IBA</strong> y el <strong>WBC</strong></li>
+                    <li>Sábados de entrenamiento especial incluidos</li>
+                </ul>
+                <div class="pricing-actions">
+                    <a href="registro.html" class="btn-brutal btn-light">INSCRIBIRME</a>
+                    <a href="https://wa.me/584248576200?text=Hola!%20Quiero%20informaci%C3%B3n%20sobre%20la%20mensualidad." target="_blank" rel="noopener" class="btn-brutal btn-ghost"><i data-feather="message-circle" aria-hidden="true"></i> PREGUNTAR</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!--
+      ============================================================
+      TESTIMONIOS
+      ⚠️ PENDIENTE: son tarjetas vacías a propósito.
+         Reemplaza REEMPLAZAR_TESTIMONIO_N, REEMPLAZAR_NOMBRE_N y
+         REEMPLAZAR_TIEMPO_N por testimonios REALES de alumnos.
+         No publiques esta sección con el texto de relleno.
+         Si quieres foto del alumno, descomenta el <img> de cada tarjeta.
+      ============================================================
+    -->
+    <section id="testimonios" class="testimonials-section">
+        <div class="testimonials-header" data-scroll>
+            <h2 class="huge-text">LO DICEN <span class="accent">ELLOS</span></h2>
+        </div>
+
+        <div class="testimonials-grid">
+            <blockquote class="testimonial-card" data-scroll>
+                <!-- <img class="testimonial-photo" src="assets/alumno-1.jpg" alt="" width="64" height="64"> -->
+                <p class="testimonial-quote pendiente">REEMPLAZAR_TESTIMONIO_1</p>
+                <footer class="testimonial-author">
+                    <span class="testimonial-name pendiente">REEMPLAZAR_NOMBRE_1</span>
+                    <span class="testimonial-meta pendiente">REEMPLAZAR_TIEMPO_1</span>
+                </footer>
+            </blockquote>
+
+            <blockquote class="testimonial-card" data-scroll>
+                <!-- <img class="testimonial-photo" src="assets/alumno-2.jpg" alt="" width="64" height="64"> -->
+                <p class="testimonial-quote pendiente">REEMPLAZAR_TESTIMONIO_2</p>
+                <footer class="testimonial-author">
+                    <span class="testimonial-name pendiente">REEMPLAZAR_NOMBRE_2</span>
+                    <span class="testimonial-meta pendiente">REEMPLAZAR_TIEMPO_2</span>
+                </footer>
+            </blockquote>
+
+            <blockquote class="testimonial-card" data-scroll>
+                <!-- <img class="testimonial-photo" src="assets/alumno-3.jpg" alt="" width="64" height="64"> -->
+                <p class="testimonial-quote pendiente">REEMPLAZAR_TESTIMONIO_3</p>
+                <footer class="testimonial-author">
+                    <span class="testimonial-name pendiente">REEMPLAZAR_NOMBRE_3</span>
+                    <span class="testimonial-meta pendiente">REEMPLAZAR_TIEMPO_3</span>
+                </footer>
+            </blockquote>
+        </div>
+    </section>
+
+    <!-- Immersive Gallery -->
     <section id="galeria" class="gallery">
         <div class="gallery-header" data-scroll>
             <h2 class="huge-text outline-text">ACCIÓN</h2>
-            <p>SÍGUENOS EN <a href="https://www.instagram.com/3erroundfit/?hl=es" target="_blank" class="accent-link">@3ERROUNDFIT</a></p>
+            <p>SÍGUENOS EN <a href="https://www.instagram.com/3erroundfit/?hl=es" target="_blank" rel="noopener" class="accent-link">@3ERROUNDFIT</a></p>
         </div>
-        
+
         <div class="masonry-grid">
             <div class="masonry-item item-large" data-scroll>
-                <img src="https://images.unsplash.com/photo-1599557434547-59cce322a303?auto=format&fit=crop&q=80&w=800" alt="Combate">
+                <img src="assets/galeria-ring.jpg" alt="Boxeador con casco protector entrenando en el ring" width="800" height="1200" loading="lazy" decoding="async">
             </div>
             <div class="masonry-item" data-scroll>
-                <img src="https://images.unsplash.com/photo-1583416750470-965b2707b355?auto=format&fit=crop&q=80&w=800" alt="Sparring">
+                <img src="assets/galeria-sede.jpg" alt="Área de sacos y tienda dentro de la sede de 3er Round Fit" width="800" height="600" loading="lazy" decoding="async">
             </div>
             <div class="masonry-item" data-scroll>
-                <img src="https://images.unsplash.com/photo-1517838277536-f5f99be501cd?auto=format&fit=crop&q=80&w=800" alt="Entrenamiento Saco">
+                <img src="assets/galeria-mural.jpg" alt="Murales de boxeadores en las paredes del gimnasio" width="800" height="600" loading="lazy" decoding="async">
             </div>
             <div class="masonry-item item-wide" data-scroll>
-                <img src="https://images.unsplash.com/photo-1616853246714-6338fb0cb28e?auto=format&fit=crop&q=80&w=1200" alt="Entrenamiento Guanteletas">
+                <img src="assets/galeria-accion.jpg" alt="Sesión de manoplas entre entrenador y atleta" width="1200" height="600" loading="lazy" decoding="async">
             </div>
         </div>
     </section>
@@ -169,35 +440,37 @@
     <!-- Footer / Join -->
     <footer id="unete" class="footer">
         <div class="footer-cta">
-            <h2 class="massive-text" style="font-family: var(--font-display); font-size: clamp(4rem, 8vw, 7rem); color: #fff;">ÚNETE AL CLUB</h2>
-            <p class="body-text" style="margin-bottom: 30px; font-size: 1.1rem; color: #aaa;">Gestionamos toda la información y pagos de forma directa. Llena el formulario de salud y escríbenos.</p>
-            <div style="display: flex; gap: 15px; flex-wrap: wrap; width: 100%;">
-                <a href="registro.html" class="btn-brutal" style="background-color: #fff; color: #000; flex: 1; text-align: center;">LLENAR FORMULARIO</a>
-                <a href="https://wa.me/584248576200?text=Hola!%20Quiero%20informaci%C3%B3n%20sobre%20las%20clases." target="_blank" class="btn-brutal" style="flex: 1; text-align: center;"><i data-feather="message-circle" style="margin-right: 10px;"></i> WHATSAPP</a>
+            <h2 class="massive-text footer-title">ÚNETE AL CLUB</h2>
+            <p class="body-text footer-lead">Gestionamos toda la información y pagos de forma directa. Llena el formulario de salud y escríbenos.</p>
+            <div class="footer-actions">
+                <a href="registro.html" class="btn-brutal btn-light">LLENAR FORMULARIO</a>
+                <a href="https://wa.me/584248576200?text=Hola!%20Quiero%20informaci%C3%B3n%20sobre%20las%20clases." target="_blank" rel="noopener" class="btn-brutal"><i data-feather="message-circle" aria-hidden="true"></i> WHATSAPP</a>
             </div>
         </div>
-        
+
         <div class="footer-info">
             <div class="info-block location-block">
                 <h4>UBICACIÓN</h4>
-                <p>Centro Empresarial Colón PB, Sector Vistamar<br>(al lado del C. C. Atlantico)<br>Lecheria, Anzoategui, Venezuela</p>
+                <p>
+                    Centro Empresarial Colón PB, Sector Vistamar<br>
+                    (al lado del C. C. Atlántico)<br>
+                    Lechería, Anzoátegui, Venezuela
+                </p>
+                <a href="https://www.google.com/maps/search/?api=1&amp;query=Centro+Empresarial+Col%C3%B3n+Vistamar+Lecher%C3%ADa+Anzo%C3%A1tegui" target="_blank" rel="noopener" class="accent-link">VER EN GOOGLE MAPS</a>
             </div>
             <div class="info-block">
                 <h4>CONTACTO</h4>
-                <p>+58 412-0000000<br>info@3erroundfit.com</p>
+                <a href="https://wa.me/584248576200" target="_blank" rel="noopener">WhatsApp +58 424-857 62 00</a>
+                <a href="tel:+584248576200">Llamar +58 424-857 62 00</a>
             </div>
             <div class="info-block social">
                 <h4>REDES</h4>
-                <a href="https://www.instagram.com/3erroundfit/?hl=es" target="_blank">INSTAGRAM</a>
-                <a href="#">FACEBOOK</a>
+                <a href="https://www.instagram.com/3erroundfit/?hl=es" target="_blank" rel="noopener">INSTAGRAM</a>
             </div>
         </div>
     </footer>
 
     <!-- Scripts -->
-    <script src="main.js"></script>
-    <script>
-        feather.replace();
-    </script>
+    <script src="main.js?v=20260907c"></script>
 </body>
 </html>

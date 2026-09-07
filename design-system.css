@@ -1,0 +1,552 @@
+/* ============================================================
+   3er Round Fit — Sistema de diseño del portal
+   Se carga DESPUÉS de style.css, del que hereda los tokens de marca.
+   Regla: ningún componente de portal se define fuera de este archivo.
+   Lenguaje: brutalista, igual que la landing (esquinas duras, naranja).
+   ============================================================ */
+
+:root {
+    /* Superficies */
+    --ds-bg: #050505;
+    --ds-surface: #0f0f0f;
+    --ds-surface-2: #161616;
+    --ds-border: rgba(255, 255, 255, 0.14);
+    --ds-border-strong: rgba(255, 255, 255, 0.3);
+
+    /* Texto — todos cumplen contraste AA sobre --ds-surface */
+    --ds-text: #ffffff;
+    --ds-text-soft: #c2c2c2;
+    --ds-text-mute: #8f8f8f;
+
+    /* Estados (antes hardcodeados y repetidos en admin y dashboard) */
+    --ds-ok: #5ee08b;
+    --ds-ok-bg: rgba(94, 224, 139, 0.14);
+    --ds-warn: #ffbe4d;
+    --ds-warn-bg: rgba(255, 190, 77, 0.14);
+    --ds-danger: #ff7a7a;
+    --ds-danger-bg: rgba(255, 122, 122, 0.14);
+
+    /* Ritmo */
+    --ds-1: 6px;
+    --ds-2: 12px;
+    --ds-3: 20px;
+    --ds-4: 32px;
+    --ds-5: 48px;
+}
+
+/* ---------- Base de página ---------- */
+
+.ds-page {
+    background: var(--ds-bg);
+    color: var(--ds-text);
+    font-family: var(--font-body);
+    min-height: 100vh;
+    min-height: 100svh;
+}
+
+.ds-wrap {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: var(--ds-4) var(--ds-3) var(--ds-5);
+}
+.ds-wrap--wide { max-width: 1200px; }
+
+/* ============================================================
+   Identidad de marca — mismo lenguaje que la landing
+   ============================================================ */
+
+/* Cabecera con foto del gym: el portal se ve parte del mismo sitio */
+.ds-masthead {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    border-bottom: 3px solid var(--accent-color);
+}
+
+.ds-masthead::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    background: #000 url('assets/hero-poster.jpg') center 32% / cover no-repeat;
+}
+
+.ds-masthead::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background:
+        linear-gradient(to bottom, rgba(0,0,0,.82) 0%, rgba(0,0,0,.62) 45%, rgba(0,0,0,.92) 100%),
+        linear-gradient(to right, rgba(0,0,0,.72) 0%, rgba(0,0,0,.25) 70%);
+}
+
+.ds-masthead > * { position: relative; z-index: 2; }
+
+.ds-masthead-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--ds-2);
+    flex-wrap: wrap;
+    padding: var(--ds-2) var(--ds-3);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+}
+.ds-masthead-bar img { height: 46px; width: auto; object-fit: contain; display: block; }
+
+.ds-masthead-body {
+    padding: var(--ds-4) var(--ds-3) var(--ds-5);
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+/* Tipografía display de la landing */
+.ds-display {
+    font-family: var(--font-display);
+    font-size: clamp(2.4rem, 7vw, 4.5rem);
+    line-height: 0.85;
+    text-transform: uppercase;
+    text-shadow: 0 4px 26px rgba(0, 0, 0, 0.55);
+    overflow-wrap: anywhere;
+}
+
+/* Texto en contorno, igual que "BOXEO" y "HORARIOS" en la landing */
+.ds-outline {
+    color: transparent;
+    -webkit-text-stroke: 2px var(--text-color, #fff);
+}
+
+/* Bajada con la barra naranja del hero */
+.ds-kicker {
+    margin-top: var(--ds-3);
+    border-left: 4px solid var(--accent-color);
+    padding-left: 14px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #fff;
+    line-height: 1.65;
+    max-width: 48ch;
+}
+
+/* Franja de marca: solo en el portal del atleta, no en las pantallas de trámite */
+.ds-marquee-wrap {
+    background: var(--accent-color);
+    padding: 9px 0;
+    transform: rotate(-1.4deg) scale(1.04);
+    margin: 0 0 var(--ds-4);
+    overflow: hidden;
+    white-space: nowrap;
+}
+.ds-marquee {
+    display: inline-block;
+    animation: dsMarquee 26s linear infinite;
+    font-family: var(--font-display);
+    font-size: 1.35rem;
+    letter-spacing: 2px;
+    color: #000;
+}
+.ds-marquee span { padding-right: 44px; }
+
+@keyframes dsMarquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+
+@media (max-width: 700px) {
+    .ds-outline { -webkit-text-stroke-width: 1.5px; }
+    .ds-masthead-body { padding: var(--ds-3) var(--ds-2) var(--ds-4); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ds-marquee { animation: none; }
+    .ds-marquee-wrap { transform: none; }
+}
+
+/* ---------- Barra superior ---------- */
+
+.ds-topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--ds-2);
+    flex-wrap: wrap;
+    padding: var(--ds-2) var(--ds-3);
+    background: #000;
+    border-bottom: 1px solid var(--ds-border);
+}
+
+.ds-topbar img { height: 44px; width: auto; object-fit: contain; display: block; }
+
+/* ---------- Cabecera de sección ---------- */
+
+.ds-title {
+    font-family: var(--font-display);
+    font-size: clamp(1.8rem, 5vw, 2.6rem);
+    line-height: 1;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.ds-subtitle {
+    color: var(--ds-text-soft);
+    font-size: 0.98rem;
+    line-height: 1.55;
+    margin-top: var(--ds-1);
+}
+
+/* El "//" es el separador de la landing (LUN - VIE // MAÑANA) */
+.ds-section-label {
+    font-family: var(--font-display);
+    font-size: 1.35rem;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin: var(--ds-4) 0 var(--ds-2);
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+.ds-section-label span { color: var(--accent-color); }
+/* Solo el numerador lleva el "//": otros spans (contadores) no */
+.ds-section-label > span:first-child::after { content: " //"; }
+
+/* ---------- Panel / tarjeta ---------- */
+
+.ds-panel {
+    background: var(--ds-surface);
+    border: 1px solid var(--ds-border);
+    padding: var(--ds-4);
+    position: relative;
+}
+
+.ds-panel--accent { border-top: 4px solid var(--accent-color); }
+
+/* ---------- Formularios (definición ÚNICA) ---------- */
+
+.ds-field { margin-bottom: var(--ds-3); }
+
+.ds-label {
+    display: block;
+    font-size: 0.76rem;
+    font-weight: 700;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: var(--ds-text-mute);
+    margin-bottom: var(--ds-1);
+}
+
+.ds-input,
+.ds-select,
+.ds-textarea {
+    width: 100%;
+    background: #000;
+    border: 1px solid var(--ds-border);
+    border-radius: 0;
+    color: var(--ds-text);
+    font-family: var(--font-body);
+    font-size: 1rem;
+    padding: 14px 16px;
+    outline: none;
+    transition: border-color 0.2s ease;
+}
+
+.ds-input::placeholder,
+.ds-textarea::placeholder { color: #6a6a6a; }
+
+.ds-input:focus,
+.ds-select:focus,
+.ds-textarea:focus {
+    border-color: var(--accent-color);
+    box-shadow: inset 0 0 0 1px var(--accent-color);
+}
+
+.ds-input:invalid:not(:placeholder-shown) { border-color: var(--ds-danger); }
+
+.ds-input--code {
+    font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    font-size: 1.1rem;
+    letter-spacing: 2px;
+    color: var(--accent-color);
+    border-color: var(--accent-color);
+}
+
+.ds-select {
+    appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'%3E%3Cpath fill='%23ffffff' d='M1 1l5 5 5-5'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 16px center;
+    background-size: 12px;
+    padding-right: 44px;
+}
+
+.ds-hint {
+    display: block;
+    font-size: 0.8rem;
+    color: var(--ds-text-mute);
+    line-height: 1.45;
+    margin-top: var(--ds-1);
+}
+
+/* ---------- Botones (definición ÚNICA) ---------- */
+
+.ds-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-family: var(--font-display);
+    font-size: 1.15rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 14px 26px;
+    border: 2px solid transparent;
+    border-radius: 0;
+    cursor: pointer;
+    transition: transform 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease;
+    line-height: 1.1;
+}
+
+.ds-btn:hover { transform: translate(-3px, -3px); }
+.ds-btn:active { transform: translate(0, 0); }
+
+.ds-btn--primary { background: var(--accent-color); color: #000; }
+.ds-btn--primary:hover { box-shadow: 3px 3px 0 #fff; }
+
+.ds-btn--light { background: #fff; color: #000; }
+.ds-btn--light:hover { box-shadow: 3px 3px 0 var(--accent-color); }
+
+.ds-btn--ghost {
+    background: transparent;
+    color: var(--ds-text);
+    border-color: var(--ds-border-strong);
+}
+.ds-btn--ghost:hover { border-color: #fff; box-shadow: 3px 3px 0 var(--accent-color); }
+
+.ds-btn--block { width: 100%; }
+
+.ds-btn:disabled { opacity: 0.55; cursor: not-allowed; transform: none; box-shadow: none; }
+
+/* Acciones pequeñas dentro de tablas */
+.ds-btn-sm {
+    font-family: var(--font-body);
+    font-size: 0.82rem;
+    font-weight: 700;
+    padding: 7px 13px;
+    border: 1px solid var(--ds-border-strong);
+    background: transparent;
+    color: var(--ds-text-soft);
+    cursor: pointer;
+    border-radius: 0;
+    transition: all 0.15s ease;
+}
+.ds-btn-sm:hover { border-color: #fff; color: #fff; }
+.ds-btn-sm--primary { background: var(--accent-color); border-color: var(--accent-color); color: #000; }
+.ds-btn-sm--primary:hover { background: #ff8533; color: #000; }
+.ds-btn-sm--ok { background: var(--ds-ok); border-color: var(--ds-ok); color: #00230f; }
+.ds-btn-sm--danger { background: var(--ds-danger); border-color: var(--ds-danger); color: #2b0000; }
+
+/* ---------- Insignias de estado ---------- */
+
+.ds-badge {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    padding: 4px 10px;
+    text-transform: uppercase;
+}
+.ds-badge--ok { background: var(--ds-ok-bg); color: var(--ds-ok); }
+.ds-badge--warn { background: var(--ds-warn-bg); color: var(--ds-warn); }
+.ds-badge--danger { background: var(--ds-danger-bg); color: var(--ds-danger); }
+
+/* ---------- Avisos ---------- */
+
+.ds-alert {
+    border: 1px solid var(--ds-border);
+    border-left: 4px solid var(--ds-text-mute);
+    padding: var(--ds-2) var(--ds-3);
+    font-size: 0.92rem;
+    line-height: 1.5;
+    color: var(--ds-text-soft);
+    margin-bottom: var(--ds-3);
+}
+.ds-alert--info { border-left-color: var(--accent-color); background: rgba(255, 102, 0, 0.07); }
+.ds-alert--ok { border-left-color: var(--ds-ok); background: var(--ds-ok-bg); color: #d6ffe6; }
+.ds-alert--warn { border-left-color: var(--ds-warn); background: var(--ds-warn-bg); color: #ffe9c2; }
+.ds-alert--danger { border-left-color: var(--ds-danger); background: var(--ds-danger-bg); color: #ffdada; }
+.ds-alert strong { color: #fff; }
+
+/* ---------- Filas de datos ---------- */
+
+.ds-rows { display: flex; flex-direction: column; }
+
+.ds-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--ds-3);
+    padding: 13px 0;
+    border-bottom: 1px solid var(--ds-border);
+    font-size: 0.94rem;
+}
+.ds-row:last-child { border-bottom: none; }
+
+.ds-row-key {
+    color: var(--ds-text-mute);
+    font-size: 0.74rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    flex: none;
+}
+.ds-row-val { color: var(--ds-text); font-weight: 600; text-align: right; word-break: break-word; }
+
+/* ---------- Tabla ---------- */
+
+.ds-table-wrap {
+    border: 1px solid var(--ds-border);
+    background: var(--ds-surface);
+    overflow-x: auto;
+    margin-bottom: var(--ds-4);
+}
+.ds-table-wrap--pending { border-color: rgba(255, 102, 0, 0.35); background: rgba(255, 102, 0, 0.04); }
+
+.ds-table { width: 100%; border-collapse: collapse; min-width: 680px; }
+
+.ds-table th,
+.ds-table td {
+    padding: 13px 16px;
+    text-align: left;
+    border-bottom: 1px solid var(--ds-border);
+    font-size: 0.92rem;
+}
+
+.ds-table th {
+    font-family: var(--font-display);
+    font-size: 1.05rem;
+    letter-spacing: 1px;
+    color: var(--accent-color);
+    background: #000;
+    position: sticky;
+    top: 0;
+}
+
+.ds-table tbody tr:hover { background: rgba(255, 255, 255, 0.03); }
+.ds-table td:last-child { white-space: nowrap; }
+
+.ds-empty { text-align: center; color: var(--ds-text-mute); padding: var(--ds-4); }
+
+/* ---------- Modal ---------- */
+
+.ds-modal-bg {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.85);
+    z-index: 100;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: var(--ds-3);
+}
+.ds-modal-bg.is-open { display: flex; }
+
+.ds-modal {
+    background: var(--ds-surface-2);
+    border: 1px solid var(--ds-border-strong);
+    border-top: 4px solid var(--accent-color);
+    padding: var(--ds-4);
+    max-width: 520px;
+    width: 100%;
+    max-height: 85vh;
+    overflow-y: auto;
+}
+
+.ds-modal h3 {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    letter-spacing: 1px;
+    color: var(--accent-color);
+    margin-bottom: var(--ds-3);
+}
+
+/* ---------- Utilidades ---------- */
+
+.ds-stack { display: flex; flex-direction: column; gap: var(--ds-2); }
+.ds-actions { display: flex; gap: var(--ds-2); flex-wrap: wrap; }
+.ds-actions > .ds-btn { flex: 1 1 200px; }
+.ds-center { text-align: center; }
+.ds-mt-3 { margin-top: var(--ds-3); }
+.ds-mt-4 { margin-top: var(--ds-4); }
+
+.ds-link { color: var(--accent-color); font-weight: 700; text-decoration: none; }
+.ds-link:hover { text-decoration: underline; }
+
+.ds-link-mute {
+    display: block;
+    text-align: center;
+    color: var(--ds-text-mute);
+    text-decoration: none;
+    font-size: 0.9rem;
+    margin-top: var(--ds-3);
+}
+.ds-link-mute:hover { color: #fff; }
+
+.ds-loader {
+    text-align: center;
+    padding: var(--ds-5);
+    color: var(--ds-text-mute);
+    font-family: var(--font-display);
+    font-size: 1.3rem;
+    letter-spacing: 2px;
+}
+
+.ds-visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    white-space: nowrap;
+}
+
+/* ---------- Pasos ---------- */
+
+.ds-steps {
+    display: flex;
+    gap: 8px;
+    list-style: none;
+    padding: 0;
+    margin-bottom: var(--ds-3);
+}
+.ds-step {
+    flex: 1;
+    text-align: center;
+    font-size: 0.67rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    color: var(--ds-text-mute);
+    border-top: 3px solid #2a2a2a;
+    padding-top: 8px;
+    line-height: 1.35;
+}
+.ds-step b {
+    display: block;
+    font-family: var(--font-display);
+    font-size: 1rem;
+    font-weight: 400;
+    letter-spacing: 1px;
+}
+.ds-step.is-current { color: var(--accent-color); border-top-color: var(--accent-color); }
+
+@media (max-width: 560px) {
+    .ds-wrap { padding: var(--ds-3) var(--ds-2) var(--ds-4); }
+    .ds-panel { padding: var(--ds-3) var(--ds-2); }
+    .ds-actions > .ds-btn { flex-basis: 100%; }
+    .ds-row { flex-direction: column; align-items: flex-start; gap: 4px; }
+    .ds-row-val { text-align: left; }
+}

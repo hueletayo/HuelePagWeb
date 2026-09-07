@@ -1,103 +1,149 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Unete al Club - 3er Round Fit</title>
+    <title>Únete al club - 3er Round Fit</title>
+    <meta name="robots" content="noindex">
+    <link rel="icon" href="assets/favicon-32.png" sizes="32x32" type="image/png">
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
-    <style>
-        body { background-color: #0f0f0f; color: #fff; font-family: var(--font-body); padding: 40px 20px; }
-        .form-container { background: rgba(20,20,20,0.9); padding: 40px; border-radius: 12px; max-width: 600px; margin: 0 auto; border: 1px solid rgba(255,255,255,0.1); }
-        .input-dark { background: rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.1); color: #fff; padding: 12px 20px; border-radius: 8px; width: 100%; font-family: var(--font-body); font-size: 1rem; margin-bottom: 20px; outline: none; }
-        .input-dark:focus { border-color: var(--accent-color); background: rgba(0,0,0,0.8); }
-        label { color: #aaa; font-size: 0.9rem; margin-bottom: 6px; display: block; font-weight: 500; }
-        .section-title { color: var(--accent-color); font-family: var(--font-display); font-size: 1.5rem; margin-top: 30px; margin-bottom: 15px; letter-spacing: 1px; }
-        .small-note { font-size: 0.8rem; color: #888; margin-bottom: 8px; display: block; }
-    </style>
+    <link rel="stylesheet" href="style.css?v=20260907c">
+    <link rel="stylesheet" href="design-system.css?v=20260907c">
 </head>
-<body>
-    <div class="form-container">
-        <div style="text-align:center;margin-bottom:30px;">
-            <img src="assets/logo.png" alt="Logo" style="height:60px;">
-            <h1 class="huge-text" style="font-size:2.2rem;margin-top:15px;">UNETE AL CLUB</h1>
-            <p style="color:#ccc;font-size:0.95rem;line-height:1.5;">Por favor, completa este formulario de ingreso con tus datos personales y de salud. Esta informacion es estrictamente confidencial y nos permite cuidar de ti durante los entrenamientos.</p>
+<body class="ds-page">
+
+    <header class="ds-masthead">
+        <div class="ds-masthead-bar">
+            <img src="assets/logo.png" alt="3er Round Fit">
+            <button type="button" class="ds-btn-sm" id="btn-logout">Cerrar sesión</button>
         </div>
-        <form id="perfilForm">
-            <h2 class="section-title">DATOS PERSONALES</h2>
-            <label>Telefono (WhatsApp)</label>
-            <input type="text" id="telefono" class="input-dark" placeholder="Ej. 04120000000" required>
-            <label>Usuario de Instagram</label>
-            <input type="text" id="instagram" class="input-dark" placeholder="Ej. @tu_usuario">
-            <label>Direccion de Habitacion</label>
-            <input type="text" id="direccion" class="input-dark" placeholder="Zona, Ciudad..." required>
-            <label>Contacto de Emergencia</label>
-            <input type="text" id="contactoEmergencia" class="input-dark" placeholder="Nombre y Telefono de tu contacto" required>
+        <div class="ds-masthead-body">
+            <h1 class="ds-display"><span class="ds-outline">ÚNETE</span><br>AL CLUB</h1>
+            <p class="ds-kicker">Ficha de ingreso <span class="accent">//</span> Confidencial</p>
+        </div>
+    </header>
 
-            <h2 class="section-title">FORMULARIO DE SALUD</h2>
-            <span class="small-note">El boxeo es de alta exigencia. Se sincero por tu seguridad.</span>
+    <main class="ds-wrap">
+        <div class="ds-panel ds-panel--accent">
+            <div style="margin-bottom: var(--ds-4);">
+                <p class="ds-subtitle">
+                    Completa este formulario con tus datos personales y de salud.
+                    Esta información es estrictamente confidencial y nos permite cuidar de ti
+                    durante los entrenamientos.
+                </p>
+            </div>
 
-            <label>1. Sufres de alguna condicion medica? (Azucar, tension, asma, etc.)</label>
-            <span class="small-note">Si no sufres de nada, escribe Ninguna</span>
-            <input type="text" id="condicionMedica" class="input-dark" placeholder="Ninguna" required>
+            <ol class="ds-steps">
+                <li class="ds-step"><b>1</b>Paga tu plan</li>
+                <li class="ds-step is-current"><b>2</b>Llena tus datos</li>
+                <li class="ds-step"><b>3</b>Activamos tu cuenta</li>
+            </ol>
 
-            <label>2. Tienes lesiones fisicas recientes o hernias? (espalda, rodillas, etc.)</label>
-            <span class="small-note">Detalla cualquier lesion o escribe Ninguna</span>
-            <input type="text" id="lesiones" class="input-dark" placeholder="Ninguna" required>
+            <form id="perfilForm" novalidate>
+                <h2 class="ds-section-label"><span>01</span> Datos personales</h2>
 
-            <label>3. Has sido operado recientemente?</label>
-            <span class="small-note">Detalla tipo de operacion y fecha, o escribe Ninguna</span>
-            <input type="text" id="operaciones" class="input-dark" placeholder="Ninguna" required>
-            <span class="small-note" style="color:#ff5555;margin-top:-10px;margin-bottom:25px;">*Nota: Nos reservamos el derecho de pedir clearance medico si la operacion fue reciente.</span>
+                <div class="ds-field">
+                    <label class="ds-label" for="telefono">Teléfono (WhatsApp)</label>
+                    <input type="tel" id="telefono" class="ds-input" placeholder="Ej. 0412 0000000" autocomplete="tel" required>
+                </div>
 
-            <button type="submit" class="btn-brutal" id="btn-submit" style="width:100%;border-radius:8px;font-size:1.2rem;padding:15px;margin-top:20px;">ENVIAR REGISTRO</button>
-            <div id="error-msg" style="color:#ff5555;margin-top:15px;text-align:center;display:none;"></div>
-        </form>
-    </div>
-    <script src="auth.js"></script>
+                <div class="ds-field">
+                    <label class="ds-label" for="instagram">Usuario de Instagram</label>
+                    <input type="text" id="instagram" class="ds-input" placeholder="Ej. @tu_usuario">
+                    <span class="ds-hint">Opcional.</span>
+                </div>
+
+                <div class="ds-field">
+                    <label class="ds-label" for="direccion">Dirección de habitación</label>
+                    <input type="text" id="direccion" class="ds-input" placeholder="Zona, ciudad..." required>
+                </div>
+
+                <div class="ds-field">
+                    <label class="ds-label" for="contactoEmergencia">Contacto de emergencia</label>
+                    <input type="text" id="contactoEmergencia" class="ds-input" placeholder="Nombre y teléfono de tu contacto" required>
+                </div>
+
+                <h2 class="ds-section-label"><span>02</span> Formulario de salud</h2>
+                <div class="ds-alert ds-alert--info">
+                    El boxeo es de alta exigencia. <strong>Sé sincero por tu seguridad</strong>:
+                    esta ficha solo la ve el equipo de entrenadores.
+                </div>
+
+                <div class="ds-field">
+                    <label class="ds-label" for="condicionMedica">1. ¿Sufres de alguna condición médica?</label>
+                    <input type="text" id="condicionMedica" class="ds-input" placeholder="Ninguna" required>
+                    <span class="ds-hint">Azúcar, tensión, asma, etc. Si no sufres de nada, escribe «Ninguna».</span>
+                </div>
+
+                <div class="ds-field">
+                    <label class="ds-label" for="lesiones">2. ¿Tienes lesiones físicas recientes o hernias?</label>
+                    <input type="text" id="lesiones" class="ds-input" placeholder="Ninguna" required>
+                    <span class="ds-hint">Espalda, rodillas, hombros... Detalla cualquier lesión o escribe «Ninguna».</span>
+                </div>
+
+                <div class="ds-field">
+                    <label class="ds-label" for="operaciones">3. ¿Has sido operado recientemente?</label>
+                    <input type="text" id="operaciones" class="ds-input" placeholder="Ninguna" required>
+                    <span class="ds-hint">Detalla tipo de operación y fecha, o escribe «Ninguna».</span>
+                </div>
+
+                <div class="ds-alert ds-alert--warn">
+                    Nos reservamos el derecho de pedir <strong>clearance médico</strong> si la operación fue reciente.
+                </div>
+
+                <button type="submit" class="ds-btn ds-btn--primary ds-btn--block ds-mt-3" id="btn-submit">Enviar registro</button>
+                <div id="error-msg" class="ds-alert ds-alert--danger ds-mt-3" role="alert" hidden></div>
+            </form>
+        </div>
+    </main>
+
+    <script src="auth.js?v=20260907c"></script>
     <script>
         const session = requireUser();
+        document.getElementById("btn-logout").addEventListener("click", logout);
 
-        document.getElementById("perfilForm").addEventListener("submit", async function(e) {
+        const btn = document.getElementById("btn-submit");
+        const errorMsg = document.getElementById("error-msg");
+
+        document.getElementById("perfilForm").addEventListener("submit", async function (e) {
             e.preventDefault();
             if (!session) return;
-            const btn = document.getElementById("btn-submit");
-            const errorMsg = document.getElementById("error-msg");
-            btn.innerText = "ENVIANDO...";
-            btn.disabled = true;
-            errorMsg.style.display = "none";
 
-            const payload = {
-                telefono: document.getElementById("telefono").value,
-                instagram: document.getElementById("instagram").value,
-                direccion: document.getElementById("direccion").value,
-                contactoEmergencia: document.getElementById("contactoEmergencia").value,
-                condicionMedica: document.getElementById("condicionMedica").value,
-                lesiones: document.getElementById("lesiones").value,
-                operaciones: document.getElementById("operaciones").value
-            };
+            btn.textContent = "Enviando...";
+            btn.disabled = true;
+            errorMsg.hidden = true;
+
+            const val = function (id) { return document.getElementById(id).value.trim(); };
 
             try {
-                const res = await fetch(API + "/athletes/" + session.id + "/perfil", {
+                const res = await apiFetch("/athletes/" + session.id + "/perfil", {
                     method: "PUT",
-                    headers: userHeaders(session),
-                    body: JSON.stringify(payload)
+                    body: JSON.stringify({
+                        telefono: val("telefono"),
+                        instagram: val("instagram"),
+                        direccion: val("direccion"),
+                        contactoEmergencia: val("contactoEmergencia"),
+                        condicionMedica: val("condicionMedica"),
+                        lesiones: val("lesiones"),
+                        operaciones: val("operaciones")
+                    })
                 });
                 const data = await res.json();
+
                 if (data.success) {
-                    localStorage.setItem("atleta_data", JSON.stringify(data.data));
+                    saveUser(data.data);
                     window.location.href = "dashboard.html";
                 } else {
-                    btn.innerText = "ENVIAR REGISTRO";
+                    btn.textContent = "Enviar registro";
                     btn.disabled = false;
-                    errorMsg.innerText = data.message || "Error al guardar.";
-                    errorMsg.style.display = "block";
+                    errorMsg.textContent = data.message || "Error al guardar.";
+                    errorMsg.hidden = false;
                 }
-            } catch(err) {
-                btn.innerText = "ENVIAR REGISTRO";
+            } catch (err) {
+                btn.textContent = "Enviar registro";
                 btn.disabled = false;
-                errorMsg.innerText = "Error de conexion.";
-                errorMsg.style.display = "block";
+                errorMsg.textContent = "Error de conexión.";
+                errorMsg.hidden = false;
             }
         });
     </script>
