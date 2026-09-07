@@ -1,0 +1,32 @@
+# Dependencias
+node_modules/
+.pnpm-store/
+
+# Secretos — NUNCA versionar
+.env
+.env.local
+*.env
+backend/.env
+bot/credentials.json
+
+# Sesión del bot de WhatsApp: es estado local de la máquina donde corre,
+# no código. Contiene cookies y tokens de la sesión activa.
+bot/.wwebjs_auth/
+bot/.wwebjs_cache/
+**/.wwebjs_auth/
+**/.wwebjs_cache/
+
+# Compilados
+backend/dist/
+*.tsbuildinfo
+
+# Copias de seguridad y temporales
+*.bak
+*.tmp
+.DS_Store
+Thumbs.db
+
+# Skills de agentes que Prisma autogenera en cada `prisma generate`
+backend/.agents/
+backend/.claude/
+backend/.windsurf/

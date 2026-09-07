@@ -1,136 +1,112 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reportar Pago - 3er Round Fit</title>
+    <title>Reportar pago - 3er Round Fit</title>
+    <meta name="robots" content="noindex">
+    <link rel="icon" href="assets/favicon-32.png" sizes="32x32" type="image/png">
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css?v=20260907c">
+    <link rel="stylesheet" href="design-system.css?v=20260907c">
     <style>
-        body { background-color: #050505; color: #fff; font-family: var(--font-body); }
-        .page-header { background: #000; padding: 40px 20px; text-align: center; border-bottom: 1px solid rgba(255,255,255,0.05); }
-        .page-header h2 { font-size: clamp(3rem, 5vw, 4rem); letter-spacing: 2px; color: #fff; margin: 0; }
-        .page-header p { color: #888; font-size: 1.1rem; margin-top: 10px; max-width: 500px; margin-left: auto; margin-right: auto; }
-        
-        .main-container { max-width: 800px; margin: 50px auto; padding: 0 20px; display: grid; grid-template-columns: 1fr; gap: 40px; }
-        
-        .premium-card { background: #0f0f0f; border: 1px solid rgba(255,255,255,0.08); border-radius: 4px; padding: 40px; position: relative; overflow: hidden; }
-        .premium-card::before { content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 4px; background: var(--accent-color); }
-        
-        .section-label { font-family: var(--font-display); font-size: 1.5rem; color: #fff; margin-bottom: 25px; display: flex; align-items: center; gap: 10px; }
-        .section-label span { color: var(--accent-color); }
-
-        .input-group { margin-bottom: 25px; }
-        .input-group label { display: block; font-size: 0.85rem; color: #aaa; margin-bottom: 8px; font-weight: 500; text-transform: uppercase; letter-spacing: 1px; }
-        .input-dark { width: 100%; background: #050505; border: 1px solid rgba(255,255,255,0.15); color: #fff; padding: 16px 20px; font-family: var(--font-body); font-size: 1rem; transition: all 0.3s ease; outline: none; border-radius: 0; }
-        .input-dark:focus { border-color: var(--accent-color); background: #0a0a0a; }
-        .input-dark::placeholder { color: #555; }
-        
-        select.input-dark { appearance: none; background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23FFFFFF%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E"); background-repeat: no-repeat; background-position: right 20px top 50%; background-size: 12px auto; }
-        
-        .row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-        
-        .info-panel { background: rgba(255,102,0,0.05); border: 1px solid rgba(255,102,0,0.2); padding: 20px; margin-bottom: 30px; font-size: 0.9rem; color: #ccc; line-height: 1.5; }
-        .info-panel strong { color: var(--accent-color); }
-
-        .btn-submit { width: 100%; border-radius: 0; padding: 20px; font-size: 1.2rem; margin-top: 10px; border: none; }
-        .link-back { display: block; text-align: center; margin-top: 25px; color: #888; text-decoration: none; font-size: 0.9rem; transition: color 0.3s; }
-        .link-back:hover { color: #fff; }
-
-        @media (max-width: 600px) {
-            .row { grid-template-columns: 1fr; gap: 0; }
-        }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: var(--ds-3); }
+        @media (max-width: 560px) { .grid-2 { grid-template-columns: 1fr; gap: 0; } }
     </style>
 </head>
-<body>
-    <nav class="navbar" style="position:static;background:#000;border-bottom:1px solid #111;">
-        <a href="dashboard.html" class="brand-logo" style="margin-top:5px;">
-            <img src="assets/logo.png" alt="3er Round Fit" style="height:50px;object-fit:contain;">
-        </a>
-        <a href="dashboard.html" style="color:#fff;text-decoration:none;font-size:0.9rem;border:1px solid #333;padding:8px 15px;transition:0.3s;" onmouseover="this.style.background='#fff';this.style.color='#000';" onmouseout="this.style.background='transparent';this.style.color='#fff';">VOLVER</a>
-    </nav>
+<body class="ds-page">
 
-    <div class="page-header">
-        <h2 class="huge-text">REPORTE DE PAGO</h2>
-        <p>Completa los detalles de tu transaccion para validar tu membresia en el sistema.</p>
-    </div>
+    <header class="ds-masthead">
+        <div class="ds-masthead-bar">
+            <a href="dashboard.html" aria-label="Volver al portal"><img src="assets/logo.png" alt="3er Round Fit"></a>
+            <a href="dashboard.html" class="ds-btn-sm">Volver</a>
+        </div>
+        <div class="ds-masthead-body">
+            <h1 class="ds-display"><span class="ds-outline">REPORTE</span><br>DE PAGO</h1>
+            <p class="ds-kicker">Valida tu mensualidad <span class="accent">//</span> 3er Round Fit</p>
+        </div>
+    </header>
 
-    <div class="main-container">
-        <div class="premium-card">
-            <div class="info-panel">
-                <strong>ATENCION:</strong> Asegurate de que el numero de referencia sea exacto. El equipo de Administracion verificara este pago contra nuestros registros bancarios antes de activar tu mes.
+    <main class="ds-wrap">
+
+        <div class="ds-panel ds-panel--accent ds-mt-4">
+            <div class="ds-alert ds-alert--info">
+                <strong>Atención:</strong> asegúrate de que el número de referencia sea exacto.
+                Administración lo verificará contra los registros bancarios antes de activar tu mes.
             </div>
 
-            <form id="pagoForm">
-                <div class="section-label"><span>01.</span> DATOS DEL ATLETA</div>
-                <div class="input-group">
-                    <label>Tu Nombre Completo</label>
-                    <input type="text" id="nombre" class="input-dark" required placeholder="Ej. Juan Perez">
+            <form id="pagoForm" novalidate>
+                <h2 class="ds-section-label"><span>01</span> Datos del atleta</h2>
+                <div class="ds-field">
+                    <label class="ds-label" for="nombre">Tu nombre completo</label>
+                    <input type="text" id="nombre" class="ds-input" placeholder="Ej. Juan Pérez" autocomplete="name" required>
                 </div>
-                
-                <div class="section-label" style="margin-top:40px;"><span>02.</span> DETALLES DEL PAGO</div>
-                <div class="input-group">
-                    <label>Plan que estas pagando</label>
-                    <select id="plan" class="input-dark" required>
-                        <option value="Plan PRO (60 EUR)">Plan PRO - Ilimitado (60 EUR)</option>
-                        <option value="Plan Amateur (50 EUR)">Plan Amateur - 3 dias/sem (50 EUR)</option>
-                        <option value="Plan Infantil (40 EUR)">Plan Infantil (40 EUR)</option>
-                        <option value="Plan Personalizado (100 EUR)">Plan Personalizado (100 EUR)</option>
+
+                <h2 class="ds-section-label"><span>02</span> Detalles del pago</h2>
+                <div class="ds-field">
+                    <label class="ds-label" for="plan">Plan que estás pagando</label>
+                    <select id="plan" class="ds-select" required>
+                        <option value="Plan PRO (60 EUR)">Plan PRO — Ilimitado (60 €)</option>
+                        <option value="Plan Amateur (50 EUR)">Plan Amateur — 3 días/sem (50 €)</option>
+                        <option value="Plan Infantil (40 EUR)">Plan Infantil (40 €)</option>
+                        <option value="Plan Personalizado (100 EUR)">Plan Personalizado (100 €)</option>
                     </select>
                 </div>
-                
-                <div class="row">
-                    <div class="input-group">
-                        <label>Metodo de Pago</label>
-                        <select id="metodo" class="input-dark" required>
-                            <option value="Pago Movil">Pago Movil</option>
-                            <option value="Transferencia">Transferencia Nacional</option>
+
+                <div class="grid-2">
+                    <div class="ds-field">
+                        <label class="ds-label" for="metodo">Método de pago</label>
+                        <select id="metodo" class="ds-select" required>
+                            <option value="Pago Movil">Pago móvil</option>
+                            <option value="Transferencia">Transferencia nacional</option>
                             <option value="Zelle">Zelle</option>
-                            <option value="Efectivo">Efectivo (Entregado en Box)</option>
+                            <option value="Efectivo">Efectivo (entregado en el box)</option>
                         </select>
                     </div>
-                    <div class="input-group">
-                        <label>Monto Pagado</label>
-                        <input type="text" id="monto" class="input-dark" required placeholder="Ej. 60 o 2500 Bs">
+                    <div class="ds-field">
+                        <label class="ds-label" for="monto">Monto pagado</label>
+                        <input type="text" id="monto" class="ds-input" placeholder="Ej. 60 € o 2500 Bs" required>
                     </div>
                 </div>
 
-                <div class="input-group">
-                    <label>Numero de Referencia Bancaria (Obligatorio)</label>
-                    <input type="text" id="referencia" class="input-dark" required placeholder="Ej. 12345678" style="font-family:monospace;font-size:1.2rem;letter-spacing:2px;color:var(--accent-color);">
-                    <p style="font-size:0.8rem;color:#666;margin-top:8px;">*Si pagaste en efectivo presencialmente, escribe 0000</p>
+                <div class="ds-field">
+                    <label class="ds-label" for="referencia">Número de referencia bancaria</label>
+                    <input type="text" id="referencia" class="ds-input ds-input--code" placeholder="Ej. 12345678" inputmode="numeric" required>
+                    <span class="ds-hint">Si pagaste en efectivo presencialmente, escribe <strong>0000</strong>.</span>
                 </div>
 
-                <button type="submit" class="btn-brutal btn-submit">PROCESAR REPORTE VÍA WHATSAPP</button>
-                <a href="dashboard.html" class="link-back">Cancelar y volver al Dashboard</a>
+                <div class="ds-alert ds-alert--warn">
+                    Al enviar se abrirá <strong>WhatsApp</strong> con tu reporte ya redactado.
+                    Debes pulsar enviar allí para que Administración lo reciba.
+                </div>
+
+                <button type="submit" class="ds-btn ds-btn--primary ds-btn--block">Enviar reporte por WhatsApp</button>
+                <a href="dashboard.html" class="ds-link-mute">Cancelar y volver al portal</a>
             </form>
         </div>
-    </div>
+    </main>
 
-    <script src="auth.js"></script>
+    <script src="auth.js?v=20260907c"></script>
     <script>
         const session = requireUser();
         if (session) {
             document.getElementById("nombre").value = session.nombre || "";
         }
 
-        document.getElementById("pagoForm").addEventListener("submit", function(e) {
+        document.getElementById("pagoForm").addEventListener("submit", function (e) {
             e.preventDefault();
-            const nombre = document.getElementById("nombre").value;
-            const plan = document.getElementById("plan").value;
-            const metodo = document.getElementById("metodo").value;
-            const monto = document.getElementById("monto").value;
-            const referencia = document.getElementById("referencia").value;
 
-            const mensaje = "REPORTE DE PAGO DE MENSUALIDAD\n\n" +
-                            "Atleta: " + nombre + "\n" +
-                            "Plan: " + plan + "\n" +
-                            "Metodo: " + metodo + "\n" +
-                            "Monto: " + monto + "\n" +
-                            "Referencia: " + referencia + "\n\n" +
-                            "Por favor valida este pago y actualiza mi estado en el sistema.";
+            const val = function (id) { return document.getElementById(id).value.trim(); };
+            const mensaje =
+                "REPORTE DE PAGO DE MENSUALIDAD\n\n" +
+                "Atleta: " + val("nombre") + "\n" +
+                "Plan: " + val("plan") + "\n" +
+                "Método: " + val("metodo") + "\n" +
+                "Monto: " + val("monto") + "\n" +
+                "Referencia: " + val("referencia") + "\n\n" +
+                "Por favor valida este pago y actualiza mi estado en el sistema.";
 
-            window.open("https://wa.me/584248576200?text=" + encodeURIComponent(mensaje), "_blank");
+            window.open("https://wa.me/584248576200?text=" + encodeURIComponent(mensaje), "_blank", "noopener");
             window.location.href = "dashboard.html";
         });
     </script>
