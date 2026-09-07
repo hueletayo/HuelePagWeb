@@ -37,7 +37,7 @@
     <link rel="preload" as="image" href="assets/hero-poster.jpg" fetchpriority="high">
 
     <!-- CSS -->
-    <link rel="stylesheet" href="style.css?v=20260907f">
+    <link rel="stylesheet" href="style.css?v=20260907h">
 
     <!-- Feather Icons (versión fija) -->
     <script defer src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.29.2/feather.min.js"></script>
@@ -244,7 +244,7 @@
         },
         {
           "@type": "Person",
-          "name": "Daniel Nuñez",
+          "name": "Daniel Núñez",
           "jobTitle": "Entrenador de boxeo y kickboxing",
           "description": "Entrenador de boxeo certificado por la IBA y el WBC. Kickboxing y boxeo.",
           "hasCredential": [
@@ -453,7 +453,7 @@
                 </div>
                 <div class="coach-body">
                     <span class="coach-cert">IBA &middot; WBC</span>
-                    <h3 class="coach-name">Daniel Nuñez</h3>
+                    <h3 class="coach-name">Daniel Núñez</h3>
                     <p class="coach-role">Kickboxing / Boxeo</p>
                     <ul class="coach-facts">
                         <li>Entrenador de Boxeo certificado</li>
@@ -464,40 +464,65 @@
         </div>
     </section>
 
-    <!-- Schedule Section (Brutalist Style) -->
+    <!-- Schedule Section -->
     <section id="horarios" class="schedule-section">
-        <div class="schedule-container" data-scroll>
-            <h2 class="huge-text outline-text">HORARIOS</h2>
-            <div class="schedule-brutal">
+        <div class="schedule-bg"></div>
+        <div class="schedule-scrim"></div>
 
-                <div class="sch-row">
-                    <div class="sch-day">LUN - VIE <span class="accent">//</span> MAÑANA</div>
-                    <div class="sch-times">
-                        <span>07:30 AM</span>
-                        <span>08:30 AM</span>
-                        <span>09:30 AM</span>
-                        <span>10:30 AM</span>
-                    </div>
+        <div class="schedule-inner">
+            <div class="schedule-header" data-scroll>
+                <h2 class="huge-text outline-text">HORARIOS</h2>
+                <div class="schedule-meta">
+                    <p class="schedule-kicker">LUNES A SÁBADO <span class="accent">//</span> CLASES CADA HORA</p>
+                    <p class="next-class" id="next-class" hidden></p>
                 </div>
+            </div>
 
-                <div class="sch-row">
-                    <div class="sch-day">LUN - VIE <span class="accent">//</span> TARDE</div>
-                    <div class="sch-times">
-                        <span class="accent-bg">03:00 PM (Niños)</span>
-                        <span>04:00 PM</span>
-                        <span>05:00 PM</span>
-                        <span>06:00 PM</span>
-                        <span>07:00 PM</span>
-                    </div>
-                </div>
+            <div class="schedule-cards">
+                <article class="sch-card" data-scroll>
+                    <header class="sch-card-head">
+                        <span class="sch-card-tag">LUN — VIE</span>
+                        <h3 class="sch-card-title">MAÑANA</h3>
+                    </header>
+                    <ul class="sch-slots">
+                        <li><b>07:30</b><span>AM</span></li>
+                        <li><b>08:30</b><span>AM</span></li>
+                        <li><b>09:30</b><span>AM</span></li>
+                        <li><b>10:30</b><span>AM</span></li>
+                    </ul>
+                </article>
 
-                <div class="sch-row special-row">
-                    <div class="sch-day">SÁBADOS <span class="accent">//</span> ESPECIAL</div>
-                    <div class="sch-times">
-                        <span class="accent-bg">08:30 AM</span>
-                    </div>
-                </div>
+                <article class="sch-card" data-scroll>
+                    <header class="sch-card-head">
+                        <span class="sch-card-tag">LUN — VIE</span>
+                        <h3 class="sch-card-title">TARDE</h3>
+                    </header>
+                    <ul class="sch-slots">
+                        <li class="is-kids"><b>03:00</b><span>PM &middot; Niños</span></li>
+                        <li><b>04:00</b><span>PM</span></li>
+                        <li><b>05:00</b><span>PM</span></li>
+                        <li><b>06:00</b><span>PM</span></li>
+                        <li><b>07:00</b><span>PM</span></li>
+                    </ul>
+                </article>
 
+                <article class="sch-card sch-card--sabado" data-scroll>
+                    <header class="sch-card-head">
+                        <span class="sch-card-tag">SÁBADO</span>
+                        <h3 class="sch-card-title">ESPECIAL</h3>
+                    </header>
+                    <ul class="sch-slots">
+                        <li class="is-special"><b>08:30</b><span>AM</span></li>
+                    </ul>
+                    <p class="sch-card-note">Una sola sesión, abierta a todas las modalidades.</p>
+                </article>
+            </div>
+
+            <div class="schedule-cta" data-scroll>
+                <p>¿No te cuadra ningún horario? Escríbenos y buscamos la forma.</p>
+                <a href="https://wa.me/584248576200?text=Hola!%20Quiero%20consultar%20los%20horarios%20de%20clase." target="_blank" rel="noopener" class="btn-brutal">
+                    <i data-feather="message-circle" aria-hidden="true"></i> CONSULTAR HORARIOS
+                </a>
             </div>
         </div>
     </section>
@@ -669,6 +694,6 @@
     </footer>
 
     <!-- Scripts -->
-    <script src="main.js?v=20260907f"></script>
+    <script src="main.js?v=20260907h"></script>
 </body>
 </html>

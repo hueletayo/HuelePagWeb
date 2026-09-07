@@ -121,6 +121,50 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // --- Próxima clase ----------------------------------------------------
+    // Se calcula con la hora del visitante a partir del horario publicado.
+    // Si algún día cambian las clases, hay que tocar HORARIO aquí y la
+    // sección #horarios del HTML.
+    const cajaProxima = document.getElementById('next-class');
+    if (cajaProxima) {
+        const DIAS = ['DOMINGO', 'LUNES', 'MARTES', 'MIÉRCOLES', 'JUEVES', 'VIERNES', 'SÁBADO'];
+        // minutos desde medianoche
+        const ENTRE_SEMANA = [450, 510, 570, 630, 900, 960, 1020, 1080, 1140];
+        const SABADO = [510];
+        const horarioDe = (dia) => (dia === 0 ? [] : dia === 6 ? SABADO : ENTRE_SEMANA);
+
+        const comoHora = (min) => {
+            const h24 = Math.floor(min / 60);
+            const m = String(min % 60).padStart(2, '0');
+            const h12 = h24 % 12 === 0 ? 12 : h24 % 12;
+            return h12 + ':' + m + ' ' + (h24 < 12 ? 'AM' : 'PM');
+        };
+
+        const buscarProxima = () => {
+            const ahora = new Date();
+            const minAhora = ahora.getHours() * 60 + ahora.getMinutes();
+            for (let salto = 0; salto < 8; salto++) {
+                const dia = (ahora.getDay() + salto) % 7;
+                for (const slot of horarioDe(dia)) {
+                    if (salto === 0 && slot <= minAhora) continue;
+                    const cuando = salto === 0 ? 'HOY' : salto === 1 ? 'MAÑANA' : DIAS[dia];
+                    return cuando + ' ' + comoHora(slot);
+                }
+            }
+            return null;
+        };
+
+        const pintarProxima = () => {
+            const texto = buscarProxima();
+            if (!texto) { cajaProxima.hidden = true; return; }
+            cajaProxima.textContent = 'PRÓXIMA CLASE: ' + texto;
+            cajaProxima.hidden = false;
+        };
+
+        pintarProxima();
+        window.setInterval(pintarProxima, 60000);
+    }
+
     // --- Reveal on scroll -------------------------------------------------
     const scrollElements = document.querySelectorAll('[data-scroll]');
 
