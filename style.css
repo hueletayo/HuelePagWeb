@@ -685,10 +685,42 @@ img, video {
     color: var(--accent-color);
 }
 
-.coach-bio {
-    font-size: 0.98rem;
-    line-height: 1.55;
+.coach-facts {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-top: 4px;
+}
+.coach-facts li {
+    position: relative;
+    padding-left: 18px;
+    font-size: 0.92rem;
+    line-height: 1.45;
     color: var(--text-muted);
+}
+.coach-facts li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.62em;
+    width: 10px;
+    height: 2px;
+    background: var(--accent-color);
+}
+
+/* Daniel es el unico con aval IBA/WBC: se destaca */
+.coach-card--cert { border-color: var(--accent-color); }
+
+.coach-cert {
+    align-self: flex-start;
+    background: var(--accent-color);
+    color: var(--accent-ink);
+    font-size: 0.62rem;
+    font-weight: 900;
+    letter-spacing: 0.14em;
+    padding: 4px 9px;
+    margin-bottom: 4px;
 }
 
 /* Schedule Section */

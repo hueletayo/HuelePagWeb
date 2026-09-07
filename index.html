@@ -37,7 +37,7 @@
     <link rel="preload" as="image" href="assets/hero-poster.jpg" fetchpriority="high">
 
     <!-- CSS -->
-    <link rel="stylesheet" href="style.css?v=20260907e">
+    <link rel="stylesheet" href="style.css?v=20260907f">
 
     <!-- Feather Icons (versión fija) -->
     <script defer src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.29.2/feather.min.js"></script>
@@ -207,7 +207,66 @@
             }
           }
         ]
-      }
+      },
+      "employee": [
+        {
+          "@type": "Person",
+          "name": "Samuel Sifontes",
+          "jobTitle": "Entrenador de boxeo",
+          "description": "Boxeador profesional, categoría Súper Gallo. Selección del Estado Anzoátegui.",
+          "sameAs": [
+            "https://www.instagram.com/samu_sifontes/"
+          ],
+          "memberOf": {
+            "@type": "SportsTeam",
+            "name": "Selección del Estado Anzoátegui"
+          }
+        },
+        {
+          "@type": "Person",
+          "name": "Neyker Osuna",
+          "jobTitle": "Entrenador de boxeo",
+          "description": "Boxeador amateur, categoría Élite 60 kg. Selección del Estado Anzoátegui.",
+          "memberOf": {
+            "@type": "SportsTeam",
+            "name": "Selección del Estado Anzoátegui"
+          }
+        },
+        {
+          "@type": "Person",
+          "name": "Darwin Osorio",
+          "jobTitle": "Entrenador de boxeo",
+          "description": "Boxeador amateur, categoría Élite 65 kg. Selección del Estado Anzoátegui.",
+          "memberOf": {
+            "@type": "SportsTeam",
+            "name": "Selección del Estado Anzoátegui"
+          }
+        },
+        {
+          "@type": "Person",
+          "name": "Daniel Nuñez",
+          "jobTitle": "Entrenador de boxeo y kickboxing",
+          "description": "Entrenador de boxeo certificado por la IBA y el WBC. Kickboxing y boxeo.",
+          "hasCredential": [
+            {
+              "@type": "EducationalOccupationalCredential",
+              "credentialCategory": "Certificación de entrenador",
+              "recognizedBy": {
+                "@type": "Organization",
+                "name": "International Boxing Association (IBA)"
+              }
+            },
+            {
+              "@type": "EducationalOccupationalCredential",
+              "credentialCategory": "Certificación de entrenador",
+              "recognizedBy": {
+                "@type": "Organization",
+                "name": "World Boxing Council (WBC)"
+              }
+            }
+          ]
+        }
+      ]
     }
     </script>
 </head>
@@ -323,51 +382,83 @@
     <!--
       ============================================================
       ENTRENADORES
-      Las fotos SÍ son reales (sacadas del video del box).
-      ⚠️ PENDIENTE: faltan nombres, cargos y especialidades.
-         Reemplaza los REEMPLAZAR_*; mientras tanto se ven con borde
-         punteado y etiqueta "PENDIENTE" para no publicarlos por error.
-         La tercera tarjeta está vacía a propósito: si solo son dos
-         entrenadores, bórrala entera y la rejilla se reacomoda sola.
+      Nombres, categorías y avales son REALES y están completos.
+
+      ⚠️ FALTAN LAS FOTOS. Hay dos retratos ya listos en assets/,
+         sacados del video del box, pero no sé a quién corresponde
+         cada uno, así que no los asigno:
+           assets/entrenador-1.jpg  -> el de brazos tatuados con
+                                       manoplas rojas, en guardia
+           assets/entrenador-2.jpg  -> el de pelo canoso dirigiendo
+                                       el guanteo, de perfil
+         Para poner una foto: cambia el <div class="coach-photo
+         coach-photo--vacia"> por
+           <div class="coach-photo"><img src="assets/ARCHIVO.jpg"
+                alt="NOMBRE, entrenador de 3er Round Fit"
+                width="800" height="1064" loading="lazy" decoding="async"></div>
       ============================================================
     -->
     <section id="entrenadores" class="coaches-section">
         <div class="coaches-header" data-scroll>
             <h2 class="huge-text">EL <span class="outline-text">EQUIPO</span></h2>
-            <p>QUIÉN TE VA A ENTRENAR <span class="accent">//</span> CERTIFICADOS IBA &amp; WBC</p>
+            <p>QUIÉN TE VA A ENTRENAR <span class="accent">//</span> SELECCIÓN DE ANZOÁTEGUI</p>
         </div>
 
         <div class="coaches-grid">
             <article class="coach-card" data-scroll>
-                <div class="coach-photo">
-                    <img src="assets/entrenador-1.jpg" alt="Entrenador de 3er Round Fit con manoplas en el ring" width="800" height="1064" loading="lazy" decoding="async">
-                </div>
-                <div class="coach-body">
-                    <h3 class="coach-name pendiente">REEMPLAZAR_NOMBRE_ENTRENADOR_1</h3>
-                    <p class="coach-role pendiente">REEMPLAZAR_CARGO_1</p>
-                    <p class="coach-bio pendiente">REEMPLAZAR_ESPECIALIDAD_1</p>
-                </div>
-            </article>
-
-            <article class="coach-card" data-scroll>
-                <div class="coach-photo">
-                    <img src="assets/entrenador-2.jpg" alt="Entrenador de 3er Round Fit dirigiendo una sesión de guanteo" width="800" height="1062" loading="lazy" decoding="async">
-                </div>
-                <div class="coach-body">
-                    <h3 class="coach-name pendiente">REEMPLAZAR_NOMBRE_ENTRENADOR_2</h3>
-                    <p class="coach-role pendiente">REEMPLAZAR_CARGO_2</p>
-                    <p class="coach-bio pendiente">REEMPLAZAR_ESPECIALIDAD_2</p>
-                </div>
-            </article>
-
-            <article class="coach-card" data-scroll>
-                <div class="coach-photo coach-photo--vacia">
+                <div class="coach-photo coach-photo--vacia" data-slot="samuel">
                     <span>FALTA FOTO</span>
                 </div>
                 <div class="coach-body">
-                    <h3 class="coach-name pendiente">REEMPLAZAR_NOMBRE_ENTRENADOR_3</h3>
-                    <p class="coach-role pendiente">REEMPLAZAR_CARGO_3</p>
-                    <p class="coach-bio pendiente">REEMPLAZAR_ESPECIALIDAD_3</p>
+                    <h3 class="coach-name">Samuel Sifontes</h3>
+                    <p class="coach-role">Boxeador Profesional</p>
+                    <ul class="coach-facts">
+                        <li>Categoría Súper Gallo</li>
+                        <li>Selección del Edo. Anzoátegui</li>
+                    </ul>
+                </div>
+            </article>
+
+            <article class="coach-card" data-scroll>
+                <div class="coach-photo coach-photo--vacia" data-slot="neyker">
+                    <span>FALTA FOTO</span>
+                </div>
+                <div class="coach-body">
+                    <h3 class="coach-name">Neyker Osuna</h3>
+                    <p class="coach-role">Boxeador Amateur</p>
+                    <ul class="coach-facts">
+                        <li>Categoría Élite 60 kg</li>
+                        <li>Selección del Edo. Anzoátegui</li>
+                    </ul>
+                </div>
+            </article>
+
+            <article class="coach-card" data-scroll>
+                <div class="coach-photo coach-photo--vacia" data-slot="darwin">
+                    <span>FALTA FOTO</span>
+                </div>
+                <div class="coach-body">
+                    <h3 class="coach-name">Darwin Osorio</h3>
+                    <p class="coach-role">Boxeador Amateur</p>
+                    <ul class="coach-facts">
+                        <li>Categoría Élite 65 kg</li>
+                        <li>Selección del Edo. Anzoátegui</li>
+                    </ul>
+                </div>
+            </article>
+
+            <article class="coach-card coach-card--cert" data-scroll>
+                <div class="coach-photo coach-photo--vacia" data-slot="daniel">
+                    <span>FALTA FOTO</span>
+                </div>
+                <div class="coach-body">
+                    <span class="coach-cert">IBA &middot; WBC</span>
+                    <h3 class="coach-name">Daniel Nuñez</h3>
+                    <p class="coach-role">Kickboxing / Boxeo</p>
+                    <ul class="coach-facts">
+                        <li>Entrenador de Boxeo certificado</li>
+                        <li>Aval IBA y WBC</li>
+                    </ul>
                 </div>
             </article>
         </div>
@@ -578,6 +669,6 @@
     </footer>
 
     <!-- Scripts -->
-    <script src="main.js?v=20260907e"></script>
+    <script src="main.js?v=20260907f"></script>
 </body>
 </html>
