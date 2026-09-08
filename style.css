@@ -394,6 +394,13 @@ img, video {
     display: block;
 }
 
+/* El trazo del hero baja de 2px a 1px (peticion del entrenador).
+   Mas especifico que .outline-text, asi que tambien gana sobre el
+   1.5px del breakpoint movil. */
+.hero-title .outline-text {
+    -webkit-text-stroke-width: 1px;
+}
+
 .hero-badge {
     margin-top: 25px;
     font-size: clamp(0.75rem, 1.6vw, 0.95rem);
