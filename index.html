@@ -37,7 +37,7 @@
     <link rel="preload" as="image" href="assets/hero-poster.jpg" fetchpriority="high">
 
     <!-- CSS -->
-    <link rel="stylesheet" href="style.css?v=20260907l">
+    <link rel="stylesheet" href="style.css?v=20260907m">
 
     <!-- Feather Icons (versión fija) -->
     <script defer src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.29.2/feather.min.js"></script>
@@ -353,11 +353,44 @@
             <div class="philosophy-text" data-scroll>
                 <h2 class="huge-text">SUDOR<br>&amp; GLORIA</h2>
                 <p class="body-text">
-                    Sistema de entrenamiento basado en técnicas de boxeo combinados con ejercicios de fuerza, resistencia, velocidad, agilidad y flexibilidad.
+                    Sistema de entrenamiento basado en técnicas de boxeo, combinadas con ejercicios de:
                 </p>
-                <p class="body-text highlight-text">
-                    Únicos certificados por la Asociación Internacional de Boxeo (IBA) y el Consejo Mundial de Boxeo (WBC)
-                </p>
+
+                <ul class="disciplinas">
+                    <li>Fuerza</li>
+                    <li>Resistencia</li>
+                    <li>Velocidad</li>
+                    <li>Agilidad</li>
+                    <li>Flexibilidad</li>
+                </ul>
+
+                <!--
+                  AVALES
+                  Los <img> apuntan a assets/logo-iba.png y assets/logo-wbc.png.
+                  Mientras esos archivos no existan, onerror los oculta y se
+                  muestra el acrónimo tipográfico: la sección se ve bien igual.
+                  Para activarlos basta con dejar los ficheros en assets/,
+                  preferiblemente PNG con fondo transparente y >=400px de alto.
+                -->
+                <div class="avales">
+                    <p class="avales-kicker">Únicos certificados por</p>
+                    <div class="avales-grid">
+                        <div class="aval">
+                            <img class="aval-logo" src="assets/logo-iba.png" alt="Asociación Internacional de Boxeo (IBA)"
+                                 loading="lazy" decoding="async"
+                                 onerror="this.remove()">
+                            <span class="aval-sigla" aria-hidden="true">IBA</span>
+                            <span class="aval-nombre">Asociación Internacional de Boxeo</span>
+                        </div>
+                        <div class="aval">
+                            <img class="aval-logo" src="assets/logo-wbc.png" alt="Consejo Mundial de Boxeo (WBC)"
+                                 loading="lazy" decoding="async"
+                                 onerror="this.remove()">
+                            <span class="aval-sigla" aria-hidden="true">WBC</span>
+                            <span class="aval-nombre">Consejo Mundial de Boxeo</span>
+                        </div>
+                    </div>
+                </div>
                 <a href="https://wa.me/584248576200?text=Hola!%20Quiero%20informaci%C3%B3n%20sobre%20las%20clases%20y%20precios." target="_blank" rel="noopener" class="link-btn">EMPIEZA HOY <i data-feather="message-circle" aria-hidden="true"></i></a>
             </div>
             <div class="philosophy-img" data-scroll>
@@ -701,6 +734,6 @@
     </footer>
 
     <!-- Scripts -->
-    <script src="main.js?v=20260907l"></script>
+    <script src="main.js?v=20260907m"></script>
 </body>
 </html>
