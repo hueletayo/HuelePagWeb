@@ -7,8 +7,8 @@
     <meta name="robots" content="noindex">
     <link rel="icon" href="assets/favicon-32.png" sizes="32x32" type="image/png">
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css?v=20260907z">
-    <link rel="stylesheet" href="design-system.css?v=20260907z">
+    <link rel="stylesheet" href="style.css?v=20260908a">
+    <link rel="stylesheet" href="design-system.css?v=20260908a">
     <style>
         .estado-card { text-align: center; padding: var(--ds-4) var(--ds-3); }
         .estado-badge {
@@ -61,7 +61,7 @@
         <div class="ds-loader">Cargando...</div>
     </main>
 
-    <script src="auth.js?v=20260907z"></script>
+    <script src="auth.js?v=20260908a"></script>
     <script>
         const session = requireUser();
         document.getElementById("btn-logout").addEventListener("click", logout);
@@ -192,7 +192,7 @@
             wa.rel = "noopener";
 
             const mapa = el("a", "ds-btn ds-btn--ghost", "Cómo llegar");
-            mapa.href = "https://www.google.com/maps/search/?api=1&query=Centro+Empresarial+Col%C3%B3n+Vistamar+Lecher%C3%ADa+Anzo%C3%A1tegui";
+            mapa.href = "https://www.google.com/maps/dir/?api=1&destination=10.1780358%2C-64.6835535";
             mapa.target = "_blank";
             mapa.rel = "noopener";
 
