@@ -37,7 +37,7 @@
     <link rel="preload" as="image" href="assets/hero-poster.jpg" fetchpriority="high">
 
     <!-- CSS -->
-    <link rel="stylesheet" href="style.css?v=20260907k">
+    <link rel="stylesheet" href="style.css?v=20260907l">
 
     <!-- Feather Icons (versión fija) -->
     <script defer src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.29.2/feather.min.js"></script>
@@ -267,7 +267,8 @@
                 "name": "World Boxing Council (WBC)"
               }
             }
-          ]
+          ],
+          "image": "https://www.3erroundfit.com/assets/entrenador-daniel.jpg"
         }
       ]
     }
@@ -399,25 +400,11 @@
         </div>
     </section>
 
-    <!--
-      ============================================================
-      ENTRENADORES
-      Nombres, categorías y avales son REALES y están completos.
-
-      ⚠️ FALTAN LAS FOTOS. Hay dos retratos ya listos en assets/,
-         sacados del video del box, pero no sé a quién corresponde
-         cada uno, así que no los asigno:
-           assets/entrenador-1.jpg  -> el de brazos tatuados con
-                                       manoplas rojas, en guardia
-           assets/entrenador-2.jpg  -> el de pelo canoso dirigiendo
-                                       el guanteo, de perfil
-         Para poner una foto: cambia el <div class="coach-photo
-         coach-photo--vacia"> por
-           <div class="coach-photo"><img src="assets/ARCHIVO.jpg"
-                alt="NOMBRE, entrenador de 3er Round Fit"
-                width="800" height="1064" loading="lazy" decoding="async"></div>
-      ============================================================
-    -->
+    <!-- ============================================================
+         ENTRENADORES — nombres, categorias, avales y fotos completos.
+         Las cuatro fotos van a 800x1066 (3:4). Para cambiar una,
+         sustituye el archivo en assets/ manteniendo esa proporcion.
+         ============================================================ -->
     <section id="entrenadores" class="coaches-section">
         <div class="coaches-header" data-scroll>
             <h2 class="huge-text">EL <span class="outline-text">EQUIPO</span></h2>
@@ -468,8 +455,8 @@
             </article>
 
             <article class="coach-card coach-card--cert" data-scroll>
-                <div class="coach-photo coach-photo--vacia" data-slot="daniel">
-                    <span>FALTA FOTO</span>
+                <div class="coach-photo">
+                    <img src="assets/entrenador-daniel.jpg" alt="Daniel Núñez, entrenador de boxeo certificado por la IBA y el WBC" width="800" height="1066" loading="lazy" decoding="async">
                 </div>
                 <div class="coach-body">
                     <span class="coach-cert">IBA &middot; WBC</span>
@@ -714,6 +701,6 @@
     </footer>
 
     <!-- Scripts -->
-    <script src="main.js?v=20260907k"></script>
+    <script src="main.js?v=20260907l"></script>
 </body>
 </html>
