@@ -398,7 +398,7 @@ img, video {
    Mas especifico que .outline-text, asi que tambien gana sobre el
    1.5px del breakpoint movil. */
 .hero-title .outline-text {
-    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-width: 0.5px;
 }
 
 .hero-badge {
