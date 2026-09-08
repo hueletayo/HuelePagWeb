@@ -463,9 +463,10 @@ img, video {
     padding: var(--gap-xl) 5%;
 }
 
+/* flex-start, no center: el H2 debe empezar a la altura del tope de la foto */
 .philosophy-container {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     gap: var(--gap-lg);
 }
 
@@ -477,8 +478,18 @@ img, video {
 }
 
 /* ============================================================
-   Disciplinas y avales (sección Filosofía)
+   Disciplinas, claim y avales (sección Filosofía)
    ============================================================ */
+.philosophy-claim {
+    font-size: 1.18rem;
+    line-height: 1.6;
+    color: #fff;
+    max-width: 54ch;
+    border-left: 4px solid var(--accent-color);
+    padding-left: 18px;
+    margin-top: var(--gap-sm);
+}
+
 .disciplinas {
     list-style: none;
     display: flex;
@@ -538,8 +549,9 @@ img, video {
 
 /*
  * Los logos oficiales de IBA y WBC son oscuros sobre transparente:
- * sobre el fondo negro no se leerian. Van sobre placa blanca, que es
- * el tratamiento habitual y no altera las marcas.
+ * sobre el fondo negro no se leerian. Van sobre una placa gris clara
+ * con trama diagonal, que los hace legibles sin alterar las marcas y
+ * encaja mejor con el sistema que un blanco puro.
  * La caja fija + object-fit iguala opticamente un logo cuadrado (WBC)
  * con uno muy apaisado (IBA).
  */
@@ -549,7 +561,13 @@ img, video {
     height: 92px;
     object-fit: contain;
     display: block;
-    background: #fff;
+    background-color: #d7d7d7;
+    background-image: repeating-linear-gradient(
+        45deg,
+        rgba(0, 0, 0, 0.055) 0 2px,
+        rgba(0, 0, 0, 0) 2px 7px
+    );
+    border: 1px solid rgba(255, 255, 255, 0.16);
     padding: 10px 14px;
     margin-bottom: 8px;
 }
