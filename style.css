@@ -719,6 +719,18 @@ img, video {
     transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
+/* Credencial de cada modalidad, destacada del parrafo */
+.item-flag {
+    display: block;
+    margin-top: 10px;
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent-color);
+    line-height: 1.5;
+}
+
 .training-item:hover {
     padding: 50px 0;
 }
