@@ -664,6 +664,10 @@ img, video {
     position: relative;
     min-height: 100vh;
     isolation: isolate;
+    /* Recorta el fondo sticky al borde de la seccion: sin esto seguia
+       pintado sobre la seccion siguiente (El equipo). clip y no hidden,
+       que hidden crearia contenedor de scroll y romperia el sticky. */
+    overflow: clip;
 }
 
 .training-bg,
