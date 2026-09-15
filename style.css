@@ -39,7 +39,7 @@ body {
     background-color: var(--bg-color);
     color: var(--text-color);
     font-family: var(--font-body);
-    overflow-x: hidden;
+    overflow-x: clip; /* clip, no hidden: hidden rompe position:sticky */
 }
 
 img, video {
@@ -647,18 +647,36 @@ img, video {
 }
 
 /* Interactive Training Section */
+/*
+ * La seccion es mas alta que la pantalla, asi que un fondo anclado a ella
+ * se desplaza al hacer scroll: al llegar a la ultima modalidad, el motivo
+ * de la imagen ya habia salido por arriba.
+ * Fondo y velo van sticky con margin-bottom negativo: no ocupan sitio en el
+ * flujo pero se quedan pegados a la pantalla mientras la seccion esta a la
+ * vista, asi la imagen se ve entera en cualquier punto del scroll.
+ * Por eso la seccion deja de ser flex: los sticky deben estar en flujo.
+ */
 .training-section {
-    padding: var(--gap-xl) 0;
+    /* Sin padding propio: el fondo sticky debe arrancar en el borde mismo
+       de la seccion, o el primer tramo se ve sin imagen. El aire lo pone
+       .training-content. */
+    padding: 0;
     position: relative;
     min-height: 100vh;
-    display: flex;
-    align-items: center;
     isolation: isolate;
 }
 
+.training-bg,
+.training-scrim {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    height: 100svh;
+    margin-bottom: -100vh;
+    pointer-events: none;
+}
+
 .training-bg {
-    position: absolute;
-    inset: 0;
     z-index: 0;
     background-color: #000;
     background-size: cover;
@@ -667,8 +685,6 @@ img, video {
 }
 
 .training-scrim {
-    position: absolute;
-    inset: 0;
     z-index: 1;
     background: rgba(0, 0, 0, 0.72);
 }
@@ -677,7 +693,7 @@ img, video {
     position: relative;
     z-index: 2;
     width: 100%;
-    padding: 0 5%;
+    padding: var(--gap-xl) 5%;
 }
 
 .section-title {
