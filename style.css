@@ -693,11 +693,28 @@ img, video {
     background: rgba(0, 0, 0, 0.72);
 }
 
+/* Cabecera fuera del fondo sticky: el titulo se lee sobre negro y la imagen
+   empieza justo en la linea superior de la lista. */
+.training-head {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    padding: var(--gap-xl) 5% var(--gap-md);
+}
+
+.training-head .section-title {
+    /* El aire lo pone el padding de .training-head: con el margen del titulo
+       se sumaban los dos y la imagen bajaba de mas. */
+    margin-bottom: 0;
+}
+
 .training-content {
     position: relative;
     z-index: 2;
     width: 100%;
-    padding: var(--gap-xl) 5%;
+    /* Sin padding arriba: el borde de .training-list debe caer exactamente
+       sobre el canto superior de la imagen. */
+    padding: 0 5% var(--gap-xl);
 }
 
 .section-title {

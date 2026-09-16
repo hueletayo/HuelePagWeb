@@ -42,7 +42,7 @@
     <link rel="preload" as="image" href="assets/hero-poster.jpg" fetchpriority="high">
 
     <!-- CSS -->
-    <link rel="stylesheet" href="style.css?v=20260915e">
+    <link rel="stylesheet" href="style.css?v=20260916a">
 
     <!-- Feather Icons (versión fija) -->
     <script defer src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.29.2/feather.min.js"></script>
@@ -420,11 +420,14 @@
 
     <!-- Interactive Training Section -->
     <section id="entrenamiento" class="training-section">
+        <!-- El titulo va fuera del fondo: el entrenador pidio que la imagen
+             arranque justo en la linea de debajo de "Nuestros Rounds". -->
+        <div class="training-head">
+            <h2 class="section-title" data-scroll>NUESTROS <span class="accent">ROUNDS</span></h2>
+        </div>
         <div class="training-bg" id="training-bg"></div>
         <div class="training-scrim"></div>
         <div class="training-content">
-            <h2 class="section-title" data-scroll>NUESTROS <span class="accent">ROUNDS</span></h2>
-
             <ul class="training-list">
                 <li class="training-item" data-image="assets/train-competitivo.jpg">
                     <div class="item-media"><img src="assets/train-competitivo.jpg" alt="" loading="lazy" decoding="async"></div>
@@ -764,6 +767,6 @@
     </footer>
 
     <!-- Scripts -->
-    <script src="main.js?v=20260915e"></script>
+    <script src="main.js?v=20260916a"></script>
 </body>
 </html>
