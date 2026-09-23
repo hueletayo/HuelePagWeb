@@ -121,6 +121,16 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // --- Foto de acción de los entrenadores -------------------------------
+    // En escritorio aparece con :hover (CSS). En táctil no hay hover:
+    // tocar la tarjeta alterna entre las dos fotos.
+    const sinHover = window.matchMedia('(hover: none)');
+    document.querySelectorAll('.coach-card--alt').forEach(card => {
+        card.addEventListener('click', () => {
+            if (sinHover.matches) card.classList.toggle('is-alt');
+        });
+    });
+
     // --- Scroll spy de la barra horizontal --------------------------------
     // Marca en la nav la sección que ocupa el centro de la pantalla.
     const enlacesSpy = document.querySelectorAll('.nav-links a[data-spy]');
