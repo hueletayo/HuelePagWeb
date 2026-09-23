@@ -121,11 +121,11 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- Foto de acción de los entrenadores -------------------------------
+    // --- Segunda foto de entrenadores y testimonios ------------------------
     // En escritorio aparece con :hover (CSS). En táctil no hay hover:
     // tocar la tarjeta alterna entre las dos fotos.
     const sinHover = window.matchMedia('(hover: none)');
-    document.querySelectorAll('.coach-card--alt').forEach(card => {
+    document.querySelectorAll('.coach-card--alt, .testimonial-card--alt').forEach(card => {
         card.addEventListener('click', () => {
             if (sinHover.matches) card.classList.toggle('is-alt');
         });
