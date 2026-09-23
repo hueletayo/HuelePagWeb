@@ -42,7 +42,7 @@
     <link rel="preload" as="image" href="assets/hero-poster.jpg" fetchpriority="high">
 
     <!-- CSS -->
-    <link rel="stylesheet" href="style.css?v=20260923a">
+    <link rel="stylesheet" href="style.css?v=20260923b">
 
     <!-- Feather Icons (versión fija) -->
     <script defer src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.29.2/feather.min.js"></script>
@@ -675,7 +675,8 @@
       TESTIMONIOS — atletas de élite que entrenan en el club.
       ⚠️ PENDIENTE: las citas (.testimonial-quote.pendiente) hay que
          sustituirlas por sus palabras reales. No publicar con el relleno.
-         Fotos a 900x900 (1:1) en assets/testimonio-X.jpg.
+         Fotos a 900x900 (1:1) en assets/testimonio-X.jpg. La del hover
+         (o al tocar en movil) es assets/testimonio-X-gym.jpg.
       ============================================================
     -->
     <section id="testimonios" class="testimonials-section">
@@ -685,9 +686,10 @@
         </div>
 
         <div class="testimonials-grid">
-            <blockquote class="testimonial-card" data-scroll>
+            <blockquote class="testimonial-card testimonial-card--alt" data-scroll>
                 <div class="testimonial-photo">
                     <img src="assets/testimonio-linares.jpg" alt="Jorge Linares posando con sus cinturones de campeón mundial" width="900" height="900" loading="lazy" decoding="async">
+                    <img class="testimonial-photo-alt" src="assets/testimonio-linares-gym.jpg" alt="Jorge Linares firmando un guante de boxeo" width="900" height="900" loading="lazy" decoding="async">
                     <span class="testimonial-tag">BOXEO</span>
                 </div>
                 <div class="testimonial-body">
@@ -699,9 +701,10 @@
                 </div>
             </blockquote>
 
-            <blockquote class="testimonial-card" data-scroll>
+            <blockquote class="testimonial-card testimonial-card--alt" data-scroll>
                 <div class="testimonial-photo">
                     <img src="assets/testimonio-celestino.jpg" alt="Celestino López celebrando con los brazos en alto en el estadio" width="900" height="900" loading="lazy" decoding="async">
+                    <img class="testimonial-photo-alt" src="assets/testimonio-celestino-gym.jpg" alt="Celestino López junto a Daniel Núñez en el ring de 3er Round Fit" width="900" height="900" loading="lazy" decoding="async">
                     <span class="testimonial-tag">BÉISBOL</span>
                 </div>
                 <div class="testimonial-body">
@@ -713,9 +716,10 @@
                 </div>
             </blockquote>
 
-            <blockquote class="testimonial-card" data-scroll>
+            <blockquote class="testimonial-card testimonial-card--alt" data-scroll>
                 <div class="testimonial-photo">
                     <img src="assets/testimonio-gregory.jpg" alt="Gregory Vargas con la camiseta de la selección de Venezuela" width="900" height="900" loading="lazy" decoding="async">
+                    <img class="testimonial-photo-alt" src="assets/testimonio-gregory-gym.jpg" alt="Gregory Vargas haciendo guantes con Daniel Núñez en el ring de 3er Round Fit" width="900" height="900" loading="lazy" decoding="async">
                     <span class="testimonial-tag">BALONCESTO</span>
                 </div>
                 <div class="testimonial-body">
@@ -786,6 +790,6 @@
     </footer>
 
     <!-- Scripts -->
-    <script src="main.js?v=20260923a"></script>
+    <script src="main.js?v=20260923b"></script>
 </body>
 </html>
