@@ -895,6 +895,24 @@ img, video {
     transform: scale(1.04);
 }
 
+/* Segunda foto (accion): aparece encima con fundido al pasar el raton,
+   al enfocar con teclado o al tocar la tarjeta en movil (.is-alt, main.js) */
+.coach-photo .coach-photo-alt {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity 0.5s ease, filter 0.5s ease, transform 0.6s ease;
+}
+.coach-card--alt:hover .coach-photo-alt,
+.coach-card--alt:focus-within .coach-photo-alt,
+.coach-card--alt.is-alt .coach-photo-alt {
+    opacity: 1;
+}
+.coach-card--alt.is-alt .coach-photo img {
+    filter: grayscale(0) brightness(1) contrast(1.08);
+}
+.coach-card--alt { cursor: pointer; }
+
 /* Hueco visible cuando aún falta la foto de un entrenador */
 .coach-photo--vacia {
     display: flex;
@@ -1374,33 +1392,81 @@ img, video {
 }
 
 .testimonials-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 20px;
+    flex-wrap: wrap;
     margin-bottom: var(--gap-md);
+    border-bottom: 2px solid var(--accent-color);
+    padding-bottom: 20px;
+}
+.testimonials-header p {
+    font-weight: 600;
+    letter-spacing: 2px;
+    font-size: 0.9rem;
 }
 
 .testimonials-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 20px;
+    gap: 25px;
 }
 
 .testimonial-card {
     background: #0f0f0f;
-    border-left: 4px solid var(--accent-color);
-    padding: 35px 30px;
+    border: 1px solid var(--line-soft);
+    border-bottom: 4px solid var(--accent-color);
     display: flex;
     flex-direction: column;
-    gap: 22px;
+    transition: border-color 0.3s ease, transform 0.3s ease;
+}
+.testimonial-card:hover {
+    border-color: var(--accent-color);
+    transform: translateY(-6px);
 }
 
 .testimonial-photo {
-    width: 64px;
-    height: 64px;
-    border-radius: 50%;
+    position: relative;
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+    background: #111;
+}
+.testimonial-photo img {
+    width: 100%;
+    height: 100%;
     object-fit: cover;
+    display: block;
+    filter: grayscale(0.35) brightness(0.9) contrast(1.08);
+    transition: filter 0.5s ease, transform 0.6s ease;
+}
+.testimonial-card:hover .testimonial-photo img {
+    filter: grayscale(0) brightness(1) contrast(1.08);
+    transform: scale(1.04);
+}
+
+.testimonial-tag {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    background: var(--accent-color);
+    color: var(--accent-ink);
+    font-size: 0.68rem;
+    font-weight: 900;
+    letter-spacing: 0.14em;
+    padding: 6px 12px;
+}
+
+.testimonial-body {
+    padding: 28px 26px 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+    flex: 1;
 }
 
 .testimonial-quote {
-    font-size: 1.1rem;
+    font-size: 1.05rem;
     line-height: 1.6;
     color: #f0f0f0;
     flex: 1;
@@ -1414,15 +1480,19 @@ img, video {
 
 .testimonial-name {
     font-family: var(--font-display);
-    font-size: 1.4rem;
+    font-size: 1.9rem;
+    line-height: 1;
     letter-spacing: 1px;
+    text-transform: uppercase;
     color: #fff;
 }
 
 .testimonial-meta {
-    font-size: 0.85rem;
-    color: var(--text-muted);
-    letter-spacing: 1px;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent-color);
 }
 
 /* Footer */

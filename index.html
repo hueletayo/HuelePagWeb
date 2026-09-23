@@ -42,7 +42,7 @@
     <link rel="preload" as="image" href="assets/hero-poster.jpg" fetchpriority="high">
 
     <!-- CSS -->
-    <link rel="stylesheet" href="style.css?v=20260916a">
+    <link rel="stylesheet" href="style.css?v=20260923a">
 
     <!-- Feather Icons (versión fija) -->
     <script defer src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.29.2/feather.min.js"></script>
@@ -468,8 +468,10 @@
 
     <!-- ============================================================
          ENTRENADORES — nombres, categorias, avales y fotos completos.
-         Las cuatro fotos van a 800x1066 (3:4). Para cambiar una,
+         Las fotos van a 800x1066 (3:4). Para cambiar una,
          sustituye el archivo en assets/ manteniendo esa proporcion.
+         .coach-photo-alt es la foto que aparece al pasar el raton
+         (o al tocar la tarjeta en movil): entrenador-X-accion.jpg.
          ============================================================ -->
     <section id="entrenadores" class="coaches-section">
         <div class="coaches-header" data-scroll>
@@ -478,9 +480,10 @@
         </div>
 
         <div class="coaches-grid">
-            <article class="coach-card" data-scroll>
+            <article class="coach-card coach-card--alt" data-scroll>
                 <div class="coach-photo">
                     <img src="assets/entrenador-samuel.jpg" alt="Samuel Sifontes, boxeador profesional y entrenador de 3er Round Fit" width="800" height="1066" loading="lazy" decoding="async">
+                    <img class="coach-photo-alt" src="assets/entrenador-samuel-accion.jpg" alt="Samuel Sifontes en guardia durante un combate" width="800" height="1066" loading="lazy" decoding="async">
                 </div>
                 <div class="coach-body">
                     <h3 class="coach-name">Samuel Sifontes</h3>
@@ -492,9 +495,10 @@
                 </div>
             </article>
 
-            <article class="coach-card" data-scroll>
+            <article class="coach-card coach-card--alt" data-scroll>
                 <div class="coach-photo">
                     <img src="assets/entrenador-neyker.jpg" alt="Neyker Osuna, boxeador amateur y entrenador de 3er Round Fit" width="800" height="1066" loading="lazy" decoding="async">
+                    <img class="coach-photo-alt" src="assets/entrenador-neyker-accion.jpg" alt="Neyker Osuna saludando al subir al ring con la camiseta de 3er Round Fit" width="800" height="1066" loading="lazy" decoding="async">
                 </div>
                 <div class="coach-body">
                     <h3 class="coach-name">Neyker Osuna</h3>
@@ -520,9 +524,10 @@
                 </div>
             </article>
 
-            <article class="coach-card coach-card--cert" data-scroll>
+            <article class="coach-card coach-card--cert coach-card--alt" data-scroll>
                 <div class="coach-photo">
                     <img src="assets/entrenador-daniel.jpg" alt="Daniel Núñez, entrenador de boxeo certificado por la IBA y el WBC" width="800" height="1066" loading="lazy" decoding="async">
+                    <img class="coach-photo-alt" src="assets/entrenador-daniel-accion.jpg" alt="Daniel Núñez golpeando la pera de boxeo en el gimnasio" width="800" height="1066" loading="lazy" decoding="async">
                 </div>
                 <div class="coach-body">
                     <span class="coach-cert">IBA &middot; WBC</span>
@@ -667,45 +672,59 @@
 
     <!--
       ============================================================
-      TESTIMONIOS
-      ⚠️ PENDIENTE: son tarjetas vacías a propósito.
-         Reemplaza REEMPLAZAR_TESTIMONIO_N, REEMPLAZAR_NOMBRE_N y
-         REEMPLAZAR_TIEMPO_N por testimonios REALES de alumnos.
-         No publiques esta sección con el texto de relleno.
-         Si quieres foto del alumno, descomenta el <img> de cada tarjeta.
+      TESTIMONIOS — atletas de élite que entrenan en el club.
+      ⚠️ PENDIENTE: las citas (.testimonial-quote.pendiente) hay que
+         sustituirlas por sus palabras reales. No publicar con el relleno.
+         Fotos a 900x900 (1:1) en assets/testimonio-X.jpg.
       ============================================================
     -->
     <section id="testimonios" class="testimonials-section">
         <div class="testimonials-header" data-scroll>
             <h2 class="huge-text">LO DICEN <span class="accent">ELLOS</span></h2>
+            <p>ATLETAS DE ÉLITE <span class="accent">//</span> ENTRENAN CON NOSOTROS</p>
         </div>
 
         <div class="testimonials-grid">
             <blockquote class="testimonial-card" data-scroll>
-                <!-- <img class="testimonial-photo" src="assets/alumno-1.jpg" alt="" width="64" height="64"> -->
-                <p class="testimonial-quote pendiente">REEMPLAZAR_TESTIMONIO_1</p>
-                <footer class="testimonial-author">
-                    <span class="testimonial-name pendiente">REEMPLAZAR_NOMBRE_1</span>
-                    <span class="testimonial-meta pendiente">REEMPLAZAR_TIEMPO_1</span>
-                </footer>
+                <div class="testimonial-photo">
+                    <img src="assets/testimonio-linares.jpg" alt="Jorge Linares posando con sus cinturones de campeón mundial" width="900" height="900" loading="lazy" decoding="async">
+                    <span class="testimonial-tag">BOXEO</span>
+                </div>
+                <div class="testimonial-body">
+                    <p class="testimonial-quote pendiente">REEMPLAZAR_TESTIMONIO_LINARES</p>
+                    <footer class="testimonial-author">
+                        <span class="testimonial-name">Jorge Linares</span>
+                        <span class="testimonial-meta">Campeón mundial en tres divisiones</span>
+                    </footer>
+                </div>
             </blockquote>
 
             <blockquote class="testimonial-card" data-scroll>
-                <!-- <img class="testimonial-photo" src="assets/alumno-2.jpg" alt="" width="64" height="64"> -->
-                <p class="testimonial-quote pendiente">REEMPLAZAR_TESTIMONIO_2</p>
-                <footer class="testimonial-author">
-                    <span class="testimonial-name pendiente">REEMPLAZAR_NOMBRE_2</span>
-                    <span class="testimonial-meta pendiente">REEMPLAZAR_TIEMPO_2</span>
-                </footer>
+                <div class="testimonial-photo">
+                    <img src="assets/testimonio-celestino.jpg" alt="Celestino López celebrando con los brazos en alto en el estadio" width="900" height="900" loading="lazy" decoding="async">
+                    <span class="testimonial-tag">BÉISBOL</span>
+                </div>
+                <div class="testimonial-body">
+                    <p class="testimonial-quote pendiente">REEMPLAZAR_TESTIMONIO_CELESTINO</p>
+                    <footer class="testimonial-author">
+                        <span class="testimonial-name">Celestino López</span>
+                        <span class="testimonial-meta">Beisbolista profesional &middot; Liga japonesa</span>
+                    </footer>
+                </div>
             </blockquote>
 
             <blockquote class="testimonial-card" data-scroll>
-                <!-- <img class="testimonial-photo" src="assets/alumno-3.jpg" alt="" width="64" height="64"> -->
-                <p class="testimonial-quote pendiente">REEMPLAZAR_TESTIMONIO_3</p>
-                <footer class="testimonial-author">
-                    <span class="testimonial-name pendiente">REEMPLAZAR_NOMBRE_3</span>
-                    <span class="testimonial-meta pendiente">REEMPLAZAR_TIEMPO_3</span>
-                </footer>
+                <div class="testimonial-photo">
+                    <img src="assets/testimonio-gregory.jpg" alt="Gregory Vargas con la camiseta de la selección de Venezuela" width="900" height="900" loading="lazy" decoding="async">
+                    <span class="testimonial-tag">BALONCESTO</span>
+                </div>
+                <div class="testimonial-body">
+                    <p class="testimonial-quote pendiente">REEMPLAZAR_TESTIMONIO_GREGORY</p>
+                    <footer class="testimonial-author">
+                        <span class="testimonial-name">Gregory Vargas</span>
+                        <span class="testimonial-meta">Base de la Selección Venezolana de Baloncesto</span>
+                    </footer>
+                </div>
             </blockquote>
         </div>
     </section>
@@ -767,6 +786,6 @@
     </footer>
 
     <!-- Scripts -->
-    <script src="main.js?v=20260916a"></script>
+    <script src="main.js?v=20260923a"></script>
 </body>
 </html>
