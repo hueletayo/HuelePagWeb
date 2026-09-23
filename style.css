@@ -30,6 +30,11 @@
 }
 
 html {
+    /* Tambien en html y no solo en body: en movil (iOS/Android) el
+       overflow del body no basta y el marquee inclinado, que sobresale
+       ~9px por lado, ensanchaba el viewport y sacaba el hamburguesa
+       de pantalla. clip (no hidden) para no romper position:sticky. */
+    overflow-x: clip;
     scroll-behavior: smooth;
     /* Los anclas no quedan tapadas por la navbar fija */
     scroll-padding-top: var(--nav-h);
@@ -396,9 +401,12 @@ img, video {
 
 /* El trazo del hero baja de 2px a 1px (peticion del entrenador).
    Mas especifico que .outline-text, asi que tambien gana sobre el
-   1.5px del breakpoint movil. */
+   1.5px del breakpoint movil.
+   Nunca por debajo de 1px: Windows (pantalla 1x) redondea un trazo
+   de 0.1px a un pixel entero, pero Mac/iPhone (Retina 2x-3x) lo pintan
+   casi literal y el texto desaparece. */
 .hero-title .outline-text {
-    -webkit-text-stroke-width: 0.1px;
+    -webkit-text-stroke-width: 1px;
 }
 
 .hero-badge {
@@ -1237,6 +1245,7 @@ img, video {
     -webkit-text-stroke: 0 !important;
     position: relative;
     display: inline-block;
+    max-width: 100%;
     padding: 2px 8px;
 }
 .pendiente::after {
@@ -1483,6 +1492,7 @@ img, video {
 }
 
 .testimonial-quote {
+    overflow-wrap: anywhere; /* una palabra larga no ensancha la tarjeta */
     font-size: 1.05rem;
     line-height: 1.6;
     color: #f0f0f0;
