@@ -866,10 +866,19 @@ img, video {
     font-size: 0.9rem;
 }
 
+/* Son 3 entrenadores: con auto-fit, en tablet quedaban 2 + 1 huerfano.
+   3 columnas fijas desde tablet; en movil una sola, con tope de ancho
+   para que la foto 3:4 no ocupe varias pantallas. */
 .coaches-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 25px;
+}
+@media (max-width: 760px) {
+    .coaches-grid {
+        grid-template-columns: minmax(0, 420px);
+        justify-content: center;
+    }
 }
 
 .coach-card {
@@ -1416,9 +1425,13 @@ img, video {
     font-size: 0.9rem;
 }
 
+/* 3 columnas en escritorio. En tablet 3 columnas quedan demasiado
+   estrechas para las citas y auto-fit dejaba 2 + 1 huerfano: ahi cada
+   tarjeta pasa a horizontal (foto a la izquierda). En movil, una
+   columna con tope de ancho. */
 .testimonials-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 25px;
 }
 
@@ -1497,6 +1510,48 @@ img, video {
     line-height: 1.6;
     color: #f0f0f0;
     flex: 1;
+}
+
+@media (max-width: 999px) {
+    .testimonials-grid { grid-template-columns: minmax(0, 1fr); }
+    .testimonial-card { flex-direction: row; }
+    .testimonial-photo {
+        flex: 0 0 40%;
+        aspect-ratio: auto;
+        min-height: 300px;
+    }
+}
+@media (max-width: 599px) {
+    .testimonials-grid {
+        grid-template-columns: minmax(0, 480px);
+        justify-content: center;
+    }
+    .testimonial-card { flex-direction: column; }
+    .testimonial-photo {
+        flex: none;
+        aspect-ratio: 1 / 1;
+        min-height: 0;
+    }
+}
+
+/* Tarjeta sin cita (Linares): el logro ocupa el sitio de la cita */
+.testimonial-stat {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    font-family: var(--font-display);
+    font-size: clamp(1.6rem, 2.4vw, 2.1rem);
+    line-height: 1;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #f0f0f0;
+}
+.testimonial-stat strong {
+    font-size: 5.5em;
+    font-weight: 400;
+    line-height: 0.8;
+    color: var(--accent-color);
 }
 
 .testimonial-author {

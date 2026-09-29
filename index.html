@@ -42,7 +42,7 @@
     <link rel="preload" as="image" href="assets/hero-poster.jpg" fetchpriority="high">
 
     <!-- CSS -->
-    <link rel="stylesheet" href="style.css?v=20260923d">
+    <link rel="stylesheet" href="style.css?v=20260928b">
 
     <!-- Feather Icons (versión fija) -->
     <script defer src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.29.2/feather.min.js"></script>
@@ -239,17 +239,6 @@
             "name": "Selección del Estado Anzoátegui"
           },
           "image": "https://hueletayo.github.io/HuelePagWeb/assets/entrenador-neyker.jpg"
-        },
-        {
-          "@type": "Person",
-          "name": "Darwin Osorio",
-          "jobTitle": "Entrenador de boxeo",
-          "description": "Boxeador amateur, categoría Élite 65 kg. Selección del Estado Anzoátegui.",
-          "memberOf": {
-            "@type": "SportsTeam",
-            "name": "Selección del Estado Anzoátegui"
-          },
-          "image": "https://hueletayo.github.io/HuelePagWeb/assets/entrenador-darwin.jpg"
         },
         {
           "@type": "Person",
@@ -510,20 +499,6 @@
                 </div>
             </article>
 
-            <article class="coach-card" data-scroll>
-                <div class="coach-photo">
-                    <img src="assets/entrenador-darwin.jpg" alt="Darwin Osorio, boxeador amateur y entrenador de 3er Round Fit" width="800" height="1066" loading="lazy" decoding="async">
-                </div>
-                <div class="coach-body">
-                    <h3 class="coach-name">Darwin Osorio</h3>
-                    <p class="coach-role">Boxeador Amateur</p>
-                    <ul class="coach-facts">
-                        <li>Categoría Élite 65 kg</li>
-                        <li>Selección del Edo. Anzoátegui</li>
-                    </ul>
-                </div>
-            </article>
-
             <article class="coach-card coach-card--cert coach-card--alt" data-scroll>
                 <div class="coach-photo">
                     <img src="assets/entrenador-daniel.jpg" alt="Daniel Núñez, entrenador de boxeo certificado por la IBA y el WBC" width="800" height="1066" loading="lazy" decoding="async">
@@ -673,8 +648,8 @@
     <!--
       ============================================================
       TESTIMONIOS — atletas de élite que entrenan en el club.
-      ⚠️ PENDIENTE: las citas (.testimonial-quote.pendiente) hay que
-         sustituirlas por sus palabras reales. No publicar con el relleno.
+         Linares no tiene cita: su tarjeta es un <article>, no un
+         <blockquote>. Si algún día la da, añadir .testimonial-quote.
          Fotos a 900x900 (1:1) en assets/testimonio-X.jpg. La del hover
          (o al tocar en movil) es assets/testimonio-X-gym.jpg.
       ============================================================
@@ -686,20 +661,20 @@
         </div>
 
         <div class="testimonials-grid">
-            <blockquote class="testimonial-card testimonial-card--alt" data-scroll>
+            <article class="testimonial-card testimonial-card--alt" data-scroll>
                 <div class="testimonial-photo">
                     <img src="assets/testimonio-linares.jpg" alt="Jorge Linares posando con sus cinturones de campeón mundial" width="900" height="900" loading="lazy" decoding="async">
                     <img class="testimonial-photo-alt" src="assets/testimonio-linares-gym.jpg" alt="Jorge Linares firmando un guante de boxeo" width="900" height="900" loading="lazy" decoding="async">
                     <span class="testimonial-tag">BOXEO</span>
                 </div>
                 <div class="testimonial-body">
-                    <p class="testimonial-quote pendiente">REEMPLAZAR_TESTIMONIO_LINARES</p>
+                    <p class="testimonial-stat"><strong>4</strong> veces campeón del mundo</p>
                     <footer class="testimonial-author">
                         <span class="testimonial-name">Jorge Linares</span>
-                        <span class="testimonial-meta">Campeón mundial en tres divisiones</span>
+                        <span class="testimonial-meta">Boxeador venezolano</span>
                     </footer>
                 </div>
-            </blockquote>
+            </article>
 
             <blockquote class="testimonial-card testimonial-card--alt" data-scroll>
                 <div class="testimonial-photo">
@@ -708,10 +683,10 @@
                     <span class="testimonial-tag">BÉISBOL</span>
                 </div>
                 <div class="testimonial-body">
-                    <p class="testimonial-quote pendiente">REEMPLAZAR_TESTIMONIO_CELESTINO</p>
+                    <p class="testimonial-quote">“Muy bonita experiencia entrenar en 3er. Round Fit, el boxeo mejora mi resistencia, beneficia mi salud tanto física como mental. Aquí me siento parte de la familia de 3RF.”</p>
                     <footer class="testimonial-author">
                         <span class="testimonial-name">Celestino López</span>
-                        <span class="testimonial-meta">Beisbolista profesional &middot; Liga japonesa</span>
+                        <span class="testimonial-meta">Beisbolista profesional venezolano &middot; MLB y NPB</span>
                     </footer>
                 </div>
             </blockquote>
@@ -723,10 +698,10 @@
                     <span class="testimonial-tag">BALONCESTO</span>
                 </div>
                 <div class="testimonial-body">
-                    <p class="testimonial-quote pendiente">REEMPLAZAR_TESTIMONIO_GREGORY</p>
+                    <p class="testimonial-quote">“El boxeo me ha dado muchos aspectos positivos en mi carrera, como resistencia, autocontrol y disciplina; es uno de los deportes más completos que he podido practicar. Los invito a que visiten 3er. Round Fit y entrenen con verdaderos profesionales.”</p>
                     <footer class="testimonial-author">
                         <span class="testimonial-name">Gregory Vargas</span>
-                        <span class="testimonial-meta">Base de la Selección Venezolana de Baloncesto</span>
+                        <span class="testimonial-meta">Jugador profesional de baloncesto</span>
                     </footer>
                 </div>
             </blockquote>
@@ -790,6 +765,6 @@
     </footer>
 
     <!-- Scripts -->
-    <script src="main.js?v=20260923b"></script>
+    <script src="main.js?v=20260923c"></script>
 </body>
 </html>

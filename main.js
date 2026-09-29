@@ -17,17 +17,20 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // --- Video del hero -------------------------------------------------
-    // Sólo se descarga en pantallas grandes, con conexión buena y si el
-    // usuario no pidió reducir movimiento. En el resto queda el póster.
+    // Se descarga si la conexión es buena y el usuario no pidió reducir
+    // movimiento; si no, queda el póster. En pantallas verticales (móvil,
+    // tablet) va hero-movil.mp4: sólo la franja central, que es lo único
+    // que se ve con object-fit: cover, a 432x720 y <1 MB (el original,
+    // 1600x900, pesa ~3 MB).
     const heroVideo = document.getElementById('hero-video');
     if (heroVideo) {
         const conn = navigator.connection || {};
         const isSlow = conn.saveData === true || /(^|-)2g$/.test(conn.effectiveType || '');
-        const isBigScreen = window.matchMedia('(min-width: 769px)').matches;
+        const isPortrait = window.matchMedia('(orientation: portrait)').matches;
 
-        if (isBigScreen && !prefersReducedMotion && !isSlow) {
+        if (!prefersReducedMotion && !isSlow) {
             const source = document.createElement('source');
-            source.src = 'assets/hero.mp4';
+            source.src = isPortrait ? 'assets/hero-movil.mp4' : 'assets/hero.mp4';
             source.type = 'video/mp4';
             heroVideo.appendChild(source);
             heroVideo.load();
