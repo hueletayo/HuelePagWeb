@@ -684,7 +684,12 @@ img, video {
     top: 0;
     height: 100vh;
     height: 100svh;
+    /* La resta tiene que usar la MISMA unidad que la altura. En iOS Safari
+       100vh (sin barras) es ~90px mas alto que 100svh (con barras): con
+       height:100svh y margin:-100vh cada capa subia el contenido esos px,
+       y entre fondo y velo la lista acababa encima de "NUESTROS ROUNDS". */
     margin-bottom: -100vh;
+    margin-bottom: -100svh;
     pointer-events: none;
 }
 
