@@ -91,6 +91,8 @@ img, video {
 }
 
 /* Typography Utilities */
+/* Etiquetas pequenas en mayusculas (nav, badges, flags): 0.75rem = 12px
+   es el minimo; por debajo se leian mal en movil. */
 .outline-text {
     color: transparent;
     -webkit-text-stroke: 2px var(--text-color);
@@ -140,7 +142,7 @@ img, video {
 }
 
 .navbar.scrolled {
-    background: rgba(10, 10, 10, 0.98);
+    background: #0a0a0a;
     padding: 10px 4%;
     box-shadow: 0 5px 20px rgba(0,0,0,0.5);
 }
@@ -180,7 +182,7 @@ img, video {
 .nav-links a {
     display: block;
     font-family: var(--font-body);
-    font-size: 0.74rem;
+    font-size: 0.75rem;
     font-weight: 700;
     letter-spacing: 0.14em;
     text-transform: uppercase;
@@ -208,22 +210,9 @@ img, video {
     flex: none;
 }
 
-.nav-atletas {
-    font-family: var(--font-body);
-    font-size: 0.74rem;
-    font-weight: 700;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--text-muted);
-    text-decoration: none;
-    transition: color 0.25s ease;
-    white-space: nowrap;
-}
-.nav-atletas:hover { color: #fff; }
-
 .nav-cta {
     font-family: var(--font-body);
-    font-size: 0.74rem;
+    font-size: 0.75rem;
     font-weight: 900;
     letter-spacing: 0.14em;
     text-transform: uppercase;
@@ -330,14 +319,6 @@ img, video {
 .menu-link:hover::before,
 .menu-link:focus-visible::before {
     width: 100%;
-}
-
-/* "ATLETAS" es el acceso al portal: se separa del resto */
-.menu-link-alt {
-    margin-top: 20px;
-    padding-top: 20px;
-    border-top: 3px solid rgba(0, 0, 0, 0.35);
-    font-size: clamp(1.8rem, 4vw, 3.5rem);
 }
 
 /* Hero Section */
@@ -535,7 +516,7 @@ img, video {
 }
 
 .avales-kicker {
-    font-size: 0.72rem;
+    font-size: 0.75rem;
     font-weight: 900;
     letter-spacing: 0.22em;
     text-transform: uppercase;
@@ -780,7 +761,7 @@ img, video {
 .item-flag {
     display: block;
     margin-top: 10px;
-    font-size: 0.72rem;
+    font-size: 0.75rem;
     font-weight: 800;
     letter-spacing: 0.14em;
     text-transform: uppercase;
@@ -1011,7 +992,7 @@ img, video {
     align-self: flex-start;
     background: var(--accent-color);
     color: var(--accent-ink);
-    font-size: 0.62rem;
+    font-size: 0.75rem;
     font-weight: 900;
     letter-spacing: 0.14em;
     padding: 4px 9px;
@@ -1109,7 +1090,7 @@ img, video {
 
 .sch-card-tag {
     display: block;
-    font-size: 0.68rem;
+    font-size: 0.75rem;
     font-weight: 900;
     letter-spacing: 0.22em;
     color: var(--accent-color);
@@ -1220,7 +1201,9 @@ img, video {
 
 .masonry-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    /* min(): a 320px solo hay ~275px utiles y la columna de 300px
+       se salia de la pantalla. */
+    grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
     grid-auto-rows: 300px;
     gap: 20px;
 }
@@ -1334,7 +1317,7 @@ img, video {
     background: var(--accent-color);
     color: var(--accent-ink);
     font-family: var(--font-body);
-    font-size: 0.62rem;
+    font-size: 0.75rem;
     font-weight: 900;
     letter-spacing: 0.14em;
     padding: 5px 10px;
@@ -1356,7 +1339,7 @@ img, video {
 .plan-price span { font-size: 0.45em; vertical-align: super; margin-left: 2px; }
 
 .plan-period {
-    font-size: 0.68rem;
+    font-size: 0.75rem;
     font-weight: 800;
     letter-spacing: 0.2em;
     color: var(--text-muted);
@@ -1495,7 +1478,7 @@ img, video {
     bottom: 0;
     background: var(--accent-color);
     color: var(--accent-ink);
-    font-size: 0.68rem;
+    font-size: 0.75rem;
     font-weight: 900;
     letter-spacing: 0.14em;
     padding: 6px 12px;
@@ -1652,7 +1635,7 @@ img, video {
     gap: var(--gap-md);
 }
 
-.info-block h4 {
+.info-block h3 {
     font-size: 1rem;
     color: var(--accent-color);
     margin-bottom: 15px;

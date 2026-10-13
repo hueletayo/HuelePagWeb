@@ -30,3 +30,17 @@ Thumbs.db
 backend/.agents/
 backend/.claude/
 backend/.windsurf/
+
+# Portal del atleta: retirado del sitio (2026-10). Los archivos pueden
+# seguir en la carpeta local, pero no deben volver al repo ni a la web.
+/login.html
+/registro.html
+/dashboard.html
+/pagos.html
+/admin.html
+/completar_perfil.html
+/inscripcion.html
+/auth.js
+/design-system.css
+/backend/
+/bot/

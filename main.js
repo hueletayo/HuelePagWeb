@@ -20,8 +20,12 @@ document.addEventListener('DOMContentLoaded', () => {
     // Se descarga si la conexión es buena y el usuario no pidió reducir
     // movimiento; si no, queda el póster. En pantallas verticales (móvil,
     // tablet) va hero-movil.mp4: sólo la franja central, que es lo único
-    // que se ve con object-fit: cover, a 432x720 y <1 MB (el original,
-    // 1600x900, pesa ~3 MB).
+    // que se ve con object-fit: cover, a 432x720 (~1,3 MB); en horizontal,
+    // hero.mp4 a 1600x900 (~6 MB). Ambos duran 17,6 s: el original trae
+    // al final ~4 s del logo sobre blanco que se cortaron porque dejaban
+    // ilegible el titulo blanco. El poster es su primer fotograma.
+    // Si se cambia el video, subir VIDEO_V para saltarse la cache.
+    const VIDEO_V = '20261013';
     const heroVideo = document.getElementById('hero-video');
     if (heroVideo) {
         const conn = navigator.connection || {};
@@ -30,7 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (!prefersReducedMotion && !isSlow) {
             const source = document.createElement('source');
-            source.src = isPortrait ? 'assets/hero-movil.mp4' : 'assets/hero.mp4';
+            source.src = (isPortrait ? 'assets/hero-movil.mp4' : 'assets/hero.mp4') + '?v=' + VIDEO_V;
             source.type = 'video/mp4';
             heroVideo.appendChild(source);
             heroVideo.load();
