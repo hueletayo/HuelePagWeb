@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>3er Round Fit | Club de Boxeo en Lechería, Anzoátegui</title>
-    <meta name="description" content="Club de boxeo en Lechería, Anzoátegui. Boxeo competitivo, recreativo e infantil. Únicos certificados por la IBA y el WBC. Clases de lunes a sábado.">
+    <title>3er Round Fit | Clases de Boxeo en Lechería, Anzoátegui</title>
+    <meta name="description" content="Clases de boxeo en Lechería, a minutos de Puerto La Cruz y Barcelona. Boxeo recreativo para principiantes, competitivo e infantil. Primera clase gratis. Certificados por la IBA y el WBC.">
     <meta name="theme-color" content="#000000">
     <link rel="canonical" href="https://hueletayo.github.io/HuelePagWeb/">
 
@@ -14,7 +14,9 @@
       Las URL absolutas apuntan a GitHub Pages, que es donde vive el sitio.
       Si algun dia se compra 3erroundfit.com: buscar y reemplazar
       https://hueletayo.github.io/HuelePagWeb/  ->  https://www.3erroundfit.com/
-      en este archivo, y anadir un fichero CNAME en la raiz del repo.
+      en este archivo y en sitemap.xml, y anadir un fichero CNAME en la raiz
+      del repo. Con dominio propio ya se puede anadir tambien un robots.txt
+      (en github.io/HuelePagWeb/ Google no lo lee: tiene que ir en la raiz).
     -->
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="3er Round Fit">
@@ -42,7 +44,7 @@
     <link rel="preload" as="image" href="assets/hero-poster.jpg" fetchpriority="high">
 
     <!-- CSS -->
-    <link rel="stylesheet" href="style.css?v=20261026a">
+    <link rel="stylesheet" href="style.css?v=20261026b">
 
     <!-- Feather Icons (versión fija) -->
     <script defer src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.29.2/feather.min.js"></script>
@@ -70,7 +72,9 @@
       "telephone": "+58-424-857-6200",
       "sport": "Boxing",
       "priceRange": "40€ - 100€",
-      "currenciesAccepted": "EUR, VES",
+      "currenciesAccepted": "EUR, USD, VES",
+      "paymentAccepted": "Pago móvil, efectivo en divisas, Zelle, Binance (USDT)",
+      "areaServed": ["Lechería", "Puerto La Cruz", "Barcelona", "El Morro", "Anzoátegui"],
       "address": {
         "@type": "PostalAddress",
         "streetAddress": "Centro Empresarial Colón PB, Sector Vistamar (al lado del C. C. Atlántico)",
@@ -274,6 +278,56 @@
       "hasMap": "https://maps.google.com/?cid=10415486123398897127"
     }
     </script>
+
+    <!-- Preguntas frecuentes: mismo texto que la sección #preguntas -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Necesito experiencia para empezar a boxear?",
+          "acceptedAnswer": { "@type": "Answer", "text": "No. En boxeo recreativo empiezas desde cero, sin importar tu edad ni tu forma física: el entrenador adapta cada clase a tu nivel." }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Hay clase de prueba?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Sí, la primera clase es gratis. Escríbenos por WhatsApp al +58 424-857 62 00 y te la agendamos en el horario que mejor te quede." }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Qué tengo que llevar a la primera clase?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Ropa y zapatos deportivos, agua y una toalla. Los guantes y el resto del equipo te los prestamos en el club." }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cuánto cuestan las clases de boxeo?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Desde 40 € al mes. Infantil 40 €, Amateur 50 €, PRO 60 € (acceso ilimitado) y Personalizado 100 €. Todos los planes son mensuales y sin permanencia." }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cómo puedo pagar?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Aceptamos pago móvil en bolívares, efectivo en divisas, Zelle y Binance (USDT)." }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Hay clases de boxeo para niños?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Sí. El boxeo infantil es para niños de 6 a 11 años, de lunes a viernes a las 3:00 PM. Trabaja el desarrollo motor, la disciplina y las técnicas básicas a través del juego." }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Puedo prepararme para competir?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Sí. En boxeo competitivo entrenas con sparring dirigido junto a boxeadores de la selección del Estado Anzoátegui. El club representa al Municipio Urbaneja en competiciones." }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Dónde está el gimnasio?",
+          "acceptedAnswer": { "@type": "Answer", "text": "En el Centro Empresarial Colón PB, Sector Vistamar, al lado del C. C. Atlántico, en Lechería. A pocos minutos de Puerto La Cruz, Barcelona y El Morro." }
+        }
+      ]
+    }
+    </script>
 </head>
 <body>
 
@@ -332,8 +386,8 @@
             </h1>
             <p class="hero-badge">CERTIFICADOS <strong>IBA</strong> &amp; <strong>WBC</strong> <span class="accent">//</span> LECHERÍA, ANZOÁTEGUI</p>
             <div class="hero-actions">
-                <a href="https://wa.me/584248576200?text=Hola!%20Quiero%20agendar%20mi%20primera%20clase%20en%203er%20Round%20Fit." target="_blank" rel="noopener" class="btn-brutal">
-                    <i data-feather="message-circle" aria-hidden="true"></i> AGENDA TU PRIMERA CLASE
+                <a href="https://wa.me/584248576200?text=Hola!%20Quiero%20agendar%20mi%20clase%20de%20prueba%20gratis%20en%203er%20Round%20Fit." target="_blank" rel="noopener" class="btn-brutal">
+                    <i data-feather="message-circle" aria-hidden="true"></i> CLASE DE PRUEBA GRATIS
                 </a>
                 <a href="#precios" class="hero-link">VER PRECIOS</a>
             </div>
@@ -358,7 +412,9 @@
             <div class="philosophy-text" data-scroll>
                 <h2 class="huge-text">SUDOR<br>&amp; GLORIA</h2>
                 <p class="body-text">
-                    Sistema de entrenamiento basado en técnicas de boxeo, combinadas con ejercicios de:
+                    Club de boxeo en Lechería, a minutos de Puerto La Cruz y Barcelona.
+                    Clases de boxeo para adultos y niños, desde principiantes hasta competidores,
+                    con un sistema de entrenamiento basado en técnicas de boxeo combinadas con ejercicios de:
                 </p>
 
                 <ul class="disciplinas">
@@ -438,9 +494,9 @@
                     <div class="item-body">
                         <div class="item-title">BOXEO RECREATIVO</div>
                         <div class="item-desc">
-                            Clases grupales enfocadas en mejorar la condición física, la coordinación
-                            y las técnicas de la disciplina del boxeo.
-                            <span class="item-flag">Dirigido a personas de cualquier edad</span>
+                            Clases grupales de boxeo para principiantes: mejora tu condición física,
+                            la coordinación y la técnica sin necesidad de experiencia previa.
+                            <span class="item-flag">Para cualquier edad · Primera clase gratis</span>
                         </div>
                     </div>
                 </li>
@@ -449,8 +505,8 @@
                     <div class="item-body">
                         <div class="item-title">BOXEO INFANTIL</div>
                         <div class="item-desc">
-                            Se enfoca en el desarrollo motor, la disciplina y el juego;
-                            técnicas básicas de boxeo y ejercicios funcionales.
+                            Clases de boxeo para niños enfocadas en el desarrollo motor, la disciplina
+                            y el juego; técnicas básicas de boxeo y ejercicios funcionales.
                             <span class="item-flag">Niños de 6 a 11 años</span>
                         </div>
                     </div>
@@ -592,7 +648,7 @@
     <section id="precios" class="pricing-section">
         <div class="pricing-header" data-scroll>
             <h2 class="huge-text outline-text">PRECIOS</h2>
-            <p>ELIGE TU PLAN <span class="accent">//</span> SIN PERMANENCIA</p>
+            <p>ELIGE TU PLAN <span class="accent">//</span> SIN PERMANENCIA <span class="accent">//</span> PRIMERA CLASE GRATIS</p>
         </div>
 
         <div class="pricing-grid">
@@ -645,6 +701,52 @@
                 </ul>
                 <a href="https://wa.me/584248576200?text=Hola!%20Quiero%20informaci%C3%B3n%20sobre%20el%20plan%20personalizado." target="_blank" rel="noopener" class="plan-cta">CONSULTAR</a>
             </article>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         PREGUNTAS FRECUENTES — si cambia una respuesta, hay que tocarla
+            en 2 sitios: aquí y el JSON-LD FAQPage del <head>.
+         ============================================================ -->
+    <section id="preguntas" class="faq-section">
+        <div class="faq-header" data-scroll>
+            <h2 class="huge-text">PREGUNTAS <span class="accent">FRECUENTES</span></h2>
+            <p>CLASES DE BOXEO EN LECHERÍA <span class="accent">//</span> TODO LO QUE NECESITAS SABER</p>
+        </div>
+
+        <div class="faq-list">
+            <details class="faq-item">
+                <summary>¿Necesito experiencia para empezar a boxear?</summary>
+                <p>No. En boxeo recreativo empiezas desde cero, sin importar tu edad ni tu forma física: el entrenador adapta cada clase a tu nivel.</p>
+            </details>
+            <details class="faq-item">
+                <summary>¿Hay clase de prueba?</summary>
+                <p>Sí, la primera clase es gratis. Escríbenos por WhatsApp al +58 424-857 62 00 y te la agendamos en el horario que mejor te quede.</p>
+            </details>
+            <details class="faq-item">
+                <summary>¿Qué tengo que llevar a la primera clase?</summary>
+                <p>Ropa y zapatos deportivos, agua y una toalla. Los guantes y el resto del equipo te los prestamos en el club.</p>
+            </details>
+            <details class="faq-item">
+                <summary>¿Cuánto cuestan las clases de boxeo?</summary>
+                <p>Desde 40 € al mes. Infantil 40 €, Amateur 50 €, PRO 60 € (acceso ilimitado) y Personalizado 100 €. Todos los planes son mensuales y sin permanencia.</p>
+            </details>
+            <details class="faq-item">
+                <summary>¿Cómo puedo pagar?</summary>
+                <p>Aceptamos pago móvil en bolívares, efectivo en divisas, Zelle y Binance (USDT).</p>
+            </details>
+            <details class="faq-item">
+                <summary>¿Hay clases de boxeo para niños?</summary>
+                <p>Sí. El boxeo infantil es para niños de 6 a 11 años, de lunes a viernes a las 3:00 PM. Trabaja el desarrollo motor, la disciplina y las técnicas básicas a través del juego.</p>
+            </details>
+            <details class="faq-item">
+                <summary>¿Puedo prepararme para competir?</summary>
+                <p>Sí. En boxeo competitivo entrenas con sparring dirigido junto a boxeadores de la selección del Estado Anzoátegui. El club representa al Municipio Urbaneja en competiciones.</p>
+            </details>
+            <details class="faq-item">
+                <summary>¿Dónde está el gimnasio?</summary>
+                <p>En el Centro Empresarial Colón PB, Sector Vistamar, al lado del C. C. Atlántico, en Lechería. A pocos minutos de Puerto La Cruz, Barcelona y El Morro.</p>
+            </details>
         </div>
     </section>
 

@@ -1282,6 +1282,70 @@ img, video {
 /* ============================================================
    Precios
    ============================================================ */
+/* Preguntas frecuentes: <details> nativo, accesible sin JS */
+.faq-section {
+    padding: var(--gap-xl) 5%;
+    background-color: var(--bg-alt);
+    border-top: 1px solid var(--line-soft);
+}
+
+.faq-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-bottom: var(--gap-md);
+    border-bottom: 2px solid var(--accent-color);
+    padding-bottom: 20px;
+}
+.faq-header p {
+    font-weight: 600;
+    letter-spacing: 2px;
+    font-size: 0.95rem;
+}
+
+.faq-list {
+    max-width: 900px;
+}
+
+.faq-item {
+    border-bottom: 1px solid var(--line-strong);
+}
+
+.faq-item summary {
+    list-style: none;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    padding: 22px 0;
+    font-weight: 600;
+    font-size: 1.15rem;
+    line-height: 1.4;
+}
+.faq-item summary::-webkit-details-marker { display: none; }
+
+.faq-item summary::after {
+    content: '+';
+    flex: none;
+    font-family: var(--font-display);
+    font-size: 2rem;
+    line-height: 1;
+    color: var(--accent-color);
+    transition: transform 0.2s ease;
+}
+.faq-item[open] summary::after { transform: rotate(45deg); }
+.faq-item summary:hover { color: var(--accent-color); }
+
+.faq-item p {
+    color: var(--text-muted);
+    line-height: 1.7;
+    padding: 0 40px 24px 0;
+    max-width: 70ch;
+}
+
 .pricing-section {
     padding: var(--gap-xl) 5%;
     background-color: var(--bg-color);

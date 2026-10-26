@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Sitemap para Google Search Console.
+  Se envía en Search Console > Sitemaps como "sitemap.xml".
+  Al cambiar el contenido de la web, actualiza <lastmod>.
+  Si algún día se compra 3erroundfit.com, cambia aquí también la URL.
+-->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <url>
+        <loc>https://hueletayo.github.io/HuelePagWeb/</loc>
+        <lastmod>2026-10-26</lastmod>
+    </url>
+</urlset>
