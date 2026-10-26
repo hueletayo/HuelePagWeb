@@ -44,7 +44,7 @@
     <link rel="preload" as="image" href="assets/hero-poster.jpg" fetchpriority="high">
 
     <!-- CSS -->
-    <link rel="stylesheet" href="style.css?v=20261026b">
+    <link rel="stylesheet" href="style.css?v=20261026c">
 
     <!-- Feather Icons (versión fija) -->
     <script defer src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.29.2/feather.min.js"></script>
@@ -287,23 +287,23 @@
       "mainEntity": [
         {
           "@type": "Question",
-          "name": "¿Necesito experiencia para empezar a boxear?",
-          "acceptedAnswer": { "@type": "Answer", "text": "No. En boxeo recreativo empiezas desde cero, sin importar tu edad ni tu forma física: el entrenador adapta cada clase a tu nivel." }
-        },
-        {
-          "@type": "Question",
           "name": "¿Hay clase de prueba?",
           "acceptedAnswer": { "@type": "Answer", "text": "Sí, la primera clase es gratis. Escríbenos por WhatsApp al +58 424-857 62 00 y te la agendamos en el horario que mejor te quede." }
         },
         {
           "@type": "Question",
-          "name": "¿Qué tengo que llevar a la primera clase?",
-          "acceptedAnswer": { "@type": "Answer", "text": "Ropa y zapatos deportivos, agua y una toalla. Los guantes y el resto del equipo te los prestamos en el club." }
+          "name": "¿Cuánto cuestan las clases de boxeo?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Desde 40 € al mes y sin permanencia. Los cuatro planes están en la sección de precios." }
         },
         {
           "@type": "Question",
-          "name": "¿Cuánto cuestan las clases de boxeo?",
-          "acceptedAnswer": { "@type": "Answer", "text": "Desde 40 € al mes. Infantil 40 €, Amateur 50 €, PRO 60 € (acceso ilimitado) y Personalizado 100 €. Todos los planes son mensuales y sin permanencia." }
+          "name": "¿Necesito experiencia para empezar a boxear?",
+          "acceptedAnswer": { "@type": "Answer", "text": "No. En boxeo recreativo empiezas desde cero, sin importar tu edad ni tu forma física: el entrenador adapta cada clase a tu nivel." }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Qué tengo que llevar a la primera clase?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Ropa y zapatos deportivos, agua y una toalla. Los guantes y el resto del equipo te los prestamos en el club." }
         },
         {
           "@type": "Question",
@@ -368,6 +368,7 @@
             <a href="#horarios" class="menu-link" data-text="HORARIOS">HORARIOS</a>
             <a href="#precios" class="menu-link" data-text="PRECIOS">PRECIOS</a>
             <a href="#galeria" class="menu-link" data-text="ACCIÓN">ACCIÓN</a>
+            <a href="#preguntas" class="menu-link" data-text="PREGUNTAS">PREGUNTAS</a>
             <a href="https://wa.me/584248576200?text=Hola!%20Quiero%20inscribirme%20en%203er%20Round%20Fit." target="_blank" rel="noopener" class="menu-link" data-text="ÚNETE">ÚNETE</a>
         </nav>
     </div>
@@ -702,52 +703,7 @@
                 <a href="https://wa.me/584248576200?text=Hola!%20Quiero%20informaci%C3%B3n%20sobre%20el%20plan%20personalizado." target="_blank" rel="noopener" class="plan-cta">CONSULTAR</a>
             </article>
         </div>
-    </section>
-
-    <!-- ============================================================
-         PREGUNTAS FRECUENTES — si cambia una respuesta, hay que tocarla
-            en 2 sitios: aquí y el JSON-LD FAQPage del <head>.
-         ============================================================ -->
-    <section id="preguntas" class="faq-section">
-        <div class="faq-header" data-scroll>
-            <h2 class="huge-text">PREGUNTAS <span class="accent">FRECUENTES</span></h2>
-            <p>CLASES DE BOXEO EN LECHERÍA <span class="accent">//</span> TODO LO QUE NECESITAS SABER</p>
-        </div>
-
-        <div class="faq-list">
-            <details class="faq-item">
-                <summary>¿Necesito experiencia para empezar a boxear?</summary>
-                <p>No. En boxeo recreativo empiezas desde cero, sin importar tu edad ni tu forma física: el entrenador adapta cada clase a tu nivel.</p>
-            </details>
-            <details class="faq-item">
-                <summary>¿Hay clase de prueba?</summary>
-                <p>Sí, la primera clase es gratis. Escríbenos por WhatsApp al +58 424-857 62 00 y te la agendamos en el horario que mejor te quede.</p>
-            </details>
-            <details class="faq-item">
-                <summary>¿Qué tengo que llevar a la primera clase?</summary>
-                <p>Ropa y zapatos deportivos, agua y una toalla. Los guantes y el resto del equipo te los prestamos en el club.</p>
-            </details>
-            <details class="faq-item">
-                <summary>¿Cuánto cuestan las clases de boxeo?</summary>
-                <p>Desde 40 € al mes. Infantil 40 €, Amateur 50 €, PRO 60 € (acceso ilimitado) y Personalizado 100 €. Todos los planes son mensuales y sin permanencia.</p>
-            </details>
-            <details class="faq-item">
-                <summary>¿Cómo puedo pagar?</summary>
-                <p>Aceptamos pago móvil en bolívares, efectivo en divisas, Zelle y Binance (USDT).</p>
-            </details>
-            <details class="faq-item">
-                <summary>¿Hay clases de boxeo para niños?</summary>
-                <p>Sí. El boxeo infantil es para niños de 6 a 11 años, de lunes a viernes a las 3:00 PM. Trabaja el desarrollo motor, la disciplina y las técnicas básicas a través del juego.</p>
-            </details>
-            <details class="faq-item">
-                <summary>¿Puedo prepararme para competir?</summary>
-                <p>Sí. En boxeo competitivo entrenas con sparring dirigido junto a boxeadores de la selección del Estado Anzoátegui. El club representa al Municipio Urbaneja en competiciones.</p>
-            </details>
-            <details class="faq-item">
-                <summary>¿Dónde está el gimnasio?</summary>
-                <p>En el Centro Empresarial Colón PB, Sector Vistamar, al lado del C. C. Atlántico, en Lechería. A pocos minutos de Puerto La Cruz, Barcelona y El Morro.</p>
-            </details>
-        </div>
+        <p class="pricing-more">¿Dudas antes de inscribirte? <a href="#preguntas">Mira las preguntas frecuentes</a></p>
     </section>
 
     <!--
@@ -833,6 +789,63 @@
             <div class="masonry-item item-wide" data-scroll>
                 <img src="assets/galeria-accion.jpg" alt="Sesión de manoplas entre entrenador y atleta" width="1200" height="600" loading="lazy" decoding="async">
             </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         PREGUNTAS FRECUENTES — justo antes del pie: resuelven las dudas
+            que frenan la inscripción en el momento de decidir.
+            Si cambia una respuesta, hay que tocarla en 2 sitios: aquí y
+            el JSON-LD FAQPage del <head> (mismo texto, sin enlaces).
+            Orden: de lo que más pesa en la decisión a lo logístico.
+         ============================================================ -->
+    <section id="preguntas" class="faq-section">
+        <div class="faq-aside">
+            <div class="faq-head" data-scroll>
+                <h2 class="huge-text">PREGUNTAS <span class="accent">FRECUENTES</span></h2>
+                <p class="faq-lead">Lo que más nos preguntan antes de la primera clase de boxeo en Lechería.</p>
+            </div>
+            <div class="faq-cta">
+                <p>¿No encuentras tu pregunta?</p>
+                <a href="https://wa.me/584248576200?text=Hola!%20Tengo%20una%20pregunta%20sobre%20las%20clases." target="_blank" rel="noopener" class="btn-outline">
+                    <i data-feather="message-circle" aria-hidden="true"></i> PREGÚNTANOS POR WHATSAPP
+                </a>
+            </div>
+        </div>
+
+        <div class="faq-list">
+            <details class="faq-item" open>
+                <summary>¿Hay clase de prueba?</summary>
+                <p>Sí, la primera clase es gratis. <a href="https://wa.me/584248576200?text=Hola!%20Quiero%20agendar%20mi%20clase%20de%20prueba%20gratis%20en%203er%20Round%20Fit." target="_blank" rel="noopener">Escríbenos por WhatsApp al +58 424-857 62 00</a> y te la agendamos en el horario que mejor te quede.</p>
+            </details>
+            <details class="faq-item">
+                <summary>¿Cuánto cuestan las clases de boxeo?</summary>
+                <p>Desde 40 € al mes y sin permanencia. Los cuatro planes están en <a href="#precios">la sección de precios</a>.</p>
+            </details>
+            <details class="faq-item">
+                <summary>¿Necesito experiencia para empezar a boxear?</summary>
+                <p>No. En boxeo recreativo empiezas desde cero, sin importar tu edad ni tu forma física: el entrenador adapta cada clase a tu nivel.</p>
+            </details>
+            <details class="faq-item">
+                <summary>¿Qué tengo que llevar a la primera clase?</summary>
+                <p>Ropa y zapatos deportivos, agua y una toalla. Los guantes y el resto del equipo te los prestamos en el club.</p>
+            </details>
+            <details class="faq-item">
+                <summary>¿Cómo puedo pagar?</summary>
+                <p>Aceptamos pago móvil en bolívares, efectivo en divisas, Zelle y Binance (USDT).</p>
+            </details>
+            <details class="faq-item">
+                <summary>¿Hay clases de boxeo para niños?</summary>
+                <p>Sí. El boxeo infantil es para niños de 6 a 11 años, <a href="#horarios">de lunes a viernes a las 3:00 PM</a>. Trabaja el desarrollo motor, la disciplina y las técnicas básicas a través del juego.</p>
+            </details>
+            <details class="faq-item">
+                <summary>¿Puedo prepararme para competir?</summary>
+                <p>Sí. En boxeo competitivo entrenas con sparring dirigido junto a boxeadores de la selección del Estado Anzoátegui. El club representa al Municipio Urbaneja en competiciones.</p>
+            </details>
+            <details class="faq-item">
+                <summary>¿Dónde está el gimnasio?</summary>
+                <p>En el <a href="https://maps.google.com/?cid=10415486123398897127" target="_blank" rel="noopener">Centro Empresarial Colón PB, Sector Vistamar</a>, al lado del C. C. Atlántico, en Lechería. A pocos minutos de Puerto La Cruz, Barcelona y El Morro.</p>
+            </details>
         </div>
     </section>
 
