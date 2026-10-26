@@ -131,20 +131,30 @@ img, video {
     top: 0;
     left: 0;
     width: 100%;
-    padding: 18px 4%;
+    padding: 14px 4%;
     display: flex;
     justify-content: space-between;
     align-items: center;
     gap: 24px;
     z-index: 1000;
     background: linear-gradient(to bottom, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0) 100%);
-    transition: background-color 0.3s ease, padding 0.3s ease;
+    isolation: isolate;
 }
 
-.navbar.scrolled {
+/* Al hacer scroll solo cambia el fondo, con opacity: la barra no cambia
+   de tamaño (antes animaba padding y la altura del logo). */
+.navbar::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
     background: #0a0a0a;
-    padding: 10px 4%;
     box-shadow: 0 5px 20px rgba(0,0,0,0.5);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+.navbar.scrolled::before {
+    opacity: 1;
 }
 
 .brand-logo {
@@ -158,13 +168,9 @@ img, video {
 }
 
 .brand-img {
-    height: 52px;
+    height: 48px;
     width: auto;
     object-fit: contain;
-    transition: height 0.3s ease;
-}
-.navbar.scrolled .brand-img {
-    height: 42px;
 }
 
 /* ============================================================
@@ -183,7 +189,7 @@ img, video {
     display: block;
     font-family: var(--font-body);
     font-size: 0.75rem;
-    font-weight: 700;
+    font-weight: 900;
     letter-spacing: 0.14em;
     text-transform: uppercase;
     color: #fff;
@@ -749,7 +755,6 @@ img, video {
     border-bottom: 1px solid var(--line-strong);
     padding: 40px 0;
     cursor: pointer;
-    transition: padding 0.3s ease;
 }
 
 .item-media { display: none; }
@@ -766,7 +771,7 @@ img, video {
     font-size: clamp(1.8rem, 5vw, 5rem);
     line-height: 1.05;
     color: rgba(255, 255, 255, 0.85);
-    transition: color 0.3s ease;
+    transition: color 0.3s ease, transform 0.3s ease;
 }
 
 .item-desc {
@@ -784,17 +789,15 @@ img, video {
     display: block;
     margin-top: 10px;
     font-size: 0.75rem;
-    font-weight: 800;
+    font-weight: 900;
     letter-spacing: 0.14em;
     text-transform: uppercase;
     color: var(--accent-color);
     line-height: 1.5;
 }
 
-.training-item:hover {
-    padding: 50px 0;
-}
 .training-item:hover .item-title {
+    transform: translateX(12px);
     color: #fff;
     -webkit-text-stroke: 1px var(--accent-color);
 }
@@ -818,7 +821,6 @@ img, video {
         gap: 18px;
         padding: 25px 0;
     }
-    .training-item:hover { padding: 25px 0; }
 
     .item-media {
         display: block;
@@ -878,6 +880,20 @@ img, video {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 25px;
+}
+/* Tablet: 3 columnas de ~210px partían nombres y cargos en 2-3 líneas.
+   Mismo patrón que los testimonios: una columna, foto al lado. */
+@media (max-width: 999px) and (min-width: 761px) {
+    /* .coaches-grid delante: estas reglas van antes que las base de la
+       tarjeta en el archivo y sin él las pisaban */
+    .coaches-grid { grid-template-columns: minmax(0, 1fr); }
+    .coaches-grid .coach-card { flex-direction: row; }
+    .coaches-grid .coach-photo {
+        flex: 0 0 40%;
+        aspect-ratio: auto;
+        min-height: 320px;
+    }
+    .coaches-grid .coach-body { align-self: center; }
 }
 @media (max-width: 760px) {
     .coaches-grid {
@@ -974,7 +990,7 @@ img, video {
 
 .coach-role {
     font-size: 0.78rem;
-    font-weight: 700;
+    font-weight: 900;
     letter-spacing: 0.14em;
     text-transform: uppercase;
     color: var(--accent-color);
@@ -1149,7 +1165,7 @@ img, video {
 
 .sch-slots span {
     font-size: 0.76rem;
-    font-weight: 700;
+    font-weight: 900;
     letter-spacing: 0.14em;
     color: var(--text-muted);
     text-transform: uppercase;
@@ -1489,7 +1505,7 @@ img, video {
 
 .plan-period {
     font-size: 0.75rem;
-    font-weight: 800;
+    font-weight: 900;
     letter-spacing: 0.2em;
     color: var(--text-muted);
     margin-top: -6px;
@@ -1708,7 +1724,7 @@ img, video {
 
 .testimonial-meta {
     font-size: 0.78rem;
-    font-weight: 700;
+    font-weight: 900;
     letter-spacing: 0.14em;
     text-transform: uppercase;
     color: var(--accent-color);

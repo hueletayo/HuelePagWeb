@@ -213,6 +213,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // --- Reveal on scroll -------------------------------------------------
+    // Solo los títulos de sección llevan data-scroll. El contenido (tarjetas,
+    // precios, fotos) se ve desde el principio: si el script tarda o falla,
+    // nunca queda una sección en negro.
     const scrollElements = document.querySelectorAll('[data-scroll]');
 
     if (prefersReducedMotion || !('IntersectionObserver' in window)) {
