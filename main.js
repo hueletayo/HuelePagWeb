@@ -240,6 +240,26 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // --- Barra fija de WhatsApp (móvil) ------------------------------------
+    // Aparece al dejar atrás el hero (que ya tiene su botón) y se esconde al
+    // llegar al pie (que tiene WhatsApp y Llamar). Fuera de la vista no
+    // recibe foco ni la leen los lectores de pantalla.
+    const stickyCta = document.getElementById('sticky-cta');
+    const heroEl = document.querySelector('.hero');
+    const pieEl = document.getElementById('unete');
+    if (stickyCta && heroEl && pieEl && 'IntersectionObserver' in window) {
+        let heroVisible = true;
+        let pieVisible = false;
+        const pintarCta = () => {
+            const mostrar = !heroVisible && !pieVisible;
+            stickyCta.classList.toggle('is-visible', mostrar);
+            stickyCta.setAttribute('aria-hidden', String(!mostrar));
+            stickyCta.tabIndex = mostrar ? 0 : -1;
+        };
+        new IntersectionObserver(([e]) => { heroVisible = e.isIntersecting; pintarCta(); }).observe(heroEl);
+        new IntersectionObserver(([e]) => { pieVisible = e.isIntersecting; pintarCta(); }).observe(pieEl);
+    }
+
     // --- Navbar al hacer scroll -------------------------------------------
     const navbar = document.querySelector('.navbar');
     if (navbar) {

@@ -232,8 +232,8 @@ img, video {
 /* Hamburguesa: <button> real, accesible por teclado */
 .menu-btn {
     display: none;
-    width: 40px;
-    height: 30px;
+    width: 44px;
+    height: 44px;
     position: relative;
     cursor: pointer;
     background: none;
@@ -402,6 +402,28 @@ img, video {
     max-width: 34ch;
     line-height: 1.7;
 }
+
+.hero-actions {
+    margin-top: 35px;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px 30px;
+}
+.hero-actions .btn-brutal {
+    flex: 0 0 auto;
+    font-size: 1.6rem;
+}
+.hero-link {
+    font-weight: 900;
+    font-size: 0.85rem;
+    letter-spacing: 0.18em;
+    color: #fff;
+    text-decoration: none;
+    border-bottom: 2px solid var(--accent-color);
+    padding: 6px 0;
+}
+.hero-link:hover { color: var(--accent-color); }
 
 .scroll-down {
     position: absolute;
@@ -752,9 +774,9 @@ img, video {
     line-height: 1.6;
     max-width: 400px;
     text-align: right;
-    opacity: 0;
-    transform: translateX(20px);
-    transition: opacity 0.3s ease, transform 0.3s ease;
+    /* Siempre visible: antes solo salía con :hover y quien no pasaba el
+       ratón (o navegaba con teclado) nunca leía qué es cada modalidad. */
+    color: rgba(255, 255, 255, 0.85);
 }
 
 /* Credencial de cada modalidad, destacada del parrafo */
@@ -777,8 +799,7 @@ img, video {
     -webkit-text-stroke: 1px var(--accent-color);
 }
 .training-item:hover .item-desc {
-    opacity: 1;
-    transform: translateX(0);
+    color: #fff;
 }
 
 /*
@@ -818,8 +839,6 @@ img, video {
         gap: 8px;
     }
     .item-desc {
-        opacity: 1;
-        transform: none;
         text-align: left;
         font-size: 1rem;
         max-width: none;
@@ -1665,6 +1684,36 @@ img, video {
     font-size: 0.9rem;
 }
 
+/* Barra fija de WhatsApp (móvil/tablet). Debajo del menú fullscreen (999). */
+.sticky-cta {
+    display: none;
+}
+@media (max-width: 1080px) {
+    .sticky-cta {
+        position: fixed;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 998;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        padding: 16px 20px calc(16px + env(safe-area-inset-bottom));
+        background: var(--accent-color);
+        color: var(--accent-ink);
+        font-family: var(--font-display);
+        font-size: 1.4rem;
+        text-decoration: none;
+        box-shadow: 0 -6px 20px rgba(0, 0, 0, 0.5);
+        transform: translateY(110%);
+        transition: transform 0.3s ease;
+    }
+    .sticky-cta.is-visible {
+        transform: translateY(0);
+    }
+}
+
 /* Responsive */
 @media (max-width: 900px) {
     :root {
@@ -1725,10 +1774,6 @@ img, video {
     }
     .marquee {
         animation: none;
-        transform: none;
-    }
-    .item-desc {
-        opacity: 1;
         transform: none;
     }
 }
