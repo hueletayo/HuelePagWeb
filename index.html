@@ -42,7 +42,7 @@
     <link rel="preload" as="image" href="assets/hero-poster.jpg" fetchpriority="high">
 
     <!-- CSS -->
-    <link rel="stylesheet" href="style.css?v=20261013c">
+    <link rel="stylesheet" href="style.css?v=20261026a">
 
     <!-- Feather Icons (versión fija) -->
     <script defer src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.29.2/feather.min.js"></script>
@@ -331,6 +331,12 @@
                 <span class="line reveal-text">EL <span class="outline-text">BOXEO</span></span>
             </h1>
             <p class="hero-badge">CERTIFICADOS <strong>IBA</strong> &amp; <strong>WBC</strong> <span class="accent">//</span> LECHERÍA, ANZOÁTEGUI</p>
+            <div class="hero-actions">
+                <a href="https://wa.me/584248576200?text=Hola!%20Quiero%20agendar%20mi%20primera%20clase%20en%203er%20Round%20Fit." target="_blank" rel="noopener" class="btn-brutal">
+                    <i data-feather="message-circle" aria-hidden="true"></i> AGENDA TU PRIMERA CLASE
+                </a>
+                <a href="#precios" class="hero-link">VER PRECIOS</a>
+            </div>
         </div>
         <a href="#filosofia" class="scroll-down">
             <i data-feather="arrow-down" aria-hidden="true"></i>
@@ -427,8 +433,8 @@
                         </div>
                     </div>
                 </li>
-                <li class="training-item" data-image="assets/train-recreativo.jpg">
-                    <div class="item-media"><img src="assets/train-recreativo.jpg" alt="" width="1920" height="1080" loading="lazy" decoding="async"></div>
+                <li class="training-item" data-image="assets/train-recreativo-clase.jpg">
+                    <div class="item-media"><img src="assets/train-recreativo-clase.jpg" alt="" width="1920" height="1080" loading="lazy" decoding="async"></div>
                     <div class="item-body">
                         <div class="item-title">BOXEO RECREATIVO</div>
                         <div class="item-desc">
@@ -761,7 +767,14 @@
         </div>
     </footer>
 
+    <!-- Barra fija de WhatsApp: solo en móvil/tablet, donde la nav no
+         tiene botón "Únete". main.js la muestra al pasar el hero y la
+         oculta al llegar al pie, que ya tiene sus propios botones. -->
+    <a href="https://wa.me/584248576200?text=Hola!%20Quiero%20informaci%C3%B3n%20sobre%20las%20clases." target="_blank" rel="noopener" class="sticky-cta" id="sticky-cta" tabindex="-1" aria-hidden="true">
+        <i data-feather="message-circle" aria-hidden="true"></i> ESCRÍBENOS POR WHATSAPP
+    </a>
+
     <!-- Scripts -->
-    <script src="main.js?v=20261013a"></script>
+    <script src="main.js?v=20261026a"></script>
 </body>
 </html>
