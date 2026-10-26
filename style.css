@@ -1282,31 +1282,71 @@ img, video {
 /* ============================================================
    Precios
    ============================================================ */
-/* Preguntas frecuentes: <details> nativo, accesible sin JS */
+/* Preguntas frecuentes: <details> nativo, accesible sin JS.
+   Escritorio: titulo y CTA fijos a la izquierda, acordeon a la derecha
+   (antes la lista de 900px dejaba media pantalla vacia).
+   Movil: una columna y el CTA al final, despues de las preguntas. */
 .faq-section {
     padding: var(--gap-xl) 5%;
     background-color: var(--bg-alt);
     border-top: 1px solid var(--line-soft);
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.6fr);
+    gap: var(--gap-md) var(--gap-lg);
+    align-items: start;
 }
 
-.faq-header {
+.faq-aside {
+    position: sticky;
+    top: 112px;
     display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-    gap: 20px;
-    flex-wrap: wrap;
-    margin-bottom: var(--gap-md);
-    border-bottom: 2px solid var(--accent-color);
-    padding-bottom: 20px;
+    flex-direction: column;
+    gap: 40px;
 }
-.faq-header p {
+
+/* En la columna estrecha "FRECUENTES" a 10vw se salía entre 900 y 1200px */
+.faq-head .huge-text {
+    margin-bottom: 24px;
+    font-size: clamp(3.5rem, 7vw, 8rem);
+}
+
+.faq-lead {
+    color: var(--text-muted);
+    font-size: 1.1rem;
+    line-height: 1.6;
+    max-width: 36ch;
+}
+
+.faq-cta {
+    border-top: 2px solid var(--accent-color);
+    padding-top: 24px;
+}
+.faq-cta p {
     font-weight: 600;
-    letter-spacing: 2px;
-    font-size: 0.95rem;
+    margin-bottom: 16px;
+}
+
+/* Accion secundaria: el naranja relleno se reserva para el pie */
+.btn-outline {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    min-height: 48px;
+    padding: 12px 24px;
+    border: 2px solid #fff;
+    color: #fff;
+    font-family: var(--font-display);
+    font-size: 1.4rem;
+    text-decoration: none;
+}
+.btn-outline:hover {
+    background-color: var(--accent-color);
+    border-color: var(--accent-color);
+    color: var(--accent-ink);
 }
 
 .faq-list {
-    max-width: 900px;
+    border-top: 1px solid var(--line-strong);
 }
 
 .faq-item {
@@ -1320,10 +1360,10 @@ img, video {
     justify-content: space-between;
     align-items: center;
     gap: 20px;
-    padding: 22px 0;
+    padding: 24px 0;
     font-weight: 600;
     font-size: 1.15rem;
-    line-height: 1.4;
+    line-height: 1.25;
 }
 .faq-item summary::-webkit-details-marker { display: none; }
 
@@ -1341,9 +1381,30 @@ img, video {
 
 .faq-item p {
     color: var(--text-muted);
-    line-height: 1.7;
+    line-height: 1.6;
     padding: 0 40px 24px 0;
     max-width: 70ch;
+}
+
+/* Enlaces dentro de las respuestas: subrayados, no solo por color */
+.faq-item a,
+.pricing-more a {
+    color: var(--accent-color);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+.faq-item a:hover,
+.pricing-more a:hover { color: #fff; }
+
+@media (max-width: 900px) {
+    .faq-section {
+        grid-template-columns: minmax(0, 1fr);
+    }
+    /* El aside se deshace para poder mandar el CTA al final */
+    .faq-aside { display: contents; }
+    .faq-cta { order: 1; }
+    .faq-head .huge-text { font-size: clamp(3.5rem, 10vw, 10rem); }
+    .faq-item p { padding-right: 0; }
 }
 
 .pricing-section {
@@ -1367,6 +1428,11 @@ img, video {
     font-weight: 600;
     letter-spacing: 2px;
     font-size: 0.95rem;
+}
+
+.pricing-more {
+    margin-top: 32px;
+    color: var(--text-muted);
 }
 
 .pricing-grid {
