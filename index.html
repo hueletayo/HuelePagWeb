@@ -44,7 +44,7 @@
     <link rel="preload" as="image" href="assets/hero-poster.jpg" fetchpriority="high">
 
     <!-- CSS -->
-    <link rel="stylesheet" href="style.css?v=20261026c">
+    <link rel="stylesheet" href="style.css?v=20261026e">
 
     <!-- Feather Icons (versión fija) -->
     <script defer src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.29.2/feather.min.js"></script>
@@ -410,7 +410,7 @@
     <!-- Philosophy Section (Asymmetric) -->
     <section id="filosofia" class="philosophy">
         <div class="philosophy-container">
-            <div class="philosophy-text" data-scroll>
+            <div class="philosophy-text">
                 <h2 class="huge-text">SUDOR<br>&amp; GLORIA</h2>
                 <p class="body-text">
                     Club de boxeo en Lechería, a minutos de Puerto La Cruz y Barcelona.
@@ -461,7 +461,7 @@
                 </div>
                 <a href="https://wa.me/584248576200?text=Hola!%20Quiero%20informaci%C3%B3n%20sobre%20las%20clases%20y%20precios." target="_blank" rel="noopener" class="link-btn">EMPIEZA HOY <i data-feather="message-circle" aria-hidden="true"></i></a>
             </div>
-            <div class="philosophy-img" data-scroll>
+            <div class="philosophy-img">
                 <img src="assets/gym-esquina.jpg" alt="Daniel Núñez dando instrucciones en la esquina a un atleta de 3er Round Fit durante un combate" width="896" height="1195" loading="lazy" decoding="async">
                 <div class="img-badge">100% ACTITUD</div>
             </div>
@@ -530,7 +530,7 @@
         </div>
 
         <div class="coaches-grid">
-            <article class="coach-card coach-card--alt" data-scroll>
+            <article class="coach-card coach-card--alt">
                 <div class="coach-photo">
                     <img src="assets/entrenador-samuel.jpg" alt="Samuel Sifontes con manoplas en el ring de 3er Round Fit" width="800" height="1066" loading="lazy" decoding="async">
                     <img class="coach-photo-alt" src="assets/entrenador-samuel-accion.jpg" alt="Samuel Sifontes en guardia durante un combate" width="800" height="1066" loading="lazy" decoding="async">
@@ -545,7 +545,7 @@
                 </div>
             </article>
 
-            <article class="coach-card coach-card--alt" data-scroll>
+            <article class="coach-card coach-card--alt">
                 <div class="coach-photo">
                     <img src="assets/entrenador-neyker.jpg" alt="Neyker Osuna, boxeador amateur y entrenador de 3er Round Fit" width="800" height="1066" loading="lazy" decoding="async">
                     <img class="coach-photo-alt" src="assets/entrenador-neyker-accion.jpg" alt="Neyker Osuna saludando al subir al ring con la camiseta de 3er Round Fit" width="800" height="1066" loading="lazy" decoding="async">
@@ -560,7 +560,7 @@
                 </div>
             </article>
 
-            <article class="coach-card coach-card--cert coach-card--alt" data-scroll>
+            <article class="coach-card coach-card--cert coach-card--alt">
                 <div class="coach-photo">
                     <img src="assets/entrenador-daniel.jpg" alt="Daniel Núñez, entrenador de boxeo certificado por la IBA y el WBC" width="800" height="1066" loading="lazy" decoding="async">
                     <img class="coach-photo-alt" src="assets/entrenador-daniel-accion.jpg" alt="Daniel Núñez golpeando la pera de boxeo en el gimnasio" width="800" height="1066" loading="lazy" decoding="async">
@@ -575,6 +575,70 @@
                     </ul>
                 </div>
             </article>
+        </div>
+    </section>
+
+    <!--
+      ============================================================
+      TESTIMONIOS — atletas de élite que entrenan en el club.
+         Linares no tiene cita: su tarjeta es un <article>, no un
+         <blockquote>. Si algún día la da, añadir .testimonial-quote.
+         Fotos a 900x900 (1:1). La principal es la del gimnasio
+         (assets/testimonio-X-gym.jpg): prueba que entrenan aqui. La del
+         hover (o al tocar en movil) es la de su carrera, testimonio-X.jpg.
+      ============================================================
+    -->
+    <section id="testimonios" class="testimonials-section">
+        <div class="testimonials-header" data-scroll>
+            <h2 class="huge-text">LO DICEN <span class="accent">ELLOS</span></h2>
+            <p>ATLETAS DE ÉLITE <span class="accent">//</span> ENTRENAN CON NOSOTROS</p>
+        </div>
+
+        <div class="testimonials-grid">
+            <article class="testimonial-card testimonial-card--alt">
+                <div class="testimonial-photo">
+                    <img src="assets/testimonio-linares-gym.jpg" alt="Jorge Linares firmando un guante de boxeo" width="900" height="900" loading="lazy" decoding="async">
+                    <img class="testimonial-photo-alt" src="assets/testimonio-linares.jpg" alt="Jorge Linares posando con sus cinturones de campeón mundial" width="900" height="900" loading="lazy" decoding="async">
+                    <span class="testimonial-tag">BOXEO</span>
+                </div>
+                <div class="testimonial-body">
+                    <p class="testimonial-stat"><strong>4</strong> veces campeón del mundo</p>
+                    <footer class="testimonial-author">
+                        <span class="testimonial-name">Jorge Linares</span>
+                        <span class="testimonial-meta">Boxeador venezolano</span>
+                    </footer>
+                </div>
+            </article>
+
+            <blockquote class="testimonial-card testimonial-card--alt">
+                <div class="testimonial-photo">
+                    <img src="assets/testimonio-celestino-gym.jpg" alt="Celestino López junto a Daniel Núñez en el ring de 3er Round Fit" width="900" height="900" loading="lazy" decoding="async">
+                    <img class="testimonial-photo-alt" src="assets/testimonio-celestino.jpg" alt="Celestino López celebrando con los brazos en alto en el estadio" width="900" height="900" loading="lazy" decoding="async">
+                    <span class="testimonial-tag">BÉISBOL</span>
+                </div>
+                <div class="testimonial-body">
+                    <p class="testimonial-quote">“Muy bonita experiencia entrenar en 3er. Round Fit, el boxeo mejora mi resistencia, beneficia mi salud tanto física como mental. Aquí me siento parte de la familia de 3RF.”</p>
+                    <footer class="testimonial-author">
+                        <span class="testimonial-name">Celestino López</span>
+                        <span class="testimonial-meta">Beisbolista profesional venezolano &middot; MLB y NPB</span>
+                    </footer>
+                </div>
+            </blockquote>
+
+            <blockquote class="testimonial-card testimonial-card--alt">
+                <div class="testimonial-photo">
+                    <img src="assets/testimonio-gregory-gym.jpg" alt="Gregory Vargas haciendo guantes con Daniel Núñez en el ring de 3er Round Fit" width="900" height="900" loading="lazy" decoding="async">
+                    <img class="testimonial-photo-alt" src="assets/testimonio-gregory.jpg" alt="Gregory Vargas con la camiseta de la selección de Venezuela" width="900" height="900" loading="lazy" decoding="async">
+                    <span class="testimonial-tag">BALONCESTO</span>
+                </div>
+                <div class="testimonial-body">
+                    <p class="testimonial-quote">“El boxeo me ha dado muchos aspectos positivos en mi carrera, como resistencia, autocontrol y disciplina; es uno de los deportes más completos que he podido practicar. Los invito a que visiten 3er. Round Fit y entrenen con verdaderos profesionales.”</p>
+                    <footer class="testimonial-author">
+                        <span class="testimonial-name">Gregory Vargas</span>
+                        <span class="testimonial-meta">Jugador profesional de baloncesto</span>
+                    </footer>
+                </div>
+            </blockquote>
         </div>
     </section>
 
@@ -593,7 +657,7 @@
             </div>
 
             <div class="schedule-cards">
-                <article class="sch-card" data-scroll>
+                <article class="sch-card">
                     <header class="sch-card-head">
                         <span class="sch-card-tag">LUN — VIE</span>
                         <h3 class="sch-card-title">MAÑANA</h3>
@@ -606,7 +670,7 @@
                     </ul>
                 </article>
 
-                <article class="sch-card" data-scroll>
+                <article class="sch-card">
                     <header class="sch-card-head">
                         <span class="sch-card-tag">LUN — VIE</span>
                         <h3 class="sch-card-title">TARDE</h3>
@@ -620,7 +684,7 @@
                     </ul>
                 </article>
 
-                <article class="sch-card sch-card--sabado" data-scroll>
+                <article class="sch-card sch-card--sabado">
                     <header class="sch-card-head">
                         <span class="sch-card-tag">SÁBADO</span>
                         <h3 class="sch-card-title">ESPECIAL</h3>
@@ -632,7 +696,7 @@
                 </article>
             </div>
 
-            <div class="schedule-cta" data-scroll>
+            <div class="schedule-cta">
                 <p>¿No te cuadra ningún horario? Escríbenos y buscamos la forma.</p>
                 <a href="https://wa.me/584248576200?text=Hola!%20Quiero%20consultar%20los%20horarios%20de%20clase." target="_blank" rel="noopener" class="btn-brutal">
                     <i data-feather="message-circle" aria-hidden="true"></i> CONSULTAR HORARIOS
@@ -653,7 +717,7 @@
         </div>
 
         <div class="pricing-grid">
-            <article class="plan" data-scroll>
+            <article class="plan">
                 <h3 class="plan-name">AMATEUR</h3>
                 <p class="plan-price">50<span>€</span></p>
                 <p class="plan-period">POR MES</p>
@@ -665,7 +729,7 @@
                 <a href="https://wa.me/584248576200?text=Hola!%20Quiero%20inscribirme%20en%20el%20plan%20Amateur." target="_blank" rel="noopener" class="plan-cta">INSCRIBIRME</a>
             </article>
 
-            <article class="plan plan--destacado" data-scroll>
+            <article class="plan plan--destacado">
                 <span class="plan-flag">MÁS ELEGIDO</span>
                 <h3 class="plan-name">PRO</h3>
                 <p class="plan-price">60<span>€</span></p>
@@ -679,7 +743,7 @@
                 <a href="https://wa.me/584248576200?text=Hola!%20Quiero%20inscribirme%20en%20el%20plan%20PRO." target="_blank" rel="noopener" class="plan-cta">INSCRIBIRME</a>
             </article>
 
-            <article class="plan" data-scroll>
+            <article class="plan">
                 <h3 class="plan-name">INFANTIL</h3>
                 <p class="plan-price">40<span>€</span></p>
                 <p class="plan-period">POR MES</p>
@@ -691,7 +755,7 @@
                 <a href="https://wa.me/584248576200?text=Hola!%20Quiero%20inscribirme%20en%20el%20plan%20Infantil." target="_blank" rel="noopener" class="plan-cta">INSCRIBIRME</a>
             </article>
 
-            <article class="plan" data-scroll>
+            <article class="plan">
                 <h3 class="plan-name">PERSONALIZADO</h3>
                 <p class="plan-price">100<span>€</span></p>
                 <p class="plan-period">POR MES</p>
@@ -706,69 +770,6 @@
         <p class="pricing-more">¿Dudas antes de inscribirte? <a href="#preguntas">Mira las preguntas frecuentes</a></p>
     </section>
 
-    <!--
-      ============================================================
-      TESTIMONIOS — atletas de élite que entrenan en el club.
-         Linares no tiene cita: su tarjeta es un <article>, no un
-         <blockquote>. Si algún día la da, añadir .testimonial-quote.
-         Fotos a 900x900 (1:1) en assets/testimonio-X.jpg. La del hover
-         (o al tocar en movil) es assets/testimonio-X-gym.jpg.
-      ============================================================
-    -->
-    <section id="testimonios" class="testimonials-section">
-        <div class="testimonials-header" data-scroll>
-            <h2 class="huge-text">LO DICEN <span class="accent">ELLOS</span></h2>
-            <p>ATLETAS DE ÉLITE <span class="accent">//</span> ENTRENAN CON NOSOTROS</p>
-        </div>
-
-        <div class="testimonials-grid">
-            <article class="testimonial-card testimonial-card--alt" data-scroll>
-                <div class="testimonial-photo">
-                    <img src="assets/testimonio-linares.jpg" alt="Jorge Linares posando con sus cinturones de campeón mundial" width="900" height="900" loading="lazy" decoding="async">
-                    <img class="testimonial-photo-alt" src="assets/testimonio-linares-gym.jpg" alt="Jorge Linares firmando un guante de boxeo" width="900" height="900" loading="lazy" decoding="async">
-                    <span class="testimonial-tag">BOXEO</span>
-                </div>
-                <div class="testimonial-body">
-                    <p class="testimonial-stat"><strong>4</strong> veces campeón del mundo</p>
-                    <footer class="testimonial-author">
-                        <span class="testimonial-name">Jorge Linares</span>
-                        <span class="testimonial-meta">Boxeador venezolano</span>
-                    </footer>
-                </div>
-            </article>
-
-            <blockquote class="testimonial-card testimonial-card--alt" data-scroll>
-                <div class="testimonial-photo">
-                    <img src="assets/testimonio-celestino.jpg" alt="Celestino López celebrando con los brazos en alto en el estadio" width="900" height="900" loading="lazy" decoding="async">
-                    <img class="testimonial-photo-alt" src="assets/testimonio-celestino-gym.jpg" alt="Celestino López junto a Daniel Núñez en el ring de 3er Round Fit" width="900" height="900" loading="lazy" decoding="async">
-                    <span class="testimonial-tag">BÉISBOL</span>
-                </div>
-                <div class="testimonial-body">
-                    <p class="testimonial-quote">“Muy bonita experiencia entrenar en 3er. Round Fit, el boxeo mejora mi resistencia, beneficia mi salud tanto física como mental. Aquí me siento parte de la familia de 3RF.”</p>
-                    <footer class="testimonial-author">
-                        <span class="testimonial-name">Celestino López</span>
-                        <span class="testimonial-meta">Beisbolista profesional venezolano &middot; MLB y NPB</span>
-                    </footer>
-                </div>
-            </blockquote>
-
-            <blockquote class="testimonial-card testimonial-card--alt" data-scroll>
-                <div class="testimonial-photo">
-                    <img src="assets/testimonio-gregory.jpg" alt="Gregory Vargas con la camiseta de la selección de Venezuela" width="900" height="900" loading="lazy" decoding="async">
-                    <img class="testimonial-photo-alt" src="assets/testimonio-gregory-gym.jpg" alt="Gregory Vargas haciendo guantes con Daniel Núñez en el ring de 3er Round Fit" width="900" height="900" loading="lazy" decoding="async">
-                    <span class="testimonial-tag">BALONCESTO</span>
-                </div>
-                <div class="testimonial-body">
-                    <p class="testimonial-quote">“El boxeo me ha dado muchos aspectos positivos en mi carrera, como resistencia, autocontrol y disciplina; es uno de los deportes más completos que he podido practicar. Los invito a que visiten 3er. Round Fit y entrenen con verdaderos profesionales.”</p>
-                    <footer class="testimonial-author">
-                        <span class="testimonial-name">Gregory Vargas</span>
-                        <span class="testimonial-meta">Jugador profesional de baloncesto</span>
-                    </footer>
-                </div>
-            </blockquote>
-        </div>
-    </section>
-
     <!-- Immersive Gallery -->
     <section id="galeria" class="gallery">
         <div class="gallery-header" data-scroll>
@@ -777,16 +778,16 @@
         </div>
 
         <div class="masonry-grid">
-            <div class="masonry-item item-large" data-scroll>
+            <div class="masonry-item item-large">
                 <img src="assets/galeria-ring.jpg" alt="Boxeador con casco protector entrenando en el ring" width="800" height="1200" loading="lazy" decoding="async">
             </div>
-            <div class="masonry-item" data-scroll>
+            <div class="masonry-item">
                 <img src="assets/galeria-sede.jpg" alt="Área de sacos y tienda dentro de la sede de 3er Round Fit" width="800" height="600" loading="lazy" decoding="async">
             </div>
-            <div class="masonry-item" data-scroll>
+            <div class="masonry-item">
                 <img src="assets/galeria-mural.jpg" alt="Murales de boxeadores en las paredes del gimnasio" width="800" height="600" loading="lazy" decoding="async">
             </div>
-            <div class="masonry-item item-wide" data-scroll>
+            <div class="masonry-item item-wide">
                 <img src="assets/galeria-accion.jpg" alt="Sesión de manoplas entre entrenador y atleta" width="1200" height="600" loading="lazy" decoding="async">
             </div>
         </div>
@@ -890,6 +891,6 @@
     </a>
 
     <!-- Scripts -->
-    <script src="main.js?v=20261026a"></script>
+    <script src="main.js?v=20261026b"></script>
 </body>
 </html>
